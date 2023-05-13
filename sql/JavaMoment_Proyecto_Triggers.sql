@@ -2,7 +2,7 @@ CREATE OR REPLACE TRIGGER set_usr_activo_default
 BEFORE INSERT ON USUARIOS
 FOR EACH ROW
 BEGIN
-  :NEW.activo := 1; -- Settea el valor de la columna 'activo' (1 para activo, 0 para inactivo)
+  :NEW.activo := 0; -- Settea el valor de la columna 'activo' (1 para activo, 0 para inactivo)
 END;
 /
 
