@@ -236,17 +236,3 @@ CREATE TABLE STATUS_JUSTIFICACION
 );
 
 COMMIT;
-
-/*
-INSERT INTO 
-USUARIOS(nombre_usuario, nombre1, apellido1, apellido2, fec_nac, genero, departamento, localidad, mail, contrasenia, documento)
-VALUES ('gonza.ruiz', 'gonza', 'ruiz', 'alvez', TO_DATE('03-05-2002', 'dd-mm-yyyy'), 'M', 1, 2, 'gonza@mail.com', '1234', '12345678');
-
-INSERT INTO 
-USUARIOS(nombre_usuario, nombre1, apellido1, apellido2, fec_nac, genero, departamento, localidad, mail, contrasenia, documento, activo)
-VALUES ('gon.ruiz', 'gonza', 'ruiz', 'alvez', TO_DATE('03-05-2002', 'dd-mm-yyyy'), 'M', 1, 2, 'gonza@mail.com', '1234', '12345679', 0);
-
-select * from USUARIOS;
-
-DELETE FROM USUARIOS;
-*/
