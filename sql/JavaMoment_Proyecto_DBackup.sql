@@ -1,5 +1,5 @@
 --------------------------------------------------------
---  File created - Friday-May-12-2023   
+--  File created - Saturday-May-13-2023   
 --------------------------------------------------------
 --------------------------------------------------------
 --  DDL for Sequence ANALISTAS_ID_SEQ
@@ -843,7 +843,7 @@ ALTER TRIGGER "C##PROYECTO"."SET_TUTORES_ID_TRIGGER" ENABLE;
 BEFORE INSERT ON USUARIOS
 FOR EACH ROW
 BEGIN
-  :NEW.activo := 1; -- Settea el valor de la columna 'activo' (1 para activo, 0 para inactivo)
+  :NEW.activo := 0; -- Settea el valor de la columna 'activo' (1 para activo, 0 para inactivo)
 END;
 
 /
@@ -1012,7 +1012,7 @@ ALTER TRIGGER "C##PROYECTO"."SET_TUTORES_ID_TRIGGER" ENABLE;
 BEFORE INSERT ON USUARIOS
 FOR EACH ROW
 BEGIN
-  :NEW.activo := 1; -- Settea el valor de la columna 'activo' (1 para activo, 0 para inactivo)
+  :NEW.activo := 0; -- Settea el valor de la columna 'activo' (1 para activo, 0 para inactivo)
 END;
 
 /
