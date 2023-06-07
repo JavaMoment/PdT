@@ -67,7 +67,7 @@ public class CRUDBean<T, ID extends Serializable> implements CRUDRemote<T, ID> {
 	}
 
 	@Override
-	public List<T> selectAll(T entity) {
+	public List<T> selectAll() {
 		// TODO Auto-generated method stub
 		Class<T> entityClass = getEntityClass();
         CriteriaBuilder cb = em.getCriteriaBuilder();
