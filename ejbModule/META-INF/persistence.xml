@@ -6,6 +6,9 @@
         
         <class>com.entities.Analista</class>
         <class>com.entities.Estudiante</class>
+        <class>com.entities.Evento</class>
+        <class>com.entities.Itr</class>
+        <class>com.entities.Reclamo</class>
         <class>com.entities.Tutor</class>
         <class>com.entities.Usuario</class>
 
