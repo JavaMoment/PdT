@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Entity
 @Table(name="ANALISTAS")
 public class Analista implements Serializable {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L; //Se utiliza para proporcionar un número de versión para la representación serializada de la clase Analista.
 
 	@Id
 	@SequenceGenerator(name="ANALISTAS_IDANALISTA_GENERATOR", sequenceName="analistas_id_seq", allocationSize=1, initialValue=1)
