@@ -39,7 +39,7 @@ public class Usuario implements Serializable {
 	private Date fecNac;
 
 	@Column(nullable=false, length=1)
-	private String genero;
+	private char genero;
 
 	@Column(name="ID_DEPARTAMENTO", nullable=false)
 	private int idDepartamento;
@@ -133,11 +133,11 @@ public class Usuario implements Serializable {
 		this.fecNac = fecNac;
 	}
 
-	public String getGenero() {
+	public char getGenero() {
 		return this.genero;
 	}
 
-	public void setGenero(String genero) {
+	public void setGenero(char genero) {
 		this.genero = genero;
 	}
 
@@ -254,6 +254,20 @@ public class Usuario implements Serializable {
 		tutore.setUsuario(this);
 
 		return tutore;
+	}
+
+	@Override
+	public String toString() {
+		return "Usuario [" + (nombreUsuario != null ? "nombreUsuario=" + nombreUsuario + ", " : "") + "activo=" + activo
+				+ ", " + (apellido1 != null ? "apellido1=" + apellido1 + ", " : "")
+				+ (apellido2 != null ? "apellido2=" + apellido2 + ", " : "")
+				+ (contrasenia != null ? "contrasenia=" + contrasenia + ", " : "")
+				+ (documento != null ? "documento=" + documento + ", " : "")
+				+ (fecNac != null ? "fecNac=" + fecNac + ", " : "") + "genero=" + genero + ", "
+				+ "idDepartamento=" + idDepartamento + ", idItr=" + idItr + ", idLocalidad=" + idLocalidad + ", "
+				+ (mail != null ? "mail=" + mail + ", " : "") + (nombre1 != null ? "nombre1=" + nombre1 + ", " : "")
+				+ (nombre2 != null ? "nombre2=" + nombre2 + ", " : "")
+				+ (telefono != null ? "telefono=" + telefono : "") + "]";
 	}
 
 	public Tutor removeTutore(Tutor tutore) {
