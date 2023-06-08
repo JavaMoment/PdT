@@ -9,7 +9,7 @@ import javax.ejb.Remote;
 public interface CRUDRemote<T, ID extends Serializable> {
 
 	int create(T entity);
-	List<T> selectAll(T entity);
+	List<T> selectAll();
 	int update(T entity);
 	int delete(T entity);
 	T selectById(Long id);
