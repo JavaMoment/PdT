@@ -17,7 +17,7 @@ public class Estudiante implements Serializable {
 	@SequenceGenerator(name="ESTUDIANTES_IDESTUDIANTE_GENERATOR", sequenceName="ESTUD_ID_SEQ", allocationSize=1, initialValue=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ESTUDIANTES_IDESTUDIANTE_GENERATOR")
 	@Column(name="ID_ESTUDIANTE", unique=true, nullable=false, precision=38)
-	private long idEstudiante;
+	private Long idEstudiante;
 
 	@Column(nullable=false, length=4)
 	private String generacion;

@@ -3,6 +3,7 @@ package com.services;
 import javax.ejb.Stateless;
 
 import com.entities.Usuario;
+import javax.persistence.Entity;
 
 /**
  * Session Bean implementation class UsuarioBean
