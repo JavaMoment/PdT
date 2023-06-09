@@ -30,11 +30,11 @@ public class Itr implements Serializable {
 	//bi-directional many-to-one association to Departamento
 	@OneToMany(mappedBy="itr")
 	private List<Departamento> departamentos;
-
-	//bi-directional many-to-one association to Usuario
-	@OneToMany(mappedBy="itr")
-	private List<Usuario> usuarios;
 */
+	//bi-directional many-to-one association to Usuario
+	//@OneToMany(mappedBy="itr")
+	//private List<Usuario> usuarios;
+
 	public Itr() {
 	}
 
@@ -53,8 +53,8 @@ public class Itr implements Serializable {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	/*
 	
+	/*
 	public List<Departamento> getDepartamentos() {
 		return this.departamentos;
 	}
