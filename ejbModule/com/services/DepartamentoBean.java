@@ -6,30 +6,32 @@ import javax.ejb.Stateless;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
-import com.entities.Itr;
+import com.entities.Departamento;
 
 /**
- * Session Bean implementation class ItrBean
+ * Session Bean implementation class DepartamentoBean
  */
 @Stateless
-public class ItrBean extends CRUDBean<Itr, Long> implements ItrBeanRemote {
+public class DepartamentoBean extends CRUDBean<Departamento, Long> implements DepartamentoBeanRemote {
 
     /**
      * Default constructor. 
      */
-    public ItrBean() {
+    public DepartamentoBean() {
         // TODO Auto-generated constructor stub
     }
-    
-    public List<String> selectAllNames() {
+
+	@Override
+	public List<String> selectAllNames() {
 		// TODO Auto-generated method stub
 		try {
 			@SuppressWarnings("unchecked")
 			TypedQuery<String> query = (TypedQuery<String>) super.getEntityManager()
-					.createQuery("SELECT i.nombre FROM Itr i ORDER BY i.idItr", String.class);
+					.createQuery("SELECT d.nombre FROM Departamento d ORDER BY d.idDepartamento", String.class);
 			return query.getResultList();
 		} catch (PersistenceException e) {
 			return null;
 		}
 	}
+
 }

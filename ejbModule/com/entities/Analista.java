@@ -14,7 +14,7 @@ public class Analista implements Serializable {
 	private static final long serialVersionUID = 1L; //Se utiliza para proporcionar un número de versión para la representación serializada de la clase Analista.
 
 	@Id
-	@SequenceGenerator(name="ANALISTAS_IDANALISTA_GENERATOR", sequenceName="ANALISTAS_ID_SEQ", allocationSize=1, initialValue=1)
+	@SequenceGenerator(name="ANALISTAS_IDANALISTA_GENERATOR", sequenceName="analistas_id_seq", allocationSize=1, initialValue=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ANALISTAS_IDANALISTA_GENERATOR")
 	@Column(name="ID_ANALISTA", unique=true, nullable=false, precision=38)
 	private Long idAnalista;

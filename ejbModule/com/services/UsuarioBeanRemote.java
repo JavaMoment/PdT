@@ -7,6 +7,6 @@ import javax.persistence.Entity;
 
 @Remote
 public interface UsuarioBeanRemote extends CRUDRemote<Usuario, Long> {
-	
-	
+
+	String selectPasswBy(String mail);
 }

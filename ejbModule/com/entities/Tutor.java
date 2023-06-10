@@ -14,7 +14,7 @@ public class Tutor implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="TUTORES_IDTUTOR_GENERATOR", sequenceName="TUTORES_ID_SEQ", allocationSize=1, initialValue=1)
+	@SequenceGenerator(name="TUTORES_IDTUTOR_GENERATOR", sequenceName="tutores_id_seq", allocationSize=1, initialValue=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="TUTORES_IDTUTOR_GENERATOR")
 	@Column(name="ID_TUTOR", unique=true, nullable=false, precision=38)
 	private Long idTutor;

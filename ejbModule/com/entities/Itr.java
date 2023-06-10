@@ -19,7 +19,7 @@ public class Itr implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="ITR_IDITR_GENERATOR", sequenceName="ITR_SEQ_ID")
+	@SequenceGenerator(name="ITR_IDITR_GENERATOR", sequenceName="itr_id_seq")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ITR_IDITR_GENERATOR")
 	@Column(name="ID_ITR")
 	private long idItr;
