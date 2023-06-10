@@ -29,6 +29,10 @@ public class CRUDBean<T, ID extends Serializable> implements CRUDRemote<T, ID> {
     public CRUDBean() {
         // TODO Auto-generated constructor stub
     }
+    
+    public EntityManager getEntityManager() {
+    	return em;
+    }
 
 	@Override
 	public int create(T entity) {
