@@ -16,5 +16,5 @@ public class EstudianteBean extends CRUDBean<Usuario, Long> implements Estudiant
     public EstudianteBean() {
         // TODO Auto-generated constructor stub
     }
-
+    
 }
