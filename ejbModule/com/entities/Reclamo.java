@@ -12,7 +12,6 @@ import java.util.List;
  */
 @Entity
 @Table(name="RECLAMOS")
-@NamedQuery(name="Reclamo.findAll", query="SELECT r FROM Reclamo r")
 public class Reclamo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -22,6 +21,7 @@ public class Reclamo implements Serializable {
 	@Column(name="ID_RECLAMO")
 	private long idReclamo;
 
+	@Column(name="DETALLE")
 	private String detalle;
 
 	@Temporal(TemporalType.DATE)
@@ -42,8 +42,6 @@ public class Reclamo implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="ID_EVENTO")
 	private Evento evento;
-
-	private List<StatusCertificados> statusCertificados;
 
 	
 	//bi-directional many-to-many association to StatusCertificado
@@ -99,14 +97,6 @@ public class Reclamo implements Serializable {
 
 	public void setEvento(Evento evento) {
 		this.evento = evento;
-	}
-
-	public List<StatusCertificados> getStatusCertificados() {
-		return this.statusCertificados;
-	}
-
-	public void setStatusCertificados(List<StatusCertificados> statusCertificados) {
-		this.statusCertificados = statusCertificados;
 	}
 
 }
