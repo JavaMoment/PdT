@@ -17,7 +17,7 @@ public class Analista implements Serializable {
 	@SequenceGenerator(name="ANALISTAS_IDANALISTA_GENERATOR", sequenceName="analistas_id_seq", allocationSize=1, initialValue=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ANALISTAS_IDANALISTA_GENERATOR")
 	@Column(name="ID_ANALISTA", unique=true, nullable=false, precision=38)
-	private long idAnalista;
+	private Long idAnalista;
 
 	//bi-directional many-to-one association to Usuario
 	@ManyToOne

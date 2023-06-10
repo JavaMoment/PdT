@@ -45,6 +45,12 @@ public class Evento implements Serializable {
 			}
 		)
 	private List<Analista> analistas;
+
+	private List<Reclamo> reclamos;
+
+	private List<Tutor> tutores;
+
+	private List<Constancia> constancias;
 /*
 	//bi-directional many-to-one association to Constancia
 	@OneToMany(mappedBy="evento")
@@ -110,7 +116,7 @@ public class Evento implements Serializable {
 		this.analistas = analistas;
 	}
 
-	/*
+	
 	public List<Constancia> getConstancias() {
 		return this.constancias;
 	}
@@ -132,7 +138,7 @@ public class Evento implements Serializable {
 
 		return constancia;
 	}
-
+/*
 	public List<EstudianteEvento> getEstudianteEventos() {
 		return this.estudianteEventos;
 	}
@@ -175,7 +181,7 @@ public class Evento implements Serializable {
 		justificacione.setEvento(null);
 
 		return justificacione;
-	}
+	*/
 
 	public List<Reclamo> getReclamos() {
 		return this.reclamos;
@@ -208,5 +214,5 @@ public class Evento implements Serializable {
 		this.tutores = tutores;
 	}
 
-*/
+
 }

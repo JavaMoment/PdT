@@ -43,11 +43,13 @@ public class Reclamo implements Serializable {
 	@JoinColumn(name="ID_EVENTO")
 	private Evento evento;
 
-	/*
+	private List<StatusCertificados> statusCertificados;
+
+	
 	//bi-directional many-to-many association to StatusCertificado
-	@ManyToMany(mappedBy="reclamos")
-	private List<StatusCertificado> statusCertificados;
-*/
+	//@ManyToMany(mappedBy="reclamos")
+	//private List<StatusCertificados> statusCertificados;
+
 	public Reclamo() {
 	}
 
@@ -98,13 +100,13 @@ public class Reclamo implements Serializable {
 	public void setEvento(Evento evento) {
 		this.evento = evento;
 	}
-/*
-	public List<StatusCertificado> getStatusCertificados() {
+
+	public List<StatusCertificados> getStatusCertificados() {
 		return this.statusCertificados;
 	}
 
-	public void setStatusCertificados(List<StatusCertificado> statusCertificados) {
+	public void setStatusCertificados(List<StatusCertificados> statusCertificados) {
 		this.statusCertificados = statusCertificados;
 	}
-*/
+
 }

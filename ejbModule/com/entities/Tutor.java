@@ -17,7 +17,7 @@ public class Tutor implements Serializable {
 	@SequenceGenerator(name="TUTORES_IDTUTOR_GENERATOR", sequenceName="tutores_id_seq", allocationSize=1, initialValue=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="TUTORES_IDTUTOR_GENERATOR")
 	@Column(name="ID_TUTOR", unique=true, nullable=false, precision=38)
-	private long idTutor;
+	private Long idTutor;
 
 	@Column(name="ID_AREA", nullable=false, precision=38)
 	private int idArea;
