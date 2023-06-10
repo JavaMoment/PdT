@@ -39,7 +39,7 @@ public class Usuario implements Serializable {
 	private Date fecNac;
 
 	@Column(nullable=false, length=1)
-	private String genero;
+	private char genero;
 
 	@Column(name="ID_DEPARTAMENTO", nullable=false)
 	private int idDepartamento;
@@ -63,7 +63,7 @@ public class Usuario implements Serializable {
 	private String telefono;
 
 	//bi-directional many-to-one association to Analista
-	@OneToMany(mappedBy="usuario", fetch=FetchType.LAZY)
+	/*@OneToMany(mappedBy="usuario", fetch=FetchType.LAZY)
 	private List<Analista> analistas;
 
 	//bi-directional many-to-one association to Estudiantes
@@ -72,11 +72,28 @@ public class Usuario implements Serializable {
 
 	//bi-directional many-to-one association to Tutores
 	@OneToMany(mappedBy="usuario", fetch=FetchType.LAZY)
-	private List<Tutor> tutores;
+	private List<Tutor> tutores;*/
 
 	public Usuario() {
 	}
 
+	public Usuario(String nombreUsuario, String apellido1, String apellido2, String contrasenia, String documento,
+			Date fecNac, char genero, int idDepartamento, int idItr, int idLocalidad, String mail, String nombre1) {
+		super();
+		this.nombreUsuario = nombreUsuario;
+		this.apellido1 = apellido1;
+		this.apellido2 = apellido2;
+		this.contrasenia = contrasenia;
+		this.documento = documento;
+		this.fecNac = fecNac;
+		this.genero = genero;
+		this.idDepartamento = idDepartamento;
+		this.idItr = idItr;
+		this.idLocalidad = idLocalidad;
+		this.mail = mail;
+		this.nombre1 = nombre1;
+	}
+	
 	public String getNombreUsuario() {
 		return this.nombreUsuario;
 	}
@@ -133,11 +150,11 @@ public class Usuario implements Serializable {
 		this.fecNac = fecNac;
 	}
 
-	public String getGenero() {
+	public char getGenero() {
 		return this.genero;
 	}
 
-	public void setGenero(String genero) {
+	public void setGenero(char genero) {
 		this.genero = genero;
 	}
 
@@ -197,7 +214,7 @@ public class Usuario implements Serializable {
 		this.telefono = telefono;
 	}
 
-	public List<Analista> getAnalistas() {
+/*	public List<Analista> getAnalistas() {
 		return this.analistas;
 	}
 
@@ -249,18 +266,32 @@ public class Usuario implements Serializable {
 		this.tutores = tutores;
 	}
 
+	public Tutor removeTutore(Tutor tutore) {
+		getTutores().remove(tutore);
+		tutore.setUsuario(null);
+		
+		return tutore;
+	}
+
 	public Tutor addTutore(Tutor tutore) {
 		getTutores().add(tutore);
 		tutore.setUsuario(this);
 
 		return tutore;
-	}
-
-	public Tutor removeTutore(Tutor tutore) {
-		getTutores().remove(tutore);
-		tutore.setUsuario(null);
-
-		return tutore;
+	}*/
+	
+	@Override
+	public String toString() {
+		return "Usuario [" + (nombreUsuario != null ? "nombreUsuario=" + nombreUsuario + ", " : "") + "activo=" + activo
+				+ ", " + (apellido1 != null ? "apellido1=" + apellido1 + ", " : "")
+				+ (apellido2 != null ? "apellido2=" + apellido2 + ", " : "")
+				+ (contrasenia != null ? "contrasenia=" + contrasenia + ", " : "")
+				+ (documento != null ? "documento=" + documento + ", " : "")
+				+ (fecNac != null ? "fecNac=" + fecNac + ", " : "") + "genero=" + genero + ", idDepartamento="
+				+ idDepartamento + ", idItr=" + idItr + ", idLocalidad=" + idLocalidad + ", "
+				+ (mail != null ? "mail=" + mail + ", " : "") + (nombre1 != null ? "nombre1=" + nombre1 + ", " : "")
+				+ (nombre2 != null ? "nombre2=" + nombre2 + ", " : "")
+				+ (telefono != null ? "telefono=" + telefono : "") + "]";
 	}
 
 }

@@ -13,9 +13,8 @@
         <class>com.entities.Usuario</class>
         <class>com.entities.Constancia</class>
         <class>com.entities.StatusCertificados</class>
-        <class>com.entities.StatusConstancia</class>
-
-
+        <class>com.entities.Departamento</class>
+        <class>com.entities.Localidad</class>
 
         <validation-mode>AUTO</validation-mode>
 

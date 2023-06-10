@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.enums.Tipo;
+
 /**
  * Entity implementation class for Entity: Constancia
  *
