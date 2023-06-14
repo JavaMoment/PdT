@@ -9,4 +9,6 @@ import com.entities.Localidad;
 @Remote
 public interface LocalidadBeanRemote extends CRUDRemote<Localidad, Long>  {
 	List<String> selectAllNames();
+
+	List<String> selectAllNamesBy(long idDepa);
 }
