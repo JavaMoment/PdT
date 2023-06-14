@@ -29,8 +29,21 @@ public class UsuarioBean extends CRUDBean<Usuario, Long> implements UsuarioBeanR
 					.createQuery("SELECT u FROM Usuario u WHERE u.mail=:mail")
 					.setParameter("mail", mail);
 			return query.getSingleResult().getContrasenia();
-		} catch (PersistenceException e) {
+		} catch(PersistenceException e) {
 			return null;
+		}
+	}
+	
+	@Override
+	public boolean isUserRegistered(String username) {
+		try {
+			@SuppressWarnings("unchecked")
+			TypedQuery<String> query = (TypedQuery<String>) super.getEntityManager()
+				.createQuery("SELECT u.nombreUsuario FROM Usuario u WHERE u.nombreUsuario=:username")
+				.setParameter("username", username);
+			return !query.getSingleResult().isEmpty();
+		} catch(PersistenceException e) {
+			return false;
 		}
 	}
 

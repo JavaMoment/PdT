@@ -1,4 +1,4 @@
-package com.entities;
+package com.enums;
 
 public enum Tipo {
 	PRESENCIAL,

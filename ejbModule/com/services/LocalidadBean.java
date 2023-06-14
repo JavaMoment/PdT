@@ -6,6 +6,7 @@ import javax.ejb.Stateless;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
+import com.entities.Departamento;
 import com.entities.Localidad;
 
 /**
@@ -21,6 +22,7 @@ public class LocalidadBean extends CRUDBean<Localidad, Long> implements Localida
         // TODO Auto-generated constructor stub
     }
 
+    @Override
     public List<String> selectAllNames() {
 		// TODO Auto-generated method stub
 		try {
@@ -32,4 +34,17 @@ public class LocalidadBean extends CRUDBean<Localidad, Long> implements Localida
 			return null;
 		}
 	}
+    
+    @Override
+    public List<String> selectAllNamesBy(long idDepa) {
+    	try {
+    		@SuppressWarnings("unchecked")
+			TypedQuery<String> query = (TypedQuery<String>) super.getEntityManager()
+					.createQuery("SELECT l.nombre FROM Localidad l WHERE l.departamento.idDepartamento=:idDepa ORDER BY l.idLocalidad", String.class)
+					.setParameter("idDepa", idDepa);
+			return query.getResultList();
+    	} catch(PersistenceException e) {
+    		return null;
+    	}
+    }
 }

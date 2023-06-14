@@ -3,6 +3,10 @@ package com.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.enums.Modalidad;
+import com.enums.TipoEvento;
+
 import java.util.Date;
 import java.util.List;
 
@@ -13,7 +17,6 @@ import java.util.List;
  */
 @Entity
 @Table(name="EVENTOS")
-@NamedQuery(name="Evento.findAll", query="SELECT e FROM Evento e")
 public class Evento implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -31,17 +34,17 @@ public class Evento implements Serializable {
 	@Column(name="FECHA_HORA_INICIO")
 	private Date fechaHoraInicio;
 
-	@Column
+	@Column(name="LOCALIZACION")
 	private String localizacion;
 	
-	@Column
+	@Column(name="TITULO")
 	private String titulo;
 	
-	@Column(nullable=false)
+	@Column(name="TIPO_EVENTO", nullable=false)
 	@Enumerated(EnumType.STRING)
 	private TipoEvento tipoEvento;
 	
-	@Column(nullable=false)
+	@Column(name="MODALIDAD", nullable=false)
 	@Enumerated(EnumType.STRING)
 	private Modalidad modalidad;
 
