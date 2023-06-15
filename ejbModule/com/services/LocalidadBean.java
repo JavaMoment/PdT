@@ -21,6 +21,18 @@ public class LocalidadBean extends CRUDBean<Localidad, Long> implements Localida
     public LocalidadBean() {
         // TODO Auto-generated constructor stub
     }
+    
+    @Override
+    public List<Localidad> selectAll() {
+    	try {
+			@SuppressWarnings("unchecked")
+			TypedQuery<Localidad> query = (TypedQuery<Localidad>) super.getEntityManager()
+					.createQuery("SELECT l FROM Localidad l ORDER BY l.idLocalidad", Localidad.class);
+			return query.getResultList();
+		} catch (PersistenceException e) {
+			return null;
+		}
+    }
 
     @Override
     public List<String> selectAllNames() {
