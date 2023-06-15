@@ -1,11 +1,13 @@
 package com.services;
 
+
 import javax.ejb.Stateless;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
+
 import com.entities.Usuario;
-import javax.persistence.Entity;
+
 
 /**
  * Session Bean implementation class UsuarioBean
