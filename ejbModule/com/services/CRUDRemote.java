@@ -14,5 +14,6 @@ public interface CRUDRemote<T, ID extends Serializable> {
 	int update(T entity);
 	int delete(T entity);
 	T selectById(Long id);
+	String[] getColsNames();
 	
 }
