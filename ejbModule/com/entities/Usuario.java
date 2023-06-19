@@ -94,9 +94,6 @@ public class Usuario implements Serializable {
 		this.nombre1 = nombre1;
 	}
 	
-	public String getNombreUsuario() {
-		return this.nombreUsuario;
-	}
 
 	public void setNombreUsuario(String nombreUsuario) {
 		this.nombreUsuario = nombreUsuario;
@@ -214,6 +211,10 @@ public class Usuario implements Serializable {
 		this.telefono = telefono;
 	}
 
+	public String getNombreUsuario() {
+		return this.nombreUsuario;
+	}
+	
 /*	public List<Analista> getAnalistas() {
 		return this.analistas;
 	}
