@@ -56,9 +56,7 @@ public class Localidad implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Localidad [" + (idLocalidad != null ? "idLocalidad=" + idLocalidad + ", " : "")
-				+ (nombre != null ? "nombre=" + nombre + ", " : "")
-				+ (departamento != null ? "departamento=" + departamento.getNombre() : "") + "]";
+		return nombre != null ? nombre : "";
 	}
 
 
