@@ -18,15 +18,16 @@ public class Departamento implements Serializable {
 	@SequenceGenerator(name="DEPARTAMENTOS_IDDEPARTAMENTO_GENERATOR", sequenceName="DEPA_ID_SEQ")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="DEPARTAMENTOS_IDDEPARTAMENTO_GENERATOR")
 	@Column(name="ID_DEPARTAMENTO")
-	private long idDepartamento;
+	private Long idDepartamento;
 
-	@Column(name="ID_ITR")
-	private java.math.BigDecimal idItr;
+	@Column(name="ID_ITR", nullable=true)
+	private Long idItr;
 
+	@Column(name="nombre", nullable=false)
 	private String nombre;
 
 	//bi-directional many-to-one association to Localidad
-	@OneToMany(mappedBy="departamento")
+	@OneToMany(mappedBy="departamento", cascade = CascadeType.ALL, orphanRemoval = true, fetch=FetchType.LAZY)
 	private List<Localidad> localidades;
 
 	public Departamento() {
@@ -36,15 +37,15 @@ public class Departamento implements Serializable {
 		return this.idDepartamento;
 	}
 
-	public void setIdDepartamento(long idDepartamento) {
+	public void setIdDepartamento(Long idDepartamento) {
 		this.idDepartamento = idDepartamento;
 	}
 
-	public java.math.BigDecimal getIdItr() {
+	public long getIdItr() {
 		return this.idItr;
 	}
 
-	public void setIdItr(java.math.BigDecimal idItr) {
+	public void setIdItr(Long idItr) {
 		this.idItr = idItr;
 	}
 
@@ -76,6 +77,11 @@ public class Departamento implements Serializable {
 		localidade.setDepartamento(null);
 
 		return localidade;
+	}
+
+	@Override
+	public String toString() {
+		return nombre != null ? nombre : "";
 	}
 
 }

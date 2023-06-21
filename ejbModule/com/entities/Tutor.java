@@ -32,6 +32,10 @@ public class Tutor implements Serializable {
 
 	public Tutor() {
 	}
+	
+	public Tutor(Usuario user) {
+		this.usuario = user;
+	}
 
 	public long getIdTutor() {
 		return this.idTutor;

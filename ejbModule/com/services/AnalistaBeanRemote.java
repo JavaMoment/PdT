@@ -2,9 +2,10 @@ package com.services;
 
 import javax.ejb.Remote;
 
-import com.entities.Usuario;
+import com.entities.Analista;
+
 
 @Remote
-public interface AnalistaBeanRemote extends CRUDRemote<Usuario, Long> {
+public interface AnalistaBeanRemote extends CRUDRemote<Analista, Long> {
 
 }

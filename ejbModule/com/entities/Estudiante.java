@@ -29,6 +29,10 @@ public class Estudiante implements Serializable {
 
 	public Estudiante() {
 	}
+	
+	public Estudiante(Usuario user) {
+		this.usuario = user;
+	}
 
 	public long getIdEstudiante() {
 		return this.idEstudiante;

@@ -2,8 +2,12 @@ package com.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -36,19 +40,22 @@ public class Usuario implements Serializable {
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="FEC_NAC", nullable=false)
-	private Date fecNac;
+	private Date fechaNacimiento;
 
 	@Column(nullable=false, length=1)
 	private char genero;
 
-	@Column(name="ID_DEPARTAMENTO", nullable=false)
-	private int idDepartamento;
+	@ManyToOne
+	@JoinColumn(name="ID_DEPARTAMENTO", nullable=false)
+	private Departamento departamento;
 
-	@Column(name="ID_ITR", nullable=false)
-	private int idItr;
-
-	@Column(name="ID_LOCALIDAD", nullable=false)
-	private int idLocalidad;
+	@ManyToOne
+	@JoinColumn(name="ID_ITR", nullable=false)
+	private Itr itr;
+	
+	@ManyToOne
+	@JoinColumn(name="ID_LOCALIDAD", nullable=false)
+	private Localidad localidad;
 
 	@Column(nullable=false, length=250)
 	private String mail;
@@ -63,40 +70,37 @@ public class Usuario implements Serializable {
 	private String telefono;
 
 	//bi-directional many-to-one association to Analista
-	/*@OneToMany(mappedBy="usuario", fetch=FetchType.LAZY)
-	private List<Analista> analistas;
+	@OneToMany(mappedBy="usuario", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	private Set<Analista> analistas;
 
 	//bi-directional many-to-one association to Estudiantes
-	@OneToMany(mappedBy="usuario", fetch=FetchType.LAZY)
-	private List<Estudiante> estudiantes;
+	@OneToMany(mappedBy="usuario", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	private Set<Estudiante> estudiantes;
 
 	//bi-directional many-to-one association to Tutores
-	@OneToMany(mappedBy="usuario", fetch=FetchType.LAZY)
-	private List<Tutor> tutores;*/
+	@OneToMany(mappedBy="usuario", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	private Set<Tutor> tutores;
 
 	public Usuario() {
 	}
 
 	public Usuario(String nombreUsuario, String apellido1, String apellido2, String contrasenia, String documento,
-			Date fecNac, char genero, int idDepartamento, int idItr, int idLocalidad, String mail, String nombre1) {
+			Date FechaNacimiento, char genero, Departamento idDepartamento, Itr idItr, Localidad idLocalidad, String mail, String nombre1) {
 		super();
 		this.nombreUsuario = nombreUsuario;
 		this.apellido1 = apellido1;
 		this.apellido2 = apellido2;
 		this.contrasenia = contrasenia;
 		this.documento = documento;
-		this.fecNac = fecNac;
+		this.fechaNacimiento = FechaNacimiento;
 		this.genero = genero;
-		this.idDepartamento = idDepartamento;
-		this.idItr = idItr;
-		this.idLocalidad = idLocalidad;
+		this.departamento = idDepartamento;
+		this.itr = idItr;
+		this.localidad = idLocalidad;
 		this.mail = mail;
 		this.nombre1 = nombre1;
 	}
 	
-	public String getNombreUsuario() {
-		return this.nombreUsuario;
-	}
 
 	public void setNombreUsuario(String nombreUsuario) {
 		this.nombreUsuario = nombreUsuario;
@@ -142,12 +146,12 @@ public class Usuario implements Serializable {
 		this.documento = documento;
 	}
 
-	public Date getFecNac() {
-		return this.fecNac;
+	public Date getFechaNacimiento() {
+		return this.fechaNacimiento;
 	}
 
-	public void setFecNac(Date fecNac) {
-		this.fecNac = fecNac;
+	public void setFechaNacimiento(Date FechaNacimiento) {
+		this.fechaNacimiento = FechaNacimiento;
 	}
 
 	public char getGenero() {
@@ -158,28 +162,28 @@ public class Usuario implements Serializable {
 		this.genero = genero;
 	}
 
-	public int getIdDepartamento() {
-		return this.idDepartamento;
+	public Departamento getDepartamento() {
+		return this.departamento;
 	}
 
-	public void setIdDepartamento(int idDepartamento) {
-		this.idDepartamento = idDepartamento;
+	public void setDepartamento(Departamento idDepartamento) {
+		this.departamento = idDepartamento;
 	}
 
-	public int getIdItr() {
-		return this.idItr;
+	public Itr getItr() {
+		return this.itr;
 	}
 
-	public void setIdItr(int idItr) {
-		this.idItr = idItr;
+	public void setItr(Itr idItr) {
+		this.itr = idItr;
 	}
 
-	public int getIdLocalidad() {
-		return this.idLocalidad;
+	public Localidad getLocalidad() {
+		return this.localidad;
 	}
 
-	public void setIdLocalidad(int idLocalidad) {
-		this.idLocalidad = idLocalidad;
+	public void setLocalidad(Localidad idLocalidad) {
+		this.localidad = idLocalidad;
 	}
 
 	public String getMail() {
@@ -214,11 +218,15 @@ public class Usuario implements Serializable {
 		this.telefono = telefono;
 	}
 
-/*	public List<Analista> getAnalistas() {
+	public String getNombreUsuario() {
+		return this.nombreUsuario;
+	}
+	
+	public Set<Analista> getAnalistas() {
 		return this.analistas;
 	}
 
-	public void setAnalistas(List<Analista> analistas) {
+	public void setAnalistas(Set<Analista> analistas) {
 		this.analistas = analistas;
 	}
 
@@ -236,11 +244,11 @@ public class Usuario implements Serializable {
 		return analista;
 	}
 
-	public List<Estudiante> getEstudiantes() {
+	public Set<Estudiante> getEstudiantes() {
 		return this.estudiantes;
 	}
 
-	public void setEstudiantes(List<Estudiante> estudiantes) {
+	public void setEstudiantes(Set<Estudiante> estudiantes) {
 		this.estudiantes = estudiantes;
 	}
 
@@ -258,11 +266,11 @@ public class Usuario implements Serializable {
 		return estudiante;
 	}
 
-	public List<Tutor> getTutores() {
+	public Set<Tutor> getTutores() {
 		return this.tutores;
 	}
 
-	public void setTutores(List<Tutor> tutores) {
+	public void setTutores(Set<Tutor> tutores) {
 		this.tutores = tutores;
 	}
 
@@ -278,7 +286,7 @@ public class Usuario implements Serializable {
 		tutore.setUsuario(this);
 
 		return tutore;
-	}*/
+	}
 	
 	@Override
 	public String toString() {
@@ -287,8 +295,8 @@ public class Usuario implements Serializable {
 				+ (apellido2 != null ? "apellido2=" + apellido2 + ", " : "")
 				+ (contrasenia != null ? "contrasenia=" + contrasenia + ", " : "")
 				+ (documento != null ? "documento=" + documento + ", " : "")
-				+ (fecNac != null ? "fecNac=" + fecNac + ", " : "") + "genero=" + genero + ", idDepartamento="
-				+ idDepartamento + ", idItr=" + idItr + ", idLocalidad=" + idLocalidad + ", "
+				+ (fechaNacimiento != null ? "FechaNacimiento=" + fechaNacimiento + ", " : "") + "genero=" + genero + ", idDepartamento="
+				+ departamento + ", idItr=" + itr + ", idLocalidad=" + localidad + ", "
 				+ (mail != null ? "mail=" + mail + ", " : "") + (nombre1 != null ? "nombre1=" + nombre1 + ", " : "")
 				+ (nombre2 != null ? "nombre2=" + nombre2 + ", " : "")
 				+ (telefono != null ? "telefono=" + telefono : "") + "]";
