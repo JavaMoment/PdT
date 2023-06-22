@@ -19,7 +19,7 @@ public class Estudiante implements Serializable {
 	@Column(name="ID_ESTUDIANTE", unique=true, nullable=false, precision=38)
 	private Long idEstudiante;
 
-	@Column(nullable=false, length=4)
+	@Column(name="GENERACION", nullable=false, length=4)
 	private String generacion;
 
 	//bi-directional many-to-one association to Usuario
@@ -30,8 +30,9 @@ public class Estudiante implements Serializable {
 	public Estudiante() {
 	}
 	
-	public Estudiante(Usuario user) {
+	public Estudiante(Usuario user, String generacion) {
 		this.usuario = user;
+		this.generacion = generacion;
 	}
 
 	public long getIdEstudiante() {
