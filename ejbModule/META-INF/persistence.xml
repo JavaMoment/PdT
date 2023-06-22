@@ -15,6 +15,7 @@
         <class>com.entities.StatusCertificados</class>
         <class>com.entities.Departamento</class>
         <class>com.entities.Localidad</class>
+        <class>com.entities.Area</class>
 
         <validation-mode>AUTO</validation-mode>
 
