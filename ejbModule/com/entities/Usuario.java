@@ -57,8 +57,11 @@ public class Usuario implements Serializable {
 	@JoinColumn(name="ID_LOCALIDAD", nullable=false)
 	private Localidad localidad;
 
-	@Column(nullable=false, length=250)
-	private String mail;
+	@Column(name="MAIL_INSTITUCIONAL", nullable=false, length=250)
+	private String mailInstitucional;
+	
+	@Column(name="MAIL_PERSONAL", length=250)
+	private String mailPersonal;
 
 	@Column(nullable=false, length=50)
 	private String nombre1;
@@ -84,8 +87,11 @@ public class Usuario implements Serializable {
 	public Usuario() {
 	}
 
-	public Usuario(String nombreUsuario, String apellido1, String apellido2, String contrasenia, String documento,
-			Date FechaNacimiento, char genero, Departamento idDepartamento, Itr idItr, Localidad idLocalidad, String mail, String nombre1) {
+	public Usuario(String nombreUsuario, String apellido1, String apellido2, 
+			String contrasenia, String documento, Date FechaNacimiento, 
+			char genero, Departamento idDepartamento, Itr idItr, 
+			Localidad idLocalidad, String mailInsti, String mailPers,
+			String nombre1) {
 		super();
 		this.nombreUsuario = nombreUsuario;
 		this.apellido1 = apellido1;
@@ -97,7 +103,8 @@ public class Usuario implements Serializable {
 		this.departamento = idDepartamento;
 		this.itr = idItr;
 		this.localidad = idLocalidad;
-		this.mail = mail;
+		this.mailInstitucional = mailInsti;
+		this.mailPersonal = mailPers;
 		this.nombre1 = nombre1;
 	}
 	
@@ -186,12 +193,20 @@ public class Usuario implements Serializable {
 		this.localidad = idLocalidad;
 	}
 
-	public String getMail() {
-		return this.mail;
+	public String getMailInstitucional() {
+		return this.mailInstitucional;
 	}
 
-	public void setMail(String mail) {
-		this.mail = mail;
+	public void setMailInstitucional(String mail) {
+		this.mailInstitucional = mail;
+	}
+
+	public String getMailPersonal() {
+		return mailPersonal;
+	}
+
+	public void setMailPersonal(String mailPersonal) {
+		this.mailPersonal = mailPersonal;
 	}
 
 	public String getNombre1() {
@@ -220,6 +235,10 @@ public class Usuario implements Serializable {
 
 	public String getNombreUsuario() {
 		return this.nombreUsuario;
+	}
+	
+	public boolean isValidUser(String passw) {
+		return activo == 1 && contrasenia.equals(passw);
 	}
 	
 	public Set<Analista> getAnalistas() {
@@ -297,7 +316,7 @@ public class Usuario implements Serializable {
 				+ (documento != null ? "documento=" + documento + ", " : "")
 				+ (fechaNacimiento != null ? "FechaNacimiento=" + fechaNacimiento + ", " : "") + "genero=" + genero + ", idDepartamento="
 				+ departamento + ", idItr=" + itr + ", idLocalidad=" + localidad + ", "
-				+ (mail != null ? "mail=" + mail + ", " : "") + (nombre1 != null ? "nombre1=" + nombre1 + ", " : "")
+				+ (mailInstitucional != null ? "mail=" + mailInstitucional + ", " : "") + (nombre1 != null ? "nombre1=" + nombre1 + ", " : "")
 				+ (nombre2 != null ? "nombre2=" + nombre2 + ", " : "")
 				+ (telefono != null ? "telefono=" + telefono : "") + "]";
 	}

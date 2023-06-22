@@ -11,4 +11,7 @@ public interface UsuarioBeanRemote extends CRUDRemote<Usuario, Long> {
 
 	boolean isUserRegistered(String username);
 
+	Usuario selectUserBy(String mailOrUsername);
+
+
 }
