@@ -2,13 +2,13 @@ package com.services;
 
 import javax.ejb.Stateless;
 
-import com.entities.Usuario;
+import com.entities.Analista;
 
 /**
  * Session Bean implementation class AnalistaBean
  */
 @Stateless
-public class AnalistaBean extends CRUDBean<Usuario, Long> implements AnalistaBeanRemote {
+public class AnalistaBean extends CRUDBean<Analista, Long> implements AnalistaBeanRemote {
 
     /**
      * Default constructor. 

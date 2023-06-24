@@ -2,13 +2,13 @@ package com.services;
 
 import javax.ejb.Stateless;
 
-import com.entities.Usuario;
+import com.entities.Tutor;
 
 /**
  * Session Bean implementation class TutorBean
  */
 @Stateless
-public class TutorBean extends CRUDBean<Usuario, Long> implements TutorBeanRemote {
+public class TutorBean extends CRUDBean<Tutor, Long> implements TutorBeanRemote {
 
     /**
      * Default constructor. 

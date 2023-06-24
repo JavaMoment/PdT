@@ -17,12 +17,13 @@ public class Localidad implements Serializable {
 	@SequenceGenerator(name="LOCALIDADES_IDLOCALIDAD_GENERATOR", sequenceName="LOCALI_ID_SEQ")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="LOCALIDADES_IDLOCALIDAD_GENERATOR")
 	@Column(name="ID_LOCALIDAD")
-	private long idLocalidad;
+	private Long idLocalidad;
 
+	@Column(name="nombre", nullable=false)
 	private String nombre;
 
 	//bi-directional many-to-one association to Departamento
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne()
 	@JoinColumn(name="ID_DEPARTAMENTO")
 	private Departamento departamento;
 
@@ -33,7 +34,7 @@ public class Localidad implements Serializable {
 		return this.idLocalidad;
 	}
 
-	public void setIdLocalidad(long idLocalidad) {
+	public void setIdLocalidad(Long idLocalidad) {
 		this.idLocalidad = idLocalidad;
 	}
 
@@ -52,5 +53,11 @@ public class Localidad implements Serializable {
 	public void setDepartamento(Departamento departamento) {
 		this.departamento = departamento;
 	}
+
+	@Override
+	public String toString() {
+		return nombre != null ? nombre : "";
+	}
+
 
 }

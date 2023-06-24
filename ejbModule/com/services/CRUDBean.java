@@ -2,7 +2,9 @@ package com.services;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -13,7 +15,10 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import javax.persistence.Entity;
+
+import org.hibernate.metamodel.spi.MetamodelImplementor;
+import org.hibernate.metadata.ClassMetadata;
+
 
 /**
  * Session Bean implementation class CRUDBean
@@ -100,5 +105,16 @@ public class CRUDBean<T, ID extends Serializable> implements CRUDRemote<T, ID> {
 	private Class<T> getEntityClass() {
         return (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }
+	
+	@Override
+	public String[] getColsNames() {
+		MetamodelImplementor metamodel = (MetamodelImplementor) em.getMetamodel();
+		ClassMetadata classMetadata = (ClassMetadata) metamodel.entityPersister(getEntityClass().getName());
+
+		String[] colNames = classMetadata.getPropertyNames();
+		String[] pkColName = {metamodel.entityPersister(getEntityClass().getName()).getIdentifierPropertyName()};
+		return Stream.concat(Arrays.stream(colNames), Arrays.stream(pkColName))
+                .toArray(String[]::new);
+	}
 
 }

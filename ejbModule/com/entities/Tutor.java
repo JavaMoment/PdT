@@ -3,6 +3,8 @@ package com.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import com.enums.Roles;
+
 
 /**
  * The persistent class for the TUTORES database table.
@@ -19,11 +21,13 @@ public class Tutor implements Serializable {
 	@Column(name="ID_TUTOR", unique=true, nullable=false, precision=38)
 	private Long idTutor;
 
-	@Column(name="ID_AREA", nullable=false, precision=38)
-	private int idArea;
+	@ManyToOne
+	@JoinColumn(name="ID_AREA", nullable=false)
+	private Area area;
 
-	@Column(nullable=false, length=75)
-	private String tipo;
+	@Column(name="tipo", nullable=false, length=75)
+	@Enumerated(EnumType.STRING)
+	private Roles rol;
 
 	//bi-directional many-to-one association to Usuario
 	@ManyToOne
@@ -31,6 +35,12 @@ public class Tutor implements Serializable {
 	private Usuario usuario;
 
 	public Tutor() {
+	}
+	
+	public Tutor(Usuario user, Area area, Roles rol) {
+		this.usuario = user;
+		this.area = area;
+		this.rol = rol;
 	}
 
 	public long getIdTutor() {
@@ -41,20 +51,20 @@ public class Tutor implements Serializable {
 		this.idTutor = idTutor;
 	}
 
-	public int getIdArea() {
-		return idArea;
+	public Area getIdArea() {
+		return area;
 	}
 
-	public void setIdArea(int idArea) {
-		this.idArea = idArea;
+	public void setIdArea(Area idArea) {
+		this.area = idArea;
 	}
 
-	public String getTipo() {
-		return this.tipo;
+	public Roles getTipo() {
+		return this.rol;
 	}
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setTipo(Roles tipo) {
+		this.rol = tipo;
 	}
 
 	public Usuario getUsuario() {
