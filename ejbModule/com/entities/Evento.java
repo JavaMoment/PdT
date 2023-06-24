@@ -18,6 +18,19 @@ import java.util.List;
 @Entity
 @Table(name="EVENTOS")
 public class Evento implements Serializable {
+	
+	
+	
+	public Evento() {
+	}
+
+
+	public Evento(String title, String type, Date startDate, Date endDate, String modality, String itr,
+			String location) {
+		// TODO Auto-generated constructor stub
+	}
+
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -34,19 +47,19 @@ public class Evento implements Serializable {
 	@Column(name="FECHA_HORA_INICIO")
 	private Date fechaHoraInicio;
 
-	@Column(name="LOCALIZACION")
-	private String localizacion;
+	//@Column(name="LOCALIZACION")
+	//private String localizacion;
 	
 	@Column(name="TITULO")
 	private String titulo;
 	
-	@Column(name="TIPO_EVENTO", nullable=false)
-	@Enumerated(EnumType.STRING)
-	private TipoEvento tipoEvento;
+	//@Column(name="TIPO_EVENTO", nullable=false)
+	//@Enumerated(EnumType.STRING)
+	//private TipoEvento tipoEvento;
 	
-	@Column(name="MODALIDAD", nullable=false)
-	@Enumerated(EnumType.STRING)
-	private Modalidad modalidad;
+	//@Column(name="MODALIDAD", nullable=false)
+	//@Enumerated(EnumType.STRING)
+	//private Modalidad modalidad;
 
 	//bi-directional many-to-many association to Analista
 	@ManyToMany
