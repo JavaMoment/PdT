@@ -42,7 +42,7 @@ public class Usuario implements Serializable {
 	@Column(name="FEC_NAC", nullable=false)
 	private Date fechaNacimiento;
 
-	@Column(nullable=false, length=1)
+	@Column(name="GENERO", nullable=false, length=1)
 	private char genero;
 
 	@ManyToOne

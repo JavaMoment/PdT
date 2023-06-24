@@ -23,9 +23,7 @@ public class Constancia implements Serializable {
 	@Column(name="ID_CONSTANCIA", unique=true, nullable=false, precision=38)
 	private Long idConstancia;
 	
-	@Column(nullable=false)
-	@Enumerated(EnumType.STRING)
-	private Tipo tipo;
+
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="FECHA_HORA", nullable=false)
@@ -60,13 +58,7 @@ public class Constancia implements Serializable {
 		this.idConstancia = idConstancia;
 	}
 
-	public Tipo getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(Tipo tipo) {
-		this.tipo = tipo;
-	}
+	
 
 	public Date getFecha_hora() {
 		return fecha_hora;
