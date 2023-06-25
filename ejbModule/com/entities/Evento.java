@@ -1,14 +1,8 @@
 package com.entities;
 
-
 import java.io.Serializable;
 import javax.persistence.*;
-
-import com.enums.Modalidad;
-import com.enums.TipoEvento;
-
 import java.util.Date;
-import java.util.List;
 
 
 /**
@@ -17,14 +11,10 @@ import java.util.List;
  */
 @Entity
 @Table(name="EVENTOS")
+@NamedQuery(name="Evento.findAll", query="SELECT e FROM Evento e")
 public class Evento implements Serializable {
 	
 	
-	
-	public Evento() {
-	}
-
-
 	public Evento(String title, String type, Date startDate, Date endDate, String modality, String itr,
 			String location) {
 		// TODO Auto-generated constructor stub
@@ -34,8 +24,7 @@ public class Evento implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="EVENTOS_IDEVENTO_GENERATOR", sequenceName="event_id_seq")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="EVENTOS_IDEVENTO_GENERATOR")
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="ID_EVENTO")
 	private long idEvento;
 
@@ -49,8 +38,18 @@ public class Evento implements Serializable {
 
 	//@Column(name="LOCALIZACION")
 	//private String localizacion;
+	@Column(name="ID_ITR")
+	private java.math.BigDecimal idItr;
+
+	@Column(name="ID_TIPO")
+	private java.math.BigDecimal idTipo;
+
+	private String localizacion;
+
 	
-	@Column(name="TITULO")
+	@Column(name="TIPO_EVENTO")
+	private String tipoEvento;
+
 	private String titulo;
 	
 	//@Column(name="TIPO_EVENTO", nullable=false)
@@ -61,37 +60,97 @@ public class Evento implements Serializable {
 	//@Enumerated(EnumType.STRING)
 	//private Modalidad modalidad;
 
-	//bi-directional many-to-many association to Analista
-	@ManyToMany
-	@JoinTable(
-		name="ANALISTA_EVENTO"
-		, joinColumns={
-			@JoinColumn(name="ID_EVENTO")
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="ID_ANALISTA")
-			}
-	)
-	private List<Analista> analistas;
-	
-	
-	@ManyToMany
-	@JoinTable(
-		name="TUTOR_EVENTO"
-		, joinColumns={
-			@JoinColumn(name="ID_EVENTO")
-			}
-		, inverseJoinColumns={
-			@JoinColumn(name="ID_TUTOR")
-			}
-	)
-	private List<Tutor> tutores;
-	
+	//bi-directional many-to-one association to Modalidad
+	@ManyToOne
+	@JoinColumn(name="ID_MODALIDAD")
+	private Modalidad modalidad;
 
-		
-	
-	
+	//bi-directional many-to-one association to Estado
+	@ManyToOne
+	@JoinColumn(name="ID_ESTADO")
+	private Estado estado;
 
+	public Evento() {
+	}
 
+	public long getIdEvento() {
+		return this.idEvento;
+	}
+
+	public void setIdEvento(long idEvento) {
+		this.idEvento = idEvento;
+	}
+
+	public Date getFechaHoraFinal() {
+		return this.fechaHoraFinal;
+	}
+
+	public void setFechaHoraFinal(Date fechaHoraFinal) {
+		this.fechaHoraFinal = fechaHoraFinal;
+	}
+
+	public Date getFechaHoraInicio() {
+		return this.fechaHoraInicio;
+	}
+
+	public void setFechaHoraInicio(Date fechaHoraInicio) {
+		this.fechaHoraInicio = fechaHoraInicio;
+	}
+
+	public java.math.BigDecimal getIdItr() {
+		return this.idItr;
+	}
+
+	public void setIdItr(java.math.BigDecimal idItr) {
+		this.idItr = idItr;
+	}
+
+	public java.math.BigDecimal getIdTipo() {
+		return this.idTipo;
+	}
+
+	public void setIdTipo(java.math.BigDecimal idTipo) {
+		this.idTipo = idTipo;
+	}
+
+	public String getLocalizacion() {
+		return this.localizacion;
+	}
+
+	public void setLocalizacion(String localizacion) {
+		this.localizacion = localizacion;
+	}
+
+	public String getTipoEvento() {
+		return this.tipoEvento;
+	}
+
+	public void setTipoEvento(String tipoEvento) {
+		this.tipoEvento = tipoEvento;
+	}
+
+	public String getTitulo() {
+		return this.titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+	public Modalidad getModalidade() {
+		return this.modalidad;
+	}
+
+	public void setModalidade(Modalidad modalidade) {
+		this.modalidad = modalidade;
+	}
+
+	public Estado getEstado() {
+		return this.estado;
+	}
+
+	public void setEstado(Estado estado) {
+		this.estado = estado;
+	}
 
 }
