@@ -14,7 +14,6 @@ import java.util.List;
  * 
  */
 @Entity
-@NamedQuery(name="Itr.findAll", query="SELECT i FROM Itr i")
 public class Itr implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -26,14 +25,14 @@ public class Itr implements Serializable {
 
 	private String nombre;
 
-	/*
-	//bi-directional many-to-one association to Departamento
+	
+	/*//bi-directional many-to-one association to Departamento
 	@OneToMany(mappedBy="itr")
 	private List<Departamento> departamentos;
-*/
+
 	//bi-directional many-to-one association to Usuario
-	//@OneToMany(mappedBy="itr")
-	//private List<Usuario> usuarios;
+	@OneToMany(mappedBy="itr")
+	private List<Usuario> usuarios;*/
 
 	public Itr() {
 	}
@@ -54,7 +53,7 @@ public class Itr implements Serializable {
 		this.nombre = nombre;
 	}
 	
-	/*
+/*	
 	public List<Departamento> getDepartamentos() {
 		return this.departamentos;
 	}
@@ -84,7 +83,7 @@ public class Itr implements Serializable {
 	public void setUsuarios(List<Usuario> usuarios) {
 		this.usuarios = usuarios;
 	}
-
+ 
 	public Usuario addUsuario(Usuario usuario) {
 		getUsuarios().add(usuario);
 		usuario.setItr(this);
@@ -99,4 +98,8 @@ public class Itr implements Serializable {
 		return usuario;
 	}
 */
+	@Override
+	public String toString() {
+		return this.nombre != null ? this.nombre : "";
+	}
 }

@@ -12,5 +12,4 @@ import com.entities.Evento;
 @Remote
 public interface EventoBeanRemote extends CRUDRemote<Evento, Long>{
 
-
 }

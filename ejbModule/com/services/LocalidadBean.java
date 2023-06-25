@@ -59,4 +59,17 @@ public class LocalidadBean extends CRUDBean<Localidad, Long> implements Localida
     		return null;
     	}
     }
+
+	@Override
+	public List<Localidad> selectAllBy(long idDepa) {
+		try {
+    		@SuppressWarnings("unchecked")
+			TypedQuery<Localidad> query = (TypedQuery<Localidad>) super.getEntityManager()
+					.createQuery("SELECT l FROM Localidad l WHERE l.departamento.idDepartamento=:idDepa ORDER BY l.idLocalidad", Localidad.class)
+					.setParameter("idDepa", idDepa);
+			return query.getResultList();
+    	} catch(PersistenceException e) {
+    		return null;
+    	}
+	}
 }
