@@ -48,5 +48,19 @@ public class UsuarioBean extends CRUDBean<Usuario, Long> implements UsuarioBeanR
 			return false;
 		}
 	}
+	
+	@Override
+	public Usuario selectUserBy(String mailOrUsername) {
+		try {
+			@SuppressWarnings("unchecked")
+			TypedQuery<Usuario> query = (TypedQuery<Usuario>) super.getEntityManager()
+				.createQuery("SELECT u FROM Usuario u WHERE u.nombreUsuario =:mailOrUsername OR u.mailInstitucional =:mailOrUsername")
+				.setParameter("mailOrUsername", mailOrUsername);
+			return query.getSingleResult();
+		} catch(PersistenceException e) {
+			return null;
+		
+		}
+	}
 
 }

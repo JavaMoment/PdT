@@ -81,8 +81,7 @@ public class Departamento implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Departamento [" + (idDepartamento != null ? "idDepartamento=" + idDepartamento + ", " : "")
-				+ (idItr != null ? "idItr=" + idItr + ", " : "") + (nombre != null ? "nombre=" + nombre : "") + "]";
+		return nombre != null ? nombre : "";
 	}
 
 }

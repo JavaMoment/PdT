@@ -26,6 +26,10 @@ public class Analista implements Serializable {
 
 	public Analista() {
 	}
+	
+	public Analista(Usuario user) {
+		this.usuario = user;
+	}
 
 	public long getIdAnalista() {
 		return this.idAnalista;
