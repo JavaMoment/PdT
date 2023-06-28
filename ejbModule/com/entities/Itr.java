@@ -3,6 +3,8 @@ package com.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 
+
+
 //import entities.Departamento;
 //import entities.Usuario;
 

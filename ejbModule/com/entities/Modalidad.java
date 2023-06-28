@@ -24,7 +24,7 @@ public class Modalidad implements Serializable {
 	private String nombre;
 
 	//bi-directional many-to-one association to Evento
-	//@OneToMany(mappedBy="modalidad")
+	@OneToMany(mappedBy="modalidad")
 	private List<Evento> eventos;
 
 	public Modalidad() {

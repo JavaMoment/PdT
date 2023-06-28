@@ -1,9 +1,6 @@
 --------------------------------------------------------
-<<<<<<< Updated upstream
 --  File created - Wednesday-June-21-2023   
-=======
---  File created - mi�rcoles-junio-21-2023   
->>>>>>> Stashed changes
+
 --------------------------------------------------------
 --------------------------------------------------------
 --  DDL for Sequence ANALISTAS_ID_SEQ
@@ -49,11 +46,7 @@
 --  DDL for Sequence LOCALI_ID_SEQ
 --------------------------------------------------------
 
-<<<<<<< Updated upstream
-   CREATE SEQUENCE  "C##PROYECTO"."LOCALI_ID_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 65 NOCACHE  NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
-=======
    CREATE SEQUENCE  "C##PROYECTO"."LOCALI_ID_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 12 NOCACHE  NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;
->>>>>>> Stashed changes
 --------------------------------------------------------
 --  DDL for Sequence RECL_ID_SEQ
 --------------------------------------------------------
@@ -149,7 +142,6 @@
   BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
   TABLESPACE "USERS" ;
 --------------------------------------------------------
-<<<<<<< Updated upstream
 --  DDL for Table ESTUDIANTES
 --------------------------------------------------------
 
@@ -162,10 +154,8 @@
  NOCOMPRESS LOGGING
   TABLESPACE "USERS" ;
 --------------------------------------------------------
---  DDL for Table ESTUDIANTE_EVENTO
-=======
+
 --  DDL for Table ESTADOS
->>>>>>> Stashed changes
 --------------------------------------------------------
 
   CREATE TABLE "C##PROYECTO"."ESTADOS" 
@@ -179,8 +169,7 @@
   BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
   TABLESPACE "USERS" ;
 --------------------------------------------------------
-<<<<<<< Updated upstream
-=======
+
 --  DDL for Table ESTUDIANTES
 --------------------------------------------------------
 
@@ -206,7 +195,6 @@
  NOCOMPRESS LOGGING
   TABLESPACE "USERS" ;
 --------------------------------------------------------
->>>>>>> Stashed changes
 --  DDL for Table EVENTOS
 --------------------------------------------------------
 
@@ -392,21 +380,14 @@
 	"GENERO" CHAR(1 BYTE), 
 	"ID_DEPARTAMENTO" NUMBER(*,0), 
 	"ID_LOCALIDAD" NUMBER(*,0), 
-<<<<<<< Updated upstream
-	"ID_ITR" NUMBER(*,0), 
 	"MAIL_INSTITUCIONAL" VARCHAR2(250 BYTE), 
-=======
-	"MAIL" VARCHAR2(250 BYTE), 
->>>>>>> Stashed changes
 	"CONTRASENIA" VARCHAR2(100 BYTE), 
 	"TELEFONO" VARCHAR2(9 BYTE), 
 	"DOCUMENTO" VARCHAR2(8 BYTE), 
 	"ACTIVO" NUMBER(1,0), 
-<<<<<<< Updated upstream
 	"MAIL_PERSONAL" VARCHAR2(250 BYTE)
-=======
 	"ID_ITR" NUMBER(*,0)
->>>>>>> Stashed changes
+	
    ) SEGMENT CREATION IMMEDIATE 
   PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
  NOCOMPRESS LOGGING
@@ -416,10 +397,7 @@
   TABLESPACE "USERS" ;
 REM INSERTING into C##PROYECTO.ANALISTAS
 SET DEFINE OFF;
-<<<<<<< Updated upstream
 Insert into C##PROYECTO.ANALISTAS (ID_ANALISTA,NOMBRE_USUARIO) values (2,'p.perez');
-=======
->>>>>>> Stashed changes
 REM INSERTING into C##PROYECTO.ANALISTA_EVENTO
 SET DEFINE OFF;
 REM INSERTING into C##PROYECTO.AREAS
@@ -442,13 +420,11 @@ Insert into C##PROYECTO.DEPARTAMENTOS (ID_DEPARTAMENTO,NOMBRE,ID_ITR) values (11
 Insert into C##PROYECTO.DEPARTAMENTOS (ID_DEPARTAMENTO,NOMBRE,ID_ITR) values (12,'Salto',1);
 Insert into C##PROYECTO.DEPARTAMENTOS (ID_DEPARTAMENTO,NOMBRE,ID_ITR) values (13,'San Jos�',2);
 Insert into C##PROYECTO.DEPARTAMENTOS (ID_DEPARTAMENTO,NOMBRE,ID_ITR) values (14,'Mercedes',1);
-<<<<<<< Updated upstream
 Insert into C##PROYECTO.DEPARTAMENTOS (ID_DEPARTAMENTO,NOMBRE,ID_ITR) values (15,'Tacuaremb�',3);
 Insert into C##PROYECTO.DEPARTAMENTOS (ID_DEPARTAMENTO,NOMBRE,ID_ITR) values (16,'Lavalleja',4);
 Insert into C##PROYECTO.DEPARTAMENTOS (ID_DEPARTAMENTO,NOMBRE,ID_ITR) values (17,'Montevideo',null);
 Insert into C##PROYECTO.DEPARTAMENTOS (ID_DEPARTAMENTO,NOMBRE,ID_ITR) values (18,'Rocha',null);
 Insert into C##PROYECTO.DEPARTAMENTOS (ID_DEPARTAMENTO,NOMBRE,ID_ITR) values (19,'Treinta y Tres',null);
-=======
 Insert into C##PROYECTO.DEPARTAMENTOS (ID_DEPARTAMENTO,NOMBRE,ID_ITR) values (15,'Lavalleja',4);
 Insert into C##PROYECTO.DEPARTAMENTOS (ID_DEPARTAMENTO,NOMBRE,ID_ITR) values (16,'Tacuaremb�',3);
 REM INSERTING into C##PROYECTO.ESTADOS
@@ -456,7 +432,6 @@ SET DEFINE OFF;
 Insert into C##PROYECTO.ESTADOS (ID_ESTADO,NOMBRE) values (1,'FINALIZADO');
 Insert into C##PROYECTO.ESTADOS (ID_ESTADO,NOMBRE) values (2,'CORRIENTE');
 Insert into C##PROYECTO.ESTADOS (ID_ESTADO,NOMBRE) values (3,'FUTURO');
->>>>>>> Stashed changes
 REM INSERTING into C##PROYECTO.ESTUDIANTES
 SET DEFINE OFF;
 REM INSERTING into C##PROYECTO.ESTUDIANTE_EVENTO
@@ -872,8 +847,7 @@ Insert into C##PROYECTO.USUARIOS (NOMBRE_USUARIO,NOMBRE1,NOMBRE2,APELLIDO1,APELL
   BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
   TABLESPACE "USERS" ;
 --------------------------------------------------------
-<<<<<<< Updated upstream
-=======
+
 --  DDL for Index SYS_C0010684
 --------------------------------------------------------
 
@@ -884,7 +858,6 @@ Insert into C##PROYECTO.USUARIOS (NOMBRE_USUARIO,NOMBRE1,NOMBRE2,APELLIDO1,APELL
   BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
   TABLESPACE "USERS" ;
 --------------------------------------------------------
->>>>>>> Stashed changes
 --  DDL for Index PK_ESTUD_ID
 --------------------------------------------------------
 

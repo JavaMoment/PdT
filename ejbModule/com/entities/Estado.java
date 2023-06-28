@@ -23,7 +23,7 @@ public class Estado implements Serializable {
 	private String nombre;
 
 	//bi-directional many-to-one association to Evento
-	//@OneToMany(mappedBy="estado")
+	@OneToMany(mappedBy="estado")
 	private List<Evento> eventos;
 
 	public Estado() {
