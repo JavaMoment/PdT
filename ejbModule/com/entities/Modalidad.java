@@ -22,6 +22,11 @@ public class Modalidad implements Serializable {
 
 	@Column(name="NOMBRE")
 	private String nombre;
+	
+	@Column(name="ACTIVO")
+	private int activo;
+
+	
 
 	//bi-directional many-to-one association to Evento
 	@OneToMany(mappedBy="modalidad")
@@ -52,6 +57,14 @@ public class Modalidad implements Serializable {
 
 	public void setEventos(List<Evento> eventos) {
 		this.eventos = eventos;
+	}
+	
+	public int getActivo() {
+		return activo;
+	}
+
+	public void setActivo(int activo) {
+		this.activo = activo;
 	}
 
 	/*public Evento addEvento(Evento evento) {
