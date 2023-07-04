@@ -58,9 +58,13 @@ public class Evento implements Serializable {
 	private List<Analista> analistas;
 
 	@ManyToMany
-	@JoinTable(name = "TUTOR_EVENTO", joinColumns = { @JoinColumn(name = "ID_EVENTO") }, inverseJoinColumns = {
-			@JoinColumn(name = "ID_TUTOR") })
-	private List<Tutor> tutores;
+	@JoinTable(
+	    name = "TUTOR_EVENTO", // Nombre de la tabla de unión
+	    joinColumns = { @JoinColumn(name = "ID_EVENTO") }, // Columna de unión para la clave externa de Evento
+	    inverseJoinColumns = { @JoinColumn(name = "ID_TUTOR") } // Columna de unión para la clave externa de Tutor
+	)
+	private List<Tutor> tutor; // Lista de tutores asociados al evento
+
 
 	public Evento() {
 
@@ -68,8 +72,7 @@ public class Evento implements Serializable {
 
 	// Constructor con parámetros para inicializar todas las propiedades de Evento
 	public Evento(String titulo, TipoEvento tipoEvento, Date fechaHoraInicio, Date fechaHoraFinal,
-			Modalidad modalidad, Itr itr, String localizacion, Status status) {
-		super();
+			Modalidad modalidad, Itr itr, String localizacion, Status status, List<Tutor> tutor) {
 		this.titulo = titulo;
 		this.tipoEvento = tipoEvento;
 		this.fechaHoraInicio = fechaHoraInicio;
@@ -78,6 +81,7 @@ public class Evento implements Serializable {
 		this.itr = itr;
 		this.localizacion = localizacion;
 		this.status = status;
+		this.tutor = tutor;
 	}
 
 	// Getters y setters para todas las propiedades
@@ -122,12 +126,12 @@ public class Evento implements Serializable {
 		this.analistas = analistas;
 	}
 
-	public List<Tutor> getTutores() {
-		return tutores;
+	public List<Tutor> getTutor() {
+		return tutor;
 	}
 
-	public void setTutores(List<Tutor> tutores) {
-		this.tutores = tutores;
+	public void setTutor(List<Tutor> tutor) {
+		this.tutor = tutor;
 	}
 
 	public String getLocalizacion() {
@@ -143,7 +147,7 @@ public class Evento implements Serializable {
 		return "Evento [idEvento=" + idEvento + ", fechaHoraFinal=" + fechaHoraFinal + ", fechaHoraInicio="
 				+ fechaHoraInicio + ", localizacion=" + localizacion + ", titulo=" + titulo + ", idItr=" + itr
 				+ ", tipoEvento=" + tipoEvento + ", modalidad=" + modalidad + ", status=" + status + ", analistas="
-				+ analistas + ", tutores=" + tutores + "]";
+				+ analistas + ", tutor" + tutor + "]";
 	}
 
 	public TipoEvento getTipoEvento() {
