@@ -4,8 +4,6 @@ package com.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 
-import com.enums.Modalidad;
-import com.enums.TipoEvento;
 
 import java.util.Date;
 import java.util.List;

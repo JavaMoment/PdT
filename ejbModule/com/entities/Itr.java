@@ -23,6 +23,7 @@ public class Itr implements Serializable {
 	@Column(name="ID_ITR")
 	private long idItr;
 
+	@Column(name="NOMBRE", nullable=false)
 	private String nombre;
 
 	
