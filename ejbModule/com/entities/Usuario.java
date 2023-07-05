@@ -79,6 +79,11 @@ public class Usuario implements Serializable {
 	private Set<Estudiante> estudiantes;
 
 	//bi-directional many-to-one association to Tutores
+	
+	// La anotación @OneToMany indica que esta entidad tiene una relación "uno a muchos" con la entidad "Tutor"
+	// mappedBy="usuario" especifica que el campo "usuario" en la entidad "Tutor" es el propietario de la relación.
+	// En otras palabras, "usuario" en la entidad "Tutor" mapea la relación hacia esta entidad.
+
 	@OneToMany(mappedBy="usuario", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	private Set<Tutor> tutores;
 

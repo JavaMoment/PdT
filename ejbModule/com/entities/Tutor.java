@@ -75,4 +75,9 @@ public class Tutor implements Serializable {
 		this.usuario = usuario;
 	}
 
+	@Override
+	public String toString() {
+		return usuario.getNombre1();
+	}
+
 }

@@ -23,9 +23,12 @@ public class Itr implements Serializable {
 	@Column(name="ID_ITR")
 	private long idItr;
 
+
 	@Column(name="NOMBRE", nullable=false)
 	private String nombre;
 
+	@OneToMany(mappedBy="itr")
+	private List<Evento> eventos;
 	
 	/*//bi-directional many-to-one association to Departamento
 	@OneToMany(mappedBy="itr")
