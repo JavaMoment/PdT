@@ -16,11 +16,16 @@ public class Estado implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@SequenceGenerator(name="EVENTOS_IDESTADO_GENERATOR", sequenceName="SEQ_ESTADOS")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="EVENTOS_IDESTADO_GENERATOR")	
 	@Column(name="ID_ESTADO")
 	private long idEstado;
 
+	@Column(name="NOMBRE")
 	private String nombre;
+	
+	@Column(name="ACTIVO")
+	private int activo;
 
 	//bi-directional many-to-one association to Evento
 	@OneToMany(mappedBy="estado")
@@ -51,6 +56,14 @@ public class Estado implements Serializable {
 
 	public void setEventos(List<Evento> eventos) {
 		this.eventos = eventos;
+	}
+
+	public int getActivo() {
+		return activo;
+	}
+
+	public void setActivo(int activo) {
+		this.activo = activo;
 	}
 
 	/*public Evento addEvento(Evento evento) {

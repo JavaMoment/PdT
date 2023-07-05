@@ -16,7 +16,8 @@ public class Modalidad implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@SequenceGenerator(name="MODALIDADES_IDMODALIDAD_GENERATOR", sequenceName="SEQ_MODALIDADES")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="MODALIDADES_IDMODALIDAD_GENERATOR")	
 	@Column(name="ID_MODALIDAD")
 	private long idModalidad;
 
