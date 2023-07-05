@@ -13,5 +13,8 @@ public interface UsuarioBeanRemote extends CRUDRemote<Usuario, Long> {
 
 	Usuario selectUserBy(String mailOrUsername);
 
+	int logicalDeleteByUsername(String username);
+
+	int activeUserBy(String username);
 
 }

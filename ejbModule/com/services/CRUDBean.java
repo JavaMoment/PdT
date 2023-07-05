@@ -111,8 +111,11 @@ public class CRUDBean<T, ID extends Serializable> implements CRUDRemote<T, ID> {
 		MetamodelImplementor metamodel = (MetamodelImplementor) em.getMetamodel();
 		ClassMetadata classMetadata = (ClassMetadata) metamodel.entityPersister(getEntityClass().getName());
 
+		// Get the columns names by obtaining the persisted property names in the class metadata saved by hibernate
+		// And also for the pk
 		String[] colNames = classMetadata.getPropertyNames();
 		String[] pkColName = {metamodel.entityPersister(getEntityClass().getName()).getIdentifierPropertyName()};
+
 		return Stream.concat(Arrays.stream(colNames), Arrays.stream(pkColName))
                 .toArray(String[]::new);
 	}

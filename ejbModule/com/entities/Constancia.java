@@ -2,11 +2,9 @@ package com.entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.*;
 
-import com.enums.Tipo;
 
 /**
  * Entity implementation class for Entity: Constancia

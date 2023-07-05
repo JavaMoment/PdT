@@ -3,10 +3,8 @@ package com.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 
-import java.util.Collection;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 
@@ -89,6 +87,9 @@ public class Usuario implements Serializable {
 	@OneToMany(mappedBy="usuario", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	private Set<Tutor> tutores;
 
+	@Transient
+	private String tipoUsuario;
+
 	public Usuario() {
 	}
 
@@ -111,6 +112,7 @@ public class Usuario implements Serializable {
 		this.mailInstitucional = mailInsti;
 		this.mailPersonal = mailPers;
 		this.nombre1 = nombre1;
+		
 	}
 	
 
@@ -244,6 +246,24 @@ public class Usuario implements Serializable {
 	
 	public boolean isValidUser(String passw) {
 		return activo == 1 && contrasenia.equals(passw);
+	}
+	
+	public String getTipoUsuario() {
+		if( analistas.stream().anyMatch(analista -> analista.getUsuario().getNombreUsuario().equals(nombreUsuario)) ) {
+			return "Analista";
+		} else if ( estudiantes.stream().anyMatch(estudiante -> estudiante.getUsuario().getNombreUsuario().equals(nombreUsuario)) ) {
+			return "Estudiante";
+		}
+		return "Tutor";
+	}
+	
+	public String getGeneracion() {
+		Optional<Estudiante> studentIfExists = estudiantes.stream().filter(estudiante -> estudiante.getUsuario().getNombreUsuario().equals(nombreUsuario)).findFirst();
+		if(studentIfExists.isEmpty()) {
+			return "";
+		}
+		String gen = studentIfExists.get().getGeneracion();
+		return gen != null ? gen : "";
 	}
 	
 	public Set<Analista> getAnalistas() {
