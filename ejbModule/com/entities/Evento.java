@@ -1,94 +1,98 @@
 package com.entities;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.enums.Modalidad;
 import com.enums.Status;
 import com.enums.TipoEvento;
 
 
-import java.util.Date;
-import java.util.List;
-
+/**
+ * The persistent class for the EVENTOS database table.
+ * 
+ */
 @Entity
-@Table(name = "EVENTOS")
+@Table(name="EVENTOS")
+@NamedQuery(name="Evento.findAll", query="SELECT e FROM Evento e")
 public class Evento implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name = "EVENTOS_IDEVENTO_GENERATOR", sequenceName = "event_id_seq")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "EVENTOS_IDEVENTO_GENERATOR")
-	@Column(name = "ID_EVENTO")
-	private long idEvento;
+    @SequenceGenerator(name="SEQ_ID_EVENTO", sequenceName="SEQ_ID_EVENTO")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_ID_EVENTO")
+    @Column(name="ID_EVENTO")
+    private long idEvento;
+
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "FECHA_HORA_FINAL")
+	@Column(name="FECHA_HORA_FINAL")
 	private Date fechaHoraFinal;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "FECHA_HORA_INICIO")
+	@Column(name="FECHA_HORA_INICIO")
 	private Date fechaHoraInicio;
 
-	@Column(name = "LOCALIZACION", nullable = false)
-	private String localizacion;
-
-	@Column(name = "TITULO")
-	private String titulo;
-
-	@Column(name = "TIPO_EVENTO", nullable = false)
-	@Enumerated(EnumType.STRING)
-	private TipoEvento tipoEvento;
-
-	@Column(name = "MODALIDAD", nullable = false)
-	@Enumerated(EnumType.STRING)
-	private Modalidad modalidad;
-
-	@Column(name = "STATUS", nullable = false)
-	@Enumerated(EnumType.STRING)
-	private Status status;
-
-	@ManyToOne()
-	@JoinColumn(name = "ID_ITR", nullable = false)
+	@ManyToOne
+	@JoinColumn(name = "ID_ITR") // Nombre de la columna en la tabla "EVENTOS" que hace referencia a "ITR"
 	private Itr itr;
 
-	@ManyToMany
-	@JoinTable(name = "ANALISTA_EVENTO", joinColumns = { @JoinColumn(name = "ID_EVENTO") }, inverseJoinColumns = {
-			@JoinColumn(name = "ID_ANALISTA") })
-	private List<Analista> analistas;
 
-	@ManyToMany
-	@JoinTable(
-	    name = "TUTOR_EVENTO", // Nombre de la tabla de unión
-	    joinColumns = { @JoinColumn(name = "ID_EVENTO") }, // Columna de unión para la clave externa de Evento
-	    inverseJoinColumns = { @JoinColumn(name = "ID_TUTOR") } // Columna de unión para la clave externa de Tutor
-	)
-	private List<Tutor> tutor; // Lista de tutores asociados al evento
+	private String localizacion;
 
+	@Enumerated (EnumType.STRING)
+	private Modalidad modalidad;
+
+	@Enumerated (EnumType.STRING)
+	private Status status;
+
+	@Enumerated (EnumType.STRING)
+	@Column (name="TIPO_EVENTO")
+	private TipoEvento tipoEvento;
+
+	private String titulo;
+
+	//bi-directional many-to-one association to TutorEvento
+	@OneToMany(mappedBy="evento")
+	private List<TutorEvento> tutorEventos;
 
 	public Evento() {
-
 	}
 
 	// Constructor con parámetros para inicializar todas las propiedades de Evento
-	public Evento(String titulo, TipoEvento tipoEvento, Date fechaHoraInicio, Date fechaHoraFinal,
-			Modalidad modalidad, Itr itr, String localizacion, Status status, List<Tutor> tutor) {
-		this.titulo = titulo;
-		this.tipoEvento = tipoEvento;
-		this.fechaHoraInicio = fechaHoraInicio;
-		this.fechaHoraFinal = fechaHoraFinal;
-		this.modalidad = modalidad;
-		this.itr = itr;
-		this.localizacion = localizacion;
-		this.status = status;
-		this.tutor = tutor;
-	}
+		public Evento(String titulo, TipoEvento tipoEvento, Date fechaHoraInicio, Date fechaHoraFinal,
+				Modalidad modalidad, Itr itr, String localizacion, Status status) {
+			this.titulo = titulo;
+			this.tipoEvento = tipoEvento;
+			this.fechaHoraInicio = fechaHoraInicio;
+			this.fechaHoraFinal = fechaHoraFinal;
+			this.modalidad = modalidad;
+			this.itr = itr;
+			this.localizacion = localizacion;
+			this.status = status;
+		}
+	
 
-	// Getters y setters para todas las propiedades
-
+	
 	public long getIdEvento() {
-		return idEvento;
+		return this.idEvento;
 	}
 
 	public void setIdEvento(long idEvento) {
@@ -96,7 +100,7 @@ public class Evento implements Serializable {
 	}
 
 	public Date getFechaHoraFinal() {
-		return fechaHoraFinal;
+		return this.fechaHoraFinal;
 	}
 
 	public void setFechaHoraFinal(Date fechaHoraFinal) {
@@ -104,63 +108,31 @@ public class Evento implements Serializable {
 	}
 
 	public Date getFechaHoraInicio() {
-		return fechaHoraInicio;
+		return this.fechaHoraInicio;
 	}
 
 	public void setFechaHoraInicio(Date fechaHoraInicio) {
 		this.fechaHoraInicio = fechaHoraInicio;
 	}
 
-	public String getTitulo() {
-		return titulo;
+	public Itr getItr() {
+		return this.itr;
 	}
 
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
-
-	public List<Analista> getAnalistas() {
-		return analistas;
-	}
-
-	public void setAnalistas(List<Analista> analistas) {
-		this.analistas = analistas;
-	}
-
-	public List<Tutor> getTutor() {
-		return tutor;
-	}
-
-	public void setTutor(List<Tutor> tutor) {
-		this.tutor = tutor;
+	public void setItr(Itr itr) {
+		this.itr = itr;
 	}
 
 	public String getLocalizacion() {
-		return localizacion;
+		return this.localizacion;
 	}
 
 	public void setLocalizacion(String localizacion) {
 		this.localizacion = localizacion;
 	}
 
-	@Override
-	public String toString() {
-		return "Evento [idEvento=" + idEvento + ", fechaHoraFinal=" + fechaHoraFinal + ", fechaHoraInicio="
-				+ fechaHoraInicio + ", localizacion=" + localizacion + ", titulo=" + titulo + ", idItr=" + itr
-				+ ", tipoEvento=" + tipoEvento + ", modalidad=" + modalidad + ", status=" + status + ", analistas="
-				+ analistas + ", tutor" + tutor + "]";
-	}
-
-	public TipoEvento getTipoEvento() {
-		return tipoEvento;
-	}
-
-	public void setTipoEvento(TipoEvento tipoEvento) {
-		this.tipoEvento = tipoEvento;
-	}
-
 	public Modalidad getModalidad() {
-		return modalidad;
+		return this.modalidad;
 	}
 
 	public void setModalidad(Modalidad modalidad) {
@@ -168,18 +140,49 @@ public class Evento implements Serializable {
 	}
 
 	public Status getStatus() {
-		return status;
+		return this.status;
 	}
 
 	public void setStatus(Status status) {
 		this.status = status;
 	}
 
-	public Itr getItr() {
-		return itr;
+	public TipoEvento getTipoEvento() {
+		return this.tipoEvento;
 	}
 
-	public void setItr(Itr itr) {
-		this.itr = itr;
+	public void setTipoEvento(TipoEvento tipoEvento) {
+		this.tipoEvento = tipoEvento;
 	}
+
+	public String getTitulo() {
+		return this.titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+	public List<TutorEvento> getTutorEventos() {
+		return this.tutorEventos;
+	}
+
+	public void setTutorEventos(List<TutorEvento> tutorEventos) {
+		this.tutorEventos = tutorEventos;
+	}
+
+	public TutorEvento addTutorEvento(TutorEvento tutorEvento) {
+		getTutorEventos().add(tutorEvento);
+		tutorEvento.setEvento(this);
+
+		return tutorEvento;
+	}
+
+	public TutorEvento removeTutorEvento(TutorEvento tutorEvento) {
+		getTutorEventos().remove(tutorEvento);
+		tutorEvento.setEvento(null);
+
+		return tutorEvento;
+	}
+
 }

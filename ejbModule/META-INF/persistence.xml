@@ -1,34 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+<persistence version="2.2"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
 	<persistence-unit name="PDTServerSide">
-	 <provider>org.hibernate.ejb.HibernatePersistence</provider>
-        <jta-data-source>java:/PDT_DS</jta-data-source>
-        
-        <class>com.entities.Analista</class>
-        <class>com.entities.Estudiante</class>
-        <class>com.entities.Evento</class>
-        <class>com.entities.Itr</class>
-        <class>com.entities.Reclamo</class>
-        <class>com.entities.Tutor</class>
-        <class>com.entities.Usuario</class>
-        <class>com.entities.Constancia</class>
-        <class>com.entities.StatusCertificados</class>
-        <class>com.entities.Departamento</class>
-        <class>com.entities.Localidad</class>
-        <class>com.entities.Area</class>
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<jta-data-source>java:/PDT_DS</jta-data-source>
 
-        <validation-mode>AUTO</validation-mode>
+		<class>com.entities.Analista</class>
+		<class>com.entities.Area</class>
+		<class>com.entities.Constancia</class>
+		<class>com.entities.Departamento</class>
+		<class>com.entities.Estudiante</class>
+		<class>com.entities.Evento</class>
+		<class>com.entities.Itr</class>
+		<class>com.entities.Localidad</class>
+		<class>com.entities.Reclamo</class>
+		<class>com.entities.StatusCertificados</class>
+		<class>com.entities.Tutor</class>
+		<class>com.entities.TutorEvento</class>
+		<class>com.entities.TutorEventoPK</class>
+		<class>com.entities.Usuario</class>
+		
 
-        <properties>
+		<validation-mode>AUTO</validation-mode>
 
-            <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect" />
+		<properties>
 
-            <property name="hibernate.hbm2ddl.auto" value="validate" />
+			<property name="hibernate.dialect"
+				value="org.hibernate.dialect.Oracle10gDialect" />
 
-            <property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.hbm2ddl.auto" value="validate" />
 
-            <property name="javax.persistence.schema-generation.create-database-schemas" value="true" />
+			<property name="hibernate.show_sql" value="true" />
 
-        </properties>
+			<property
+				name="javax.persistence.schema-generation.create-database-schemas"
+				value="true" />
+
+		</properties>
 	</persistence-unit>
 </persistence>

@@ -48,6 +48,9 @@ public class CRUDBean<T, ID extends Serializable> implements CRUDRemote<T, ID> {
 			em.flush();
 			return 0;
 		} catch(PersistenceException e) {
+			System.out.println(e);
+			System.out.println(e.getMessage());
+			System.out.println("cai en el catch de create");
 			return -1;
 		}
 	}
