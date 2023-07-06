@@ -13,14 +13,6 @@ import java.util.Date;
 @Table(name="EVENTOS")
 @NamedQuery(name="Evento.findAll", query="SELECT e FROM Evento e")
 public class Evento implements Serializable {
-	
-	
-	public Evento(String title, String type, Date startDate, Date endDate, String modality, String itr,
-			String location) {
-		// TODO Auto-generated constructor stub
-	}
-
-
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -36,29 +28,19 @@ public class Evento implements Serializable {
 	@Column(name="FECHA_HORA_INICIO")
 	private Date fechaHoraInicio;
 
-	//@Column(name="LOCALIZACION")
-	//private String localizacion;
 	@Column(name="ID_ITR")
-	private java.math.BigDecimal idItr;
+	private int idItr;
 
-	@Column(name="ID_TIPO")
-	private java.math.BigDecimal idTipo;
-
+	@Column(name="LOCALIZACION")
 	private String localizacion;
 
 	
 	@Column(name="TIPO_EVENTO")
 	private String tipoEvento;
-
+	
+	@Column(name="TITULO")
 	private String titulo;
 	
-	//@Column(name="TIPO_EVENTO", nullable=false)
-	//@Enumerated(EnumType.STRING)
-	//private TipoEvento tipoEvento;
-	
-	//@Column(name="MODALIDAD", nullable=false)
-	//@Enumerated(EnumType.STRING)
-	//private Modalidad modalidad;
 
 	//bi-directional many-to-one association to Modalidad
 	@ManyToOne
@@ -69,6 +51,10 @@ public class Evento implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="ID_ESTADO")
 	private Estado estado;
+	
+	@Column(name="ACTIVO")
+	private int activo;
+
 
 	public Evento() {
 	}
@@ -97,21 +83,14 @@ public class Evento implements Serializable {
 		this.fechaHoraInicio = fechaHoraInicio;
 	}
 
-	public java.math.BigDecimal getIdItr() {
+	public int getIdItr() {
 		return this.idItr;
 	}
 
-	public void setIdItr(java.math.BigDecimal idItr) {
+	public void setIdItr(int idItr) {
 		this.idItr = idItr;
 	}
 
-	public java.math.BigDecimal getIdTipo() {
-		return this.idTipo;
-	}
-
-	public void setIdTipo(java.math.BigDecimal idTipo) {
-		this.idTipo = idTipo;
-	}
 
 	public String getLocalizacion() {
 		return this.localizacion;
@@ -137,11 +116,11 @@ public class Evento implements Serializable {
 		this.titulo = titulo;
 	}
 
-	public Modalidad getModalidade() {
+	public Modalidad getModalidad() {
 		return this.modalidad;
 	}
 
-	public void setModalidade(Modalidad modalidade) {
+	public void setModalidad(Modalidad modalidade) {
 		this.modalidad = modalidade;
 	}
 
@@ -151,6 +130,21 @@ public class Evento implements Serializable {
 
 	public void setEstado(Estado estado) {
 		this.estado = estado;
+	}
+
+	public int getActivo() {
+		return activo;
+	}
+
+	public void setActivo(int activo) {
+		this.activo = activo;
+	}
+
+	@Override
+	public String toString() {
+		return "Evento [idEvento=" + idEvento + ", fechaHoraFinal=" + fechaHoraFinal + ", fechaHoraInicio="
+				+ fechaHoraInicio + ", idItr=" + idItr + ", localizacion=" + localizacion + ", tipoEvento=" + tipoEvento
+				+ ", titulo=" + titulo + ", modalidad=" + modalidad + ", estado=" + estado + ", activo=" + activo + "]";
 	}
 
 }

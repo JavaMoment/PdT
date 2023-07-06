@@ -68,18 +68,8 @@ public class Modalidad implements Serializable {
 		this.activo = activo;
 	}
 
-	/*public Evento addEvento(Evento evento) {
-		getEventos().add(evento);
-		evento.setModalidad(this);
-
-		return evento;
+	public String toString() {
+		return nombre;
 	}
-
-	public Evento removeEvento(Evento evento) {
-		getEventos().remove(evento);
-		evento.setModalidad(null);
-
-		return evento;
-	}*/
 
 }

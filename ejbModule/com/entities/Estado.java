@@ -66,18 +66,11 @@ public class Estado implements Serializable {
 		this.activo = activo;
 	}
 
-	/*public Evento addEvento(Evento evento) {
-		getEventos().add(evento);
-		evento.setEstado(this);
-
-		return evento;
+	@Override
+	public String toString() {
+		return nombre;
 	}
 
-	public Evento removeEvento(Evento evento) {
-		getEventos().remove(evento);
-		evento.setEstado(null);
-
-		return evento;
-	}*/
+	
 
 }
