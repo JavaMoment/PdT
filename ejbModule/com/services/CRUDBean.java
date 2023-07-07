@@ -68,7 +68,7 @@ public class CRUDBean<T, ID extends Serializable> implements CRUDRemote<T, ID> {
 	public int delete(T entity) {
 		// TODO Auto-generated method stub
 		try {
-			em.remove(entity);
+			em.remove(em.contains(entity) ? entity : em.merge(entity));
 			em.flush();
 			return 0;
 		} catch(PersistenceException e) {

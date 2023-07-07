@@ -7,4 +7,6 @@ import com.entities.Tutor;
 @Remote
 public interface TutorBeanRemote extends CRUDRemote<Tutor, Long> {
 
+	Tutor selectUserBy(String username);
+
 }
