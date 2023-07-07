@@ -31,6 +31,9 @@ public class Estudiante implements Serializable {
 	public Estudiante() {
 	}
 	
+	public Estudiante(Usuario user) {
+		this.usuario = user;
+	}
 	public Estudiante(Usuario user, String generacion) {
 		this.usuario = user;
 		this.generacion = generacion;

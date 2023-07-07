@@ -4,7 +4,9 @@ package com.services;
 import javax.ejb.Stateless;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
-
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaUpdate;
+import javax.persistence.criteria.Root;
 
 import com.entities.Usuario;
 
@@ -59,7 +61,34 @@ public class UsuarioBean extends CRUDBean<Usuario, Long> implements UsuarioBeanR
 			return query.getSingleResult();
 		} catch(PersistenceException e) {
 			return null;
-		
+		}
+	}
+	
+	@Override
+	public int logicalDeleteByUsername(String username) {
+		try {
+			Usuario userToUpdate = selectUserBy(username);
+			userToUpdate.setActivo((byte) 0);
+			
+			int resultCode = update(userToUpdate);
+			
+			return resultCode == 0  ? 0 : -1;
+		} catch(PersistenceException e) {
+			return -1;
+		}
+	}
+	
+	@Override
+	public int activeUserBy(String username) {
+		try {
+			Usuario userToUpdate = selectUserBy(username);
+			userToUpdate.setActivo((byte) 1);
+			
+			int resultCode = update(userToUpdate);
+			
+			return resultCode == 0  ? 0 : -1;
+		} catch(PersistenceException e) {
+			return -1;
 		}
 	}
 
