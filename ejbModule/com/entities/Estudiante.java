@@ -59,6 +59,10 @@ public class Estudiante implements Serializable {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+
+	public String getNombreUsuario() {
+		return this.usuario.getNombreUsuario();
+	}
 	
 
 
