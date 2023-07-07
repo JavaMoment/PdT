@@ -3,6 +3,7 @@ package com.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -139,7 +140,8 @@ public class Evento implements Serializable {
 	public void setActivo(int activo) {
 		this.activo = activo;
 	}
-
+	
+	
 	@Override
 	public String toString() {
 		return "Evento [idEvento=" + idEvento + ", fechaHoraFinal=" + fechaHoraFinal + ", fechaHoraInicio="

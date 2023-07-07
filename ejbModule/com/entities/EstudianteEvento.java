@@ -20,7 +20,7 @@ public class EstudianteEvento implements Serializable {
 
 	@Column(name="ASISTENCIA")
 	private String asistencia;
-	
+
 	@Column(name="CALIFICACION")
 	private int calificacion;
 

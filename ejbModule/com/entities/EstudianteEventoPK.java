@@ -12,10 +12,10 @@ public class EstudianteEventoPK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="ID_ESTUDIANTE", insertable=false, updatable=false)
+	@Column(name="ID_ESTUDIANTE", insertable=true, updatable=true)
 	private long idEstudiante;
 
-	@Column(name="ID_EVENTO", insertable=false, updatable=false)
+	@Column(name="ID_EVENTO", insertable=true, updatable=true)
 	private long idEvento;
 
 	public EstudianteEventoPK() {
@@ -24,12 +24,15 @@ public class EstudianteEventoPK implements Serializable {
 	public long getIdEstudiante() {
 		return this.idEstudiante;
 	}
+	
 	public void setIdEstudiante(long idEstudiante) {
 		this.idEstudiante = idEstudiante;
 	}
+	
 	public long getIdEvento() {
 		return this.idEvento;
 	}
+	
 	public void setIdEvento(long idEvento) {
 		this.idEvento = idEvento;
 	}
