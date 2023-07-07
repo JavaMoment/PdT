@@ -23,7 +23,7 @@ public class Localidad implements Serializable {
 	private String nombre;
 
 	//bi-directional many-to-one association to Departamento
-	@ManyToOne()
+	@ManyToOne
 	@JoinColumn(name="ID_DEPARTAMENTO")
 	private Departamento departamento;
 
