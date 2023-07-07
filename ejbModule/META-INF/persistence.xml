@@ -3,19 +3,23 @@
 	<persistence-unit name="PDTServerSide">
 	 <provider>org.hibernate.ejb.HibernatePersistence</provider>
         <jta-data-source>java:/PDT_DS</jta-data-source>
-        
         <class>com.entities.Analista</class>
+        <class>com.entities.Area</class>
+        <class>com.entities.Constancia</class>
+        <class>com.entities.Departamento</class>
+        <class>com.entities.Estado</class>
         <class>com.entities.Estudiante</class>
         <class>com.entities.Evento</class>
         <class>com.entities.Itr</class>
+        <class>com.entities.Localidad</class>
+        <class>com.entities.Modalidad</class>
         <class>com.entities.Reclamo</class>
+        <class>com.entities.StatusCertificados</class>
         <class>com.entities.Tutor</class>
         <class>com.entities.Usuario</class>
-        <class>com.entities.Constancia</class>
-        <class>com.entities.StatusCertificados</class>
-        <class>com.entities.Departamento</class>
-        <class>com.entities.Localidad</class>
-        <class>com.entities.Area</class>
+        <class>com.entities.EstudianteEvento</class>
+        <class>com.entities.EstudianteEventoPK</class>
+        
 
         <validation-mode>AUTO</validation-mode>
 

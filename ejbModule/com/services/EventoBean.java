@@ -21,5 +21,7 @@ public class EventoBean extends CRUDBean<Evento, Long> implements EventoBeanRemo
     public EventoBean() {
         // TODO Auto-generated constructor stub
     }
+    
+    
 
 }

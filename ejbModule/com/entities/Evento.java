@@ -13,14 +13,14 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "EVENTOS")
+@Table(name="EVENTOS")
+@NamedQuery(name="Evento.findAll", query="SELECT e FROM Evento e")
 public class Evento implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name = "EVENTOS_IDEVENTO_GENERATOR", sequenceName = "event_id_seq")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "EVENTOS_IDEVENTO_GENERATOR")
-	@Column(name = "ID_EVENTO")
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="ID_EVENTO")
 	private long idEvento;
 
 	@Temporal(TemporalType.DATE)
@@ -31,64 +31,39 @@ public class Evento implements Serializable {
 	@Column(name = "FECHA_HORA_INICIO")
 	private Date fechaHoraInicio;
 
-	@Column(name = "LOCALIZACION", nullable = false)
+	@Column(name="ID_ITR")
+	private int idItr;
+
+	@Column(name="LOCALIZACION")
 	private String localizacion;
 
-	@Column(name = "TITULO")
+	
+	@Column(name="TIPO_EVENTO")
+	private String tipoEvento;
+	
+	@Column(name="TITULO")
 	private String titulo;
+	
 
-	@Column(name = "TIPO_EVENTO", nullable = false)
-	@Enumerated(EnumType.STRING)
-	private TipoEvento tipoEvento;
-
-	@Column(name = "MODALIDAD", nullable = false)
-	@Enumerated(EnumType.STRING)
+	//bi-directional many-to-one association to Modalidad
+	@ManyToOne
+	@JoinColumn(name="ID_MODALIDAD")
 	private Modalidad modalidad;
 
-	@Column(name = "STATUS", nullable = false)
-	@Enumerated(EnumType.STRING)
-	private Status status;
-
-	@ManyToOne()
-	@JoinColumn(name = "ID_ITR", nullable = false)
-	private Itr itr;
-
-	@ManyToMany
-	@JoinTable(name = "ANALISTA_EVENTO", joinColumns = { @JoinColumn(name = "ID_EVENTO") }, inverseJoinColumns = {
-			@JoinColumn(name = "ID_ANALISTA") })
-	private List<Analista> analistas;
-
-	@ManyToMany
-	@JoinTable(
-	    name = "TUTOR_EVENTO", // Nombre de la tabla de unión
-	    joinColumns = { @JoinColumn(name = "ID_EVENTO") }, // Columna de unión para la clave externa de Evento
-	    inverseJoinColumns = { @JoinColumn(name = "ID_TUTOR") } // Columna de unión para la clave externa de Tutor
-	)
-	private List<Tutor> tutor; // Lista de tutores asociados al evento
+	//bi-directional many-to-one association to Estado
+	@ManyToOne
+	@JoinColumn(name="ID_ESTADO")
+	private Estado estado;
+	
+	@Column(name="ACTIVO")
+	private int activo;
 
 
 	public Evento() {
-
 	}
-
-	// Constructor con parámetros para inicializar todas las propiedades de Evento
-	public Evento(String titulo, TipoEvento tipoEvento, Date fechaHoraInicio, Date fechaHoraFinal,
-			Modalidad modalidad, Itr itr, String localizacion, Status status, List<Tutor> tutor) {
-		this.titulo = titulo;
-		this.tipoEvento = tipoEvento;
-		this.fechaHoraInicio = fechaHoraInicio;
-		this.fechaHoraFinal = fechaHoraFinal;
-		this.modalidad = modalidad;
-		this.itr = itr;
-		this.localizacion = localizacion;
-		this.status = status;
-		this.tutor = tutor;
-	}
-
-	// Getters y setters para todas las propiedades
 
 	public long getIdEvento() {
-		return idEvento;
+		return this.idEvento;
 	}
 
 	public void setIdEvento(long idEvento) {
@@ -96,7 +71,7 @@ public class Evento implements Serializable {
 	}
 
 	public Date getFechaHoraFinal() {
-		return fechaHoraFinal;
+		return this.fechaHoraFinal;
 	}
 
 	public void setFechaHoraFinal(Date fechaHoraFinal) {
@@ -104,82 +79,76 @@ public class Evento implements Serializable {
 	}
 
 	public Date getFechaHoraInicio() {
-		return fechaHoraInicio;
+		return this.fechaHoraInicio;
 	}
 
 	public void setFechaHoraInicio(Date fechaHoraInicio) {
 		this.fechaHoraInicio = fechaHoraInicio;
 	}
 
-	public String getTitulo() {
-		return titulo;
+	public int getIdItr() {
+		return this.idItr;
 	}
 
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
+	public void setIdItr(int idItr) {
+		this.idItr = idItr;
 	}
 
-	public List<Analista> getAnalistas() {
-		return analistas;
-	}
-
-	public void setAnalistas(List<Analista> analistas) {
-		this.analistas = analistas;
-	}
-
-	public List<Tutor> getTutor() {
-		return tutor;
-	}
-
-	public void setTutor(List<Tutor> tutor) {
-		this.tutor = tutor;
-	}
 
 	public String getLocalizacion() {
-		return localizacion;
+		return this.localizacion;
 	}
 
 	public void setLocalizacion(String localizacion) {
 		this.localizacion = localizacion;
 	}
 
-	@Override
-	public String toString() {
-		return "Evento [idEvento=" + idEvento + ", fechaHoraFinal=" + fechaHoraFinal + ", fechaHoraInicio="
-				+ fechaHoraInicio + ", localizacion=" + localizacion + ", titulo=" + titulo + ", idItr=" + itr
-				+ ", tipoEvento=" + tipoEvento + ", modalidad=" + modalidad + ", status=" + status + ", analistas="
-				+ analistas + ", tutor" + tutor + "]";
+	public String getTipoEvento() {
+		return this.tipoEvento;
 	}
 
-	public TipoEvento getTipoEvento() {
-		return tipoEvento;
-	}
-
-	public void setTipoEvento(TipoEvento tipoEvento) {
+	public void setTipoEvento(String tipoEvento) {
 		this.tipoEvento = tipoEvento;
 	}
 
+	public String getTitulo() {
+		return this.titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
 	public Modalidad getModalidad() {
-		return modalidad;
+		return this.modalidad;
 	}
 
-	public void setModalidad(Modalidad modalidad) {
-		this.modalidad = modalidad;
+	public void setModalidad(Modalidad modalidade) {
+		this.modalidad = modalidade;
 	}
 
-	public Status getStatus() {
-		return status;
+	public Estado getEstado() {
+		return this.estado;
 	}
 
-	public void setStatus(Status status) {
-		this.status = status;
+	public void setEstado(Estado estado) {
+		this.estado = estado;
 	}
 
-	public Itr getItr() {
-		return itr;
+	public int getActivo() {
+		return activo;
 	}
 
-	public void setItr(Itr itr) {
-		this.itr = itr;
+	public void setActivo(int activo) {
+		this.activo = activo;
 	}
+	
+	
+	@Override
+	public String toString() {
+		return "Evento [idEvento=" + idEvento + ", fechaHoraFinal=" + fechaHoraFinal + ", fechaHoraInicio="
+				+ fechaHoraInicio + ", idItr=" + idItr + ", localizacion=" + localizacion + ", tipoEvento=" + tipoEvento
+				+ ", titulo=" + titulo + ", modalidad=" + modalidad + ", estado=" + estado + ", activo=" + activo + "]";
+	}
+
 }
