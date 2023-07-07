@@ -1,6 +1,7 @@
 package com.entities;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
 
 
@@ -30,6 +31,9 @@ public class Estudiante implements Serializable {
 	public Estudiante() {
 	}
 	
+	public Estudiante(Usuario user) {
+		this.usuario = user;
+	}
 	public Estudiante(Usuario user, String generacion) {
 		this.usuario = user;
 		this.generacion = generacion;
@@ -58,5 +62,7 @@ public class Estudiante implements Serializable {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+	
+
 
 }

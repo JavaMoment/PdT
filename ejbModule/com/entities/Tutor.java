@@ -37,6 +37,10 @@ public class Tutor implements Serializable {
 	public Tutor() {
 	}
 	
+	public Tutor(Usuario user) {
+		this.usuario = user;
+	}
+	
 	public Tutor(Usuario user, Area area, Roles rol) {
 		this.usuario = user;
 		this.area = area;
@@ -51,11 +55,11 @@ public class Tutor implements Serializable {
 		this.idTutor = idTutor;
 	}
 
-	public Area getIdArea() {
+	public Area getArea() {
 		return area;
 	}
 
-	public void setIdArea(Area idArea) {
+	public void setArea(Area idArea) {
 		this.area = idArea;
 	}
 
@@ -77,7 +81,7 @@ public class Tutor implements Serializable {
 
 	@Override
 	public String toString() {
-		return usuario.getNombre1();
+		return usuario != null ? usuario.getNombreUsuario() : "";
 	}
 
 }

@@ -3,6 +3,8 @@ package com.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import com.enums.Roles;
+
 import java.util.Date;
 import java.util.Optional;
 import java.util.Set;
@@ -249,12 +251,17 @@ public class Usuario implements Serializable {
 	}
 	
 	public String getTipoUsuario() {
-		if( analistas.stream().anyMatch(analista -> analista.getUsuario().getNombreUsuario().equals(nombreUsuario)) ) {
-			return "Analista";
-		} else if ( estudiantes.stream().anyMatch(estudiante -> estudiante.getUsuario().getNombreUsuario().equals(nombreUsuario)) ) {
-			return "Estudiante";
+		if(this.tipoUsuario != null) {
+			return this.tipoUsuario;
 		}
-		return "Tutor";
+		if( analistas.stream().anyMatch(analista -> analista.getUsuario().getNombreUsuario().equals(nombreUsuario)) ) {
+			this.tipoUsuario = "Analista";
+		} else if ( estudiantes.stream().anyMatch(estudiante -> estudiante.getUsuario().getNombreUsuario().equals(nombreUsuario)) ) {
+			this.tipoUsuario = "Estudiante";
+		} else {
+			this.tipoUsuario = "Tutor";
+		}
+		return this.tipoUsuario;
 	}
 	
 	public String getGeneracion() {
@@ -266,6 +273,24 @@ public class Usuario implements Serializable {
 		return gen != null ? gen : "";
 	}
 	
+	public Roles getRol() {
+		Optional<Tutor> teacherIfExists = tutores.stream().filter(tutor -> tutor.getUsuario().getNombreUsuario().equals(nombreUsuario)).findFirst();
+		if(teacherIfExists.isEmpty()) {
+			return null;
+		}
+		Roles rol = teacherIfExists.get().getTipo();
+		return rol;
+	}
+	
+	public Area getArea() {
+		Optional<Tutor> teacherIfExists = tutores.stream().filter(tutor -> tutor.getUsuario().getNombreUsuario().equals(nombreUsuario)).findFirst();
+		if(teacherIfExists.isEmpty()) {
+			return null;
+		}
+		Area area = teacherIfExists.get().getArea();
+		return area;
+	}
+	
 	public Set<Analista> getAnalistas() {
 		return this.analistas;
 	}
@@ -275,6 +300,9 @@ public class Usuario implements Serializable {
 	}
 
 	public Analista addAnalista(Analista analista) {
+		if(analista == null) {
+			return null;
+		}
 		getAnalistas().add(analista);
 		analista.setUsuario(this);
 
@@ -282,7 +310,10 @@ public class Usuario implements Serializable {
 	}
 
 	public Analista removeAnalista(Analista analista) {
-		getAnalistas().remove(analista);
+		if(analista == null) {
+			return null;
+		}
+		getAnalistas().removeIf(a -> a.getUsuario().getNombreUsuario().equals(a.getUsuario().getNombreUsuario()));
 		analista.setUsuario(null);
 
 		return analista;
@@ -297,6 +328,9 @@ public class Usuario implements Serializable {
 	}
 
 	public Estudiante addEstudiante(Estudiante estudiante) {
+		if(estudiante == null) {
+			return null;
+		}
 		getEstudiantes().add(estudiante);
 		estudiante.setUsuario(this);
 
@@ -304,7 +338,10 @@ public class Usuario implements Serializable {
 	}
 
 	public Estudiante removeEstudiante(Estudiante estudiante) {
-		getEstudiantes().remove(estudiante);
+		if(estudiante == null) {
+			return null;
+		}
+		getEstudiantes().removeIf(e -> e.getUsuario().getNombreUsuario().equals(e.getUsuario().getNombreUsuario()));
 		estudiante.setUsuario(null);
 
 		return estudiante;
@@ -318,18 +355,24 @@ public class Usuario implements Serializable {
 		this.tutores = tutores;
 	}
 
-	public Tutor removeTutore(Tutor tutore) {
-		getTutores().remove(tutore);
-		tutore.setUsuario(null);
+	public Tutor removeTutor(Tutor tutor) {
+		if(tutor == null) {
+			return null;
+		}
+		getTutores().removeIf(t -> t.getUsuario().getNombreUsuario().equals(t.getUsuario().getNombreUsuario()));
+		tutor.setUsuario(null);
 		
-		return tutore;
+		return tutor;
 	}
 
-	public Tutor addTutore(Tutor tutore) {
-		getTutores().add(tutore);
-		tutore.setUsuario(this);
+	public Tutor addTutor(Tutor tutor) {
+		if(tutor == null) {
+			return null;
+		}
+		getTutores().add(tutor);
+		tutor.setUsuario(this);
 
-		return tutore;
+		return tutor;
 	}
 	
 	@Override

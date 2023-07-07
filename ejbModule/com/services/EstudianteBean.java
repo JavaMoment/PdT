@@ -1,6 +1,8 @@
 package com.services;
 
 import javax.ejb.Stateless;
+import javax.persistence.PersistenceException;
+import javax.persistence.TypedQuery;
 
 import com.entities.Estudiante;
 
@@ -17,5 +19,18 @@ public class EstudianteBean extends CRUDBean<Estudiante, Long> implements Estudi
     public EstudianteBean() {
         // TODO Auto-generated constructor stub
     }
+    
+    @Override
+	public Estudiante selectUserBy(String username) {
+		try {
+			@SuppressWarnings("unchecked")
+			TypedQuery<Estudiante> query = (TypedQuery<Estudiante>) super.getEntityManager()
+				.createQuery("SELECT e FROM Estudiante e JOIN e.usuario u WHERE u.nombreUsuario =:username")
+				.setParameter("username", username);
+			return query.getSingleResult();
+		} catch(PersistenceException e) {
+			return null;
+		}
+	} 
     
 }

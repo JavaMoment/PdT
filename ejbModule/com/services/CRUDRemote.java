@@ -6,14 +6,23 @@ import java.util.List;
 import javax.ejb.Remote;
 import javax.persistence.Entity;
 
+import com.entities.Estado;
+
 @Remote
 public interface CRUDRemote<T, ID extends Serializable> {
 
 	int create(T entity);
+	
 	List<T> selectAll();
+	
 	int update(T entity);
+	
 	int delete(T entity);
+	
 	T selectById(Long id);
-	String[] getColsNames();
+
+  List<T> selectAllByActive(int activo);
+	
+  String[] getColsNames();
 	
 }

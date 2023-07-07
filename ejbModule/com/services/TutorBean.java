@@ -65,6 +65,18 @@ public class TutorBean extends CRUDBean<Tutor, Long> implements TutorBeanRemote 
 	}
 
 
+    @Override
+   	public Tutor selectUserBy(String username) {
+   		try {
+   			@SuppressWarnings("unchecked")
+   			TypedQuery<Tutor> query = (TypedQuery<Tutor>) super.getEntityManager()
+   				.createQuery("SELECT t FROM Tutor t JOIN t.usuario u WHERE u.nombreUsuario =:username")
+   				.setParameter("username", username);
+   			return query.getSingleResult();
+   		} catch(PersistenceException e) {
+   			return null;
+   		}
+   	} 
 }
     
 

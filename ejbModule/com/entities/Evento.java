@@ -147,8 +147,12 @@ public class Evento implements Serializable {
 		return this.tipoEvento;
 	}
 
-	public void setTipoEvento(TipoEvento tipoEvento) {
-		this.tipoEvento = tipoEvento;
+	public String getTitulo() {
+		return this.titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
 	}
 
 	public String getTitulo() {
