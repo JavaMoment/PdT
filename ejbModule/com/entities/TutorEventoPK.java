@@ -62,4 +62,11 @@ public class TutorEventoPK implements Serializable {
 
 		return hash;
 	}
+
+	@Override
+	public String toString() {
+		return "TutorEventoPK [idTutor=" + idTutor + ", idEvento=" + idEvento + "]";
+	}
+	
+	
 }

@@ -72,4 +72,17 @@ public class EventoBean extends CRUDBean<Evento, Long> implements EventoBeanRemo
 			return null;
 		}
 	}
+
+	@Override
+	public Tutor tutorDelEvento(long id_tutor) {
+		try {
+			TypedQuery<Tutor> query = (TypedQuery<Tutor>) super.getEntityManager()
+					.createQuery("SELECT t FROM Tutor t JOIN FETCH t.usuario WHERE t.idTutor = :id", Tutor.class)
+					.setParameter("id", id_tutor);
+			return query.getResultList().get(0);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return null;
+	}
 }

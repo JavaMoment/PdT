@@ -17,13 +17,12 @@ public class TutorEvento implements Serializable {
 	@EmbeddedId
 	private TutorEventoPK id;
 
-	
 	public TutorEvento(TutorEventoPK id) {
 		super();
 		this.id = id;
 	}
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="ID_EVENTO", insertable = false, updatable = false)
 	private Evento evento;
 
@@ -44,6 +43,11 @@ public class TutorEvento implements Serializable {
 
 	public void setEvento(Evento evento) {
 		this.evento = evento;
+	}
+
+	@Override
+	public String toString() {
+		return "TutorEvento [id=" + id + ", evento=" + evento + "]";
 	}
 
 }
