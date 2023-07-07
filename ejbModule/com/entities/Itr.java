@@ -24,8 +24,12 @@ public class Itr implements Serializable {
 	@Column(name="ID_ITR")
 	private long idItr;
 
+
 	@Column(name="NOMBRE", nullable=false)
 	private String nombre;
+
+	@OneToMany(mappedBy="itr")
+	private List<Evento> eventos;
 	
 	@Column(nullable=false, precision=1)
 	private byte activo;
