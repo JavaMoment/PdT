@@ -11,7 +11,7 @@ import com.entities.Tutor;
 public interface TutorBeanRemote extends CRUDRemote<Tutor, Long> {
     
     List<Tutor> selectByUsernames(List<String> nombresUsuarios);
-  
+
     boolean asignarEventoTutor (Evento evento, Tutor tutor);
 
 	Tutor selectUserBy(String username);

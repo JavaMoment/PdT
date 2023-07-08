@@ -65,8 +65,8 @@ public class Evento implements Serializable {
 
 	@Column(name = "ACTIVO")
 	private int activo;
-
-	@Enumerated(EnumType.STRING)
+	
+	@Enumerated(EnumType.STRING)	
 	@Column(name = "TIPO_EVENTO")
 	private TipoEvento tipoEvento;
 
@@ -88,7 +88,7 @@ public class Evento implements Serializable {
 		this.itr = itr;
 		this.localizacion = localizacion;
 		this.estado = estado;
-		this.activo = 1;
+		this.activo = activo;
 	}
 
 	public Evento () {
@@ -135,6 +135,18 @@ public class Evento implements Serializable {
 	}
 
 
+	public TipoEvento getTipoEvento() {
+		return this.tipoEvento;
+	}
+
+	public String getTitulo() {
+		return this.titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
 	public Modalidad getModalidad() {
 		return this.modalidad;
 	}
@@ -158,18 +170,8 @@ public class Evento implements Serializable {
 	public void setActivo(int activo) {
 		this.activo = activo;
 	}
-	public TipoEvento getTipoEvento() {
-		return this.tipoEvento;
-	}
-
-	public String getTitulo() {
-		return this.titulo;
-	}
-
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
-	}
-
+	
+	
 	public List<TutorEvento> getTutorEventos() {
 		return this.tutorEventos;
 	}
