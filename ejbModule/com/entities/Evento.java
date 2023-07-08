@@ -205,6 +205,7 @@ public class Evento implements Serializable {
 		tutorEvento.setEvento(null);
 
 		return tutorEvento;
+	}
     
 	@Override
 	public String toString() {
