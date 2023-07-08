@@ -1,10 +1,11 @@
 package com.services;
 
-import javax.ejb.LocalBean;
+import java.util.List;
+
 import javax.ejb.Remote;
-import javax.ejb.Stateless;
 
 import com.entities.Evento;
+import com.entities.Tutor;
 
 /**
  * Session Bean implementation class EventoBeanRemote
@@ -12,4 +13,8 @@ import com.entities.Evento;
 @Remote
 public interface EventoBeanRemote extends CRUDRemote<Evento, Long>{
 
+	public Evento createEvento(Evento evento);
+	public List<Evento> todos();
+	public Tutor tutorDelEvento (long id_tutor);
+	public long buscarId (String titulo);
 }

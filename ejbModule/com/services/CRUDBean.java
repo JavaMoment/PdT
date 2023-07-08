@@ -16,9 +16,8 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-import org.hibernate.metamodel.spi.MetamodelImplementor;
 import org.hibernate.metadata.ClassMetadata;
-
+import org.hibernate.metamodel.spi.MetamodelImplementor;
 
 /**
  * Session Bean implementation class CRUDBean
@@ -28,17 +27,17 @@ public class CRUDBean<T, ID extends Serializable> implements CRUDRemote<T, ID> {
 
 	@PersistenceContext
 	private EntityManager em = Persistence.createEntityManagerFactory("PDTServerSide").createEntityManager();
-	
-    /**
-     * Default constructor. 
-     */
-    public CRUDBean() {
-        // TODO Auto-generated constructor stub
-    }
-    
-    public EntityManager getEntityManager() {
-    	return em;
-    }
+
+	/**
+	 * Default constructor.
+	 */
+	public CRUDBean() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public EntityManager getEntityManager() {
+		return em;
+	}
 
 	@Override
 	public int create(T entity) {
@@ -47,7 +46,10 @@ public class CRUDBean<T, ID extends Serializable> implements CRUDRemote<T, ID> {
 			em.persist(entity);
 			em.flush();
 			return 0;
-		} catch(PersistenceException e) {
+		} catch (PersistenceException e) {
+			System.out.println(e);
+			System.out.println(e.getMessage());
+			System.out.println("cai en el catch de create");
 			return -1;
 		}
 	}
@@ -59,7 +61,7 @@ public class CRUDBean<T, ID extends Serializable> implements CRUDRemote<T, ID> {
 			em.merge(entity);
 			em.flush();
 			return 0;
-		} catch(PersistenceException e) {
+		} catch (PersistenceException e) {
 			return -1;
 		}
 	}
@@ -71,7 +73,7 @@ public class CRUDBean<T, ID extends Serializable> implements CRUDRemote<T, ID> {
 			em.remove(em.contains(entity) ? entity : em.merge(entity));
 			em.flush();
 			return 0;
-		} catch(PersistenceException e) {
+		} catch (PersistenceException e) {
 			return -1;
 		}
 	}
@@ -80,23 +82,24 @@ public class CRUDBean<T, ID extends Serializable> implements CRUDRemote<T, ID> {
 	public List<T> selectAll() {
 		// TODO Auto-generated method stub
 		Class<T> entityClass = getEntityClass();
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<T> cq = cb.createQuery(entityClass);
-        Root<T> root = cq.from(entityClass);
-        cq.select(root);
-        TypedQuery<T> query = em.createQuery(cq);
-        return query.getResultList();
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<T> cq = cb.createQuery(entityClass);
+		Root<T> root = cq.from(entityClass);
+		cq.select(root);
+		TypedQuery<T> query = em.createQuery(cq);
+		return query.getResultList();
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public T selectById(Long id) {
 		// TODO Auto-generated method stub
 		try {
-			Class<T> entityClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
-	        
-	        return em.find(entityClass, id);
-		} catch(PersistenceException e) {
+			Class<T> entityClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass())
+					.getActualTypeArguments()[0];
+
+			return em.find(entityClass, id);
+		} catch (PersistenceException e) {
 			return null;
 		}
 	}
@@ -114,21 +117,34 @@ public class CRUDBean<T, ID extends Serializable> implements CRUDRemote<T, ID> {
 
 	@SuppressWarnings("unchecked")
 	private Class<T> getEntityClass() {
-        return (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
-    }
-	
+		return (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+	}
+
 	@Override
 	public String[] getColsNames() {
 		MetamodelImplementor metamodel = (MetamodelImplementor) em.getMetamodel();
 		ClassMetadata classMetadata = (ClassMetadata) metamodel.entityPersister(getEntityClass().getName());
 
-		// Get the columns names by obtaining the persisted property names in the class metadata saved by hibernate
+		// Get the columns names by obtaining the persisted property names in the class
+		// metadata saved by hibernate
 		// And also for the pk
 		String[] colNames = classMetadata.getPropertyNames();
-		String[] pkColName = {metamodel.entityPersister(getEntityClass().getName()).getIdentifierPropertyName()};
+		String[] pkColName = { metamodel.entityPersister(getEntityClass().getName()).getIdentifierPropertyName() };
 
-		return Stream.concat(Arrays.stream(colNames), Arrays.stream(pkColName))
-                .toArray(String[]::new);
+		return Stream.concat(Arrays.stream(colNames), Arrays.stream(pkColName)).toArray(String[]::new);
 	}
+
+	public List<T> selectAllByActive(int activo) {
+		// TODO Auto-generated method stub
+		Class<T> entityClass = getEntityClass();
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<T> cq = cb.createQuery(entityClass);
+		Root<T> root = cq.from(entityClass);
+		cq.select(root).where(cb.equal(root.get("activo"), activo));
+		TypedQuery<T> query = em.createQuery(cq);
+		return query.getResultList();
+	}
+
+	
 
 }

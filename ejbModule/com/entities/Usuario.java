@@ -377,16 +377,7 @@ public class Usuario implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "Usuario [" + (nombreUsuario != null ? "nombreUsuario=" + nombreUsuario + ", " : "") + "activo=" + activo
-				+ ", " + (apellido1 != null ? "apellido1=" + apellido1 + ", " : "")
-				+ (apellido2 != null ? "apellido2=" + apellido2 + ", " : "")
-				+ (contrasenia != null ? "contrasenia=" + contrasenia + ", " : "")
-				+ (documento != null ? "documento=" + documento + ", " : "")
-				+ (fechaNacimiento != null ? "FechaNacimiento=" + fechaNacimiento + ", " : "") + "genero=" + genero + ", idDepartamento="
-				+ departamento + ", idItr=" + itr + ", idLocalidad=" + localidad + ", "
-				+ (mailInstitucional != null ? "mail=" + mailInstitucional + ", " : "") + (nombre1 != null ? "nombre1=" + nombre1 + ", " : "")
-				+ (nombre2 != null ? "nombre2=" + nombre2 + ", " : "")
-				+ (telefono != null ? "telefono=" + telefono : "") + "]";
+		return nombreUsuario != null ? nombreUsuario : "";
 	}
 
 }
