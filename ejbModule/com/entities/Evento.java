@@ -1,6 +1,13 @@
 package com.entities;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import javax.persistence.*;
+
+import com.entities.Modalidad;
+import com.enums.TipoEvento;
+
+
 import java.util.Date;
 import java.util.List;
 
@@ -36,7 +43,7 @@ public class Evento implements Serializable {
 	@Id
 	@SequenceGenerator(name = "SEQ_ID_EVENTO", sequenceName = "SEQ_ID_EVENTO")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_ID_EVENTO")
-	@Column(name = "ID_EVENTO")
+	@Column(name="ID_EVENTO")
 	private long idEvento;
 
 	@Temporal(TemporalType.DATE)
@@ -47,13 +54,22 @@ public class Evento implements Serializable {
 	@Column(name = "FECHA_HORA_INICIO")
 	private Date fechaHoraInicio;
 
-	@ManyToOne
-	@JoinColumn(name = "ID_ITR") // Nombre de la columna en la tabla "EVENTOS" que hace referencia a "ITR"
+	@ManyToOne()
+	@JoinColumn(name = "ID_ITR", nullable = false)
 	private Itr itr;
 
+  @Column(name="LOCALIZACION")
 	private String localizacion;
 
-	// bi-directional many-to-one association to Modalidad
+	@Column(name="TIPO_EVENTO")
+	@Enumerated(EnumType.STRING)
+	private TipoEvento tipoEvento;
+	
+	@Column(name="TITULO")
+	private String titulo;
+	
+
+	//bi-directional many-to-one association to Modalidad
 	@ManyToOne
 	@JoinColumn(name = "ID_MODALIDAD")
 	private Modalidad modalidad;
@@ -66,12 +82,6 @@ public class Evento implements Serializable {
 	@Column(name = "ACTIVO")
 	private int activo;
 	
-	@Enumerated(EnumType.STRING)	
-	@Column(name = "TIPO_EVENTO")
-	private TipoEvento tipoEvento;
-
-	private String titulo;
-
 	// bi-directional many-to-one association to TutorEvento
 	@OneToMany(mappedBy = "evento", fetch = FetchType.EAGER)
 	private List<TutorEvento> tutorEventos;
@@ -134,9 +144,12 @@ public class Evento implements Serializable {
 		this.localizacion = localizacion;
 	}
 
-
 	public TipoEvento getTipoEvento() {
 		return this.tipoEvento;
+	}
+
+	public void setTipoEvento(TipoEvento tipoEvento) {
+		this.tipoEvento = tipoEvento;
 	}
 
 	public String getTitulo() {
@@ -192,6 +205,12 @@ public class Evento implements Serializable {
 		tutorEvento.setEvento(null);
 
 		return tutorEvento;
+    
+	@Override
+	public String toString() {
+		return "Evento [idEvento=" + idEvento + ", fechaHoraFinal=" + fechaHoraFinal + ", fechaHoraInicio="
+				+ fechaHoraInicio + ", idItr=" + itr.getNombre() + ", localizacion=" + localizacion + ", tipoEvento=" + tipoEvento
+				+ ", titulo=" + titulo + ", modalidad=" + modalidad + ", estado=" + estado + ", activo=" + activo + "]";
 	}
 
 }
