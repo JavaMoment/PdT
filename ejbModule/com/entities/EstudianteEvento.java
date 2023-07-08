@@ -50,5 +50,13 @@ public class EstudianteEvento implements Serializable {
 	public void setCalificacion(int calificacion) {
 		this.calificacion = calificacion;
 	}
-
+	
+	public long getIdEstudiante() {
+		return this.id.getIdEstudiante();
+	}
+	
+	public long getIdEvento() {
+		return this.id.getIdEvento();
+	}
+	
 }
