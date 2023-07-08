@@ -21,8 +21,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.enums.Modalidad;
-import com.enums.Status;
 import com.enums.TipoEvento;
 
 /**
@@ -55,11 +53,18 @@ public class Evento implements Serializable {
 
 	private String localizacion;
 
-	@Enumerated(EnumType.STRING)
+	// bi-directional many-to-one association to Modalidad
+	@ManyToOne
+	@JoinColumn(name = "ID_MODALIDAD")
 	private Modalidad modalidad;
 
-	@Enumerated(EnumType.STRING)
-	private Status status;
+	// bi-directional many-to-one association to Estado
+	@ManyToOne
+	@JoinColumn(name = "ID_ESTADO")
+	private Estado estado;
+
+	@Column(name = "ACTIVO")
+	private int activo;
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "TIPO_EVENTO")
@@ -71,12 +76,10 @@ public class Evento implements Serializable {
 	@OneToMany(mappedBy = "evento", fetch = FetchType.EAGER)
 	private List<TutorEvento> tutorEventos;
 
-	public Evento() {
-	}
 
 	// Constructor con parámetros para inicializar todas las propiedades de Evento
 	public Evento(String titulo, TipoEvento tipoEvento, Date fechaHoraInicio, Date fechaHoraFinal, Modalidad modalidad,
-			Itr itr, String localizacion, Status status) {
+			Itr itr, String localizacion, Estado estado, int activo) {
 		this.titulo = titulo;
 		this.tipoEvento = tipoEvento;
 		this.fechaHoraInicio = fechaHoraInicio;
@@ -84,9 +87,13 @@ public class Evento implements Serializable {
 		this.modalidad = modalidad;
 		this.itr = itr;
 		this.localizacion = localizacion;
-		this.status = status;
+		this.estado = estado;
+		this.activo = 1;
 	}
 
+	public Evento () {
+		
+	}
 	public long getIdEvento() {
 		return this.idEvento;
 	}
@@ -127,32 +134,32 @@ public class Evento implements Serializable {
 		this.localizacion = localizacion;
 	}
 
+
 	public Modalidad getModalidad() {
 		return this.modalidad;
 	}
 
-	public void setModalidad(Modalidad modalidad) {
-		this.modalidad = modalidad;
+	public void setModalidad(Modalidad modalidade) {
+		this.modalidad = modalidade;
 	}
 
-	public Status getStatus() {
-		return this.status;
+	public Estado getEstado() {
+		return this.estado;
 	}
 
-	public void setStatus(Status status) {
-		this.status = status;
+	public void setEstado(Estado estado) {
+		this.estado = estado;
 	}
 
+	public int getActivo() {
+		return activo;
+	}
+
+	public void setActivo(int activo) {
+		this.activo = activo;
+	}
 	public TipoEvento getTipoEvento() {
 		return this.tipoEvento;
-	}
-
-	public String getTitulo() {
-		return this.titulo;
-	}
-
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
 	}
 
 	public String getTitulo() {
