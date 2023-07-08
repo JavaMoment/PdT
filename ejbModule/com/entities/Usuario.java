@@ -73,11 +73,11 @@ public class Usuario implements Serializable {
 	private String telefono;
 
 	//bi-directional many-to-one association to Analista
-	@OneToMany(mappedBy="usuario", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="usuario", cascade = CascadeType.ALL, fetch=FetchType.EAGER, orphanRemoval = true)
 	private Set<Analista> analistas;
 
 	//bi-directional many-to-one association to Estudiantes
-	@OneToMany(mappedBy="usuario", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="usuario", cascade = CascadeType.ALL, fetch=FetchType.EAGER, orphanRemoval = true)
 	private Set<Estudiante> estudiantes;
 
 	//bi-directional many-to-one association to Tutores
@@ -86,7 +86,7 @@ public class Usuario implements Serializable {
 	// mappedBy="usuario" especifica que el campo "usuario" en la entidad "Tutor" es el propietario de la relación.
 	// En otras palabras, "usuario" en la entidad "Tutor" mapea la relación hacia esta entidad.
 
-	@OneToMany(mappedBy="usuario", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="usuario", cascade = CascadeType.ALL, fetch=FetchType.EAGER, orphanRemoval = true)
 	private Set<Tutor> tutores;
 
 	@Transient
