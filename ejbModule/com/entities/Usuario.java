@@ -60,16 +60,16 @@ public class Usuario implements Serializable {
 	@Column(name="MAIL_INSTITUCIONAL", nullable=false, length=250)
 	private String mailInstitucional;
 	
-	@Column(name="MAIL_PERSONAL", length=250)
+	@Column(name="MAIL_PERSONAL", length=250, nullable=false)
 	private String mailPersonal;
 
 	@Column(nullable=false, length=50)
 	private String nombre1;
 
-	@Column(length=50)
+	@Column(length=50, nullable = true)
 	private String nombre2;
 
-	@Column(length=9)
+	@Column(length=9, nullable = true)
 	private String telefono;
 
 	//bi-directional many-to-one association to Analista
