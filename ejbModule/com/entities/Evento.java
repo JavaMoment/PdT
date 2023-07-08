@@ -1,15 +1,17 @@
 package com.entities;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import javax.persistence.*;
+
+import com.enums.Modalidad;
+import com.enums.Status;
+import com.enums.TipoEvento;
+
+
 import java.util.Date;
 import java.util.List;
 
-
-/**
- * The persistent class for the EVENTOS database table.
- * 
- */
 @Entity
 @Table(name="EVENTOS")
 @NamedQuery(name="Evento.findAll", query="SELECT e FROM Evento e")
@@ -22,11 +24,11 @@ public class Evento implements Serializable {
 	private long idEvento;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="FECHA_HORA_FINAL")
+	@Column(name = "FECHA_HORA_FINAL")
 	private Date fechaHoraFinal;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="FECHA_HORA_INICIO")
+	@Column(name = "FECHA_HORA_INICIO")
 	private Date fechaHoraInicio;
 
 	@Column(name="ID_ITR")

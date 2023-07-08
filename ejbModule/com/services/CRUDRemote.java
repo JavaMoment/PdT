@@ -12,11 +12,17 @@ import com.entities.Estado;
 public interface CRUDRemote<T, ID extends Serializable> {
 
 	int create(T entity);
+	
 	List<T> selectAll();
+	
 	int update(T entity);
+	
 	int delete(T entity);
+	
 	T selectById(Long id);
-	List<T> selectAllByActive(int activo);
-	String[] getColsNames();
+
+  List<T> selectAllByActive(int activo);
+	
+  String[] getColsNames();
 	
 }

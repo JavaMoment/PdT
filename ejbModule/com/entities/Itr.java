@@ -9,6 +9,7 @@ import javax.persistence.*;
 //import entities.Usuario;
 
 import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -25,18 +26,30 @@ public class Itr implements Serializable {
 	@Column(name="ID_ITR")
 	private long idItr;
 
+
+	@Column(name="NOMBRE", nullable=false)
 	private String nombre;
 
-	
-	/*//bi-directional many-to-one association to Departamento
 	@OneToMany(mappedBy="itr")
-	private List<Departamento> departamentos;
+	private List<Evento> eventos;
+	
+	@Column(nullable=false, precision=1)
+	private byte activo;
+	
+	//bi-directional many-to-one association to Departamento
+	@OneToMany(mappedBy="itr", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	private Set<Departamento> departamentos;
 
 	//bi-directional many-to-one association to Usuario
-	@OneToMany(mappedBy="itr")
-	private List<Usuario> usuarios;*/
+	@OneToMany(mappedBy="itr", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	private Set<Usuario> usuarios;
 
 	public Itr() {
+	}
+	
+	public Itr(String name) {
+		this.nombre = name;
+		this.activo = (byte) 1;
 	}
 
 	public long getIdItr() {
@@ -55,12 +68,12 @@ public class Itr implements Serializable {
 		this.nombre = nombre;
 	}
 	
-/*	
-	public List<Departamento> getDepartamentos() {
+
+	public Set<Departamento> getDepartamentos() {
 		return this.departamentos;
 	}
 
-	public void setDepartamentos(List<Departamento> departamentos) {
+	public void setDepartamentos(Set<Departamento> departamentos) {
 		this.departamentos = departamentos;
 	}
 
@@ -78,11 +91,11 @@ public class Itr implements Serializable {
 		return departamento;
 	}
 
-	public List<Usuario> getUsuarios() {
+	public Set<Usuario> getUsuarios() {
 		return this.usuarios;
 	}
 
-	public void setUsuarios(List<Usuario> usuarios) {
+	public void setUsuarios(Set<Usuario> usuarios) {
 		this.usuarios = usuarios;
 	}
  
@@ -99,7 +112,15 @@ public class Itr implements Serializable {
 
 		return usuario;
 	}
-*/
+
+	public byte getActivo() {
+		return activo;
+	}
+
+	public void setActivo(byte activo) {
+		this.activo = activo;
+	}
+
 	@Override
 	public String toString() {
 		return this.nombre != null ? this.nombre : "";

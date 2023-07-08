@@ -20,8 +20,9 @@ public class Departamento implements Serializable {
 	@Column(name="ID_DEPARTAMENTO")
 	private Long idDepartamento;
 
-	@Column(name="ID_ITR", nullable=true)
-	private Long idItr;
+	@ManyToOne
+	@JoinColumn(name="ID_ITR", nullable=true)
+	private Itr itr;
 
 	@Column(name="nombre", nullable=false)
 	private String nombre;
@@ -41,12 +42,12 @@ public class Departamento implements Serializable {
 		this.idDepartamento = idDepartamento;
 	}
 
-	public long getIdItr() {
-		return this.idItr;
+	public Itr getItr() {
+		return this.itr;
 	}
 
-	public void setIdItr(Long idItr) {
-		this.idItr = idItr;
+	public void setItr(Itr Itr) {
+		this.itr = Itr;
 	}
 
 	public String getNombre() {
