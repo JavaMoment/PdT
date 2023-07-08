@@ -4,8 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import javax.persistence.*;
 
-import com.enums.Modalidad;
-import com.enums.Status;
+import com.entities.Modalidad;
 import com.enums.TipoEvento;
 
 
@@ -31,15 +30,17 @@ public class Evento implements Serializable {
 	@Column(name = "FECHA_HORA_INICIO")
 	private Date fechaHoraInicio;
 
-	@Column(name="ID_ITR")
-	private int idItr;
+	@ManyToOne()
+	@JoinColumn(name = "ID_ITR", nullable = false)
+	private Itr itr;
 
 	@Column(name="LOCALIZACION")
 	private String localizacion;
 
 	
 	@Column(name="TIPO_EVENTO")
-	private String tipoEvento;
+	@Enumerated(EnumType.STRING)
+	private TipoEvento tipoEvento;
 	
 	@Column(name="TITULO")
 	private String titulo;
@@ -86,12 +87,12 @@ public class Evento implements Serializable {
 		this.fechaHoraInicio = fechaHoraInicio;
 	}
 
-	public int getIdItr() {
-		return this.idItr;
+	public Itr getItr() {
+		return this.itr;
 	}
 
-	public void setIdItr(int idItr) {
-		this.idItr = idItr;
+	public void setItr(Itr itr) {
+		this.itr = itr;
 	}
 
 
@@ -103,11 +104,11 @@ public class Evento implements Serializable {
 		this.localizacion = localizacion;
 	}
 
-	public String getTipoEvento() {
+	public TipoEvento getTipoEvento() {
 		return this.tipoEvento;
 	}
 
-	public void setTipoEvento(String tipoEvento) {
+	public void setTipoEvento(TipoEvento tipoEvento) {
 		this.tipoEvento = tipoEvento;
 	}
 
@@ -147,7 +148,7 @@ public class Evento implements Serializable {
 	@Override
 	public String toString() {
 		return "Evento [idEvento=" + idEvento + ", fechaHoraFinal=" + fechaHoraFinal + ", fechaHoraInicio="
-				+ fechaHoraInicio + ", idItr=" + idItr + ", localizacion=" + localizacion + ", tipoEvento=" + tipoEvento
+				+ fechaHoraInicio + ", idItr=" + itr.getNombre() + ", localizacion=" + localizacion + ", tipoEvento=" + tipoEvento
 				+ ", titulo=" + titulo + ", modalidad=" + modalidad + ", estado=" + estado + ", activo=" + activo + "]";
 	}
 
