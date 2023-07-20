@@ -46,13 +46,13 @@ public class EventoBean extends CRUDBean<Evento, Long> implements EventoBeanRemo
 
 			// Creamos una variable de apoyo para capturar el id maximo que seria el ultimo
 			// en guardarse osea el de arriba
-			long maxId = 0;
+			int maxId = 0;
 
 			// recorremos todos los registros que haya en la base de datos
 			for (Evento aux : todos()) {
 
 				// Obtenemos el id de cada items
-				long idEvento = aux.getIdEvento();
+				int idEvento = aux.getIdEvento();
 
 				// Si es mayor a el maxId lo almacenamos ahí
 				if (idEvento > maxId) {
@@ -87,7 +87,7 @@ public class EventoBean extends CRUDBean<Evento, Long> implements EventoBeanRemo
 	}
 
 	@Override
-	public long buscarId(String titulo) {
+	public int buscarId(String titulo) {
 		try {
 			TypedQuery<Evento> query = (TypedQuery<Evento>) super.getEntityManager()
 					.createQuery("SELECT e FROM Evento e WHERE e.titulo = :titulo", Evento.class)

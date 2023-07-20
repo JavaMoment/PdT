@@ -1,6 +1,7 @@
 package com.enums;
 
 public enum Asistencia {
+	PENDIENTE,
 	ASISTENCIA,
 	MEDIA_ASISTENCIA_VESPERTINA,
 	MEDIA_ASISTENCIA_MATUTINA,
