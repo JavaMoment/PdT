@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
+import com.entities.Estudiante;
 import com.entities.Evento;
 import com.entities.Tutor;
 
@@ -96,6 +97,19 @@ public class EventoBean extends CRUDBean<Evento, Long> implements EventoBeanRemo
 		} catch (Exception e) {
 			// TODO: handle exception
 			return 0;
+		}
+	}
+	
+	@Override
+	public List<Evento> getEventosBy(long idEstudiante) {
+		try {
+			TypedQuery<Evento> query = (TypedQuery<Evento>) super.getEntityManager()
+					.createQuery("SELECT e FROM Evento e JOIN EstudianteEvento ee ON ee.id.idEvento = e.idEvento WHERE ee.id.idEstudiante = :idEstudiante", Evento.class)
+					.setParameter("idEstudiante", idEstudiante);
+			return query.getResultList();
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
 		}
 	}
 }

@@ -2,6 +2,9 @@ package com.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import org.hibernate.annotations.Type;
+
 import java.math.BigDecimal;
 
 
@@ -18,11 +21,11 @@ public class EstudianteEvento implements Serializable {
 	@EmbeddedId
 	private EstudianteEventoPK id;
 
-	@Column(name="ASISTENCIA")
+	@Column(name="ASISTENCIA", nullable=true)
 	private String asistencia;
 
-	@Column(name="CALIFICACION")
-	private int calificacion;
+	@Column(name="CALIFICACION", nullable=true, precision=3, scale=2)
+	private BigDecimal calificacion;
 
 	public EstudianteEvento() {
 	}
@@ -43,12 +46,18 @@ public class EstudianteEvento implements Serializable {
 		this.asistencia = asistencia;
 	}
 
-	public int getCalificacion() {
+	public BigDecimal getCalificacion() {
 		return this.calificacion;
 	}
 
-	public void setCalificacion(int calificacion) {
+	public void setCalificacion(BigDecimal calificacion) {
 		this.calificacion = calificacion;
+	}
+
+	@Override
+	public String toString() {
+		return "EstudianteEvento [" + (asistencia != null ? "asistencia=" + asistencia + ", " : "") + "calificacion="
+				+ calificacion + "]";
 	}
 
 }
