@@ -22,8 +22,15 @@ public class EstudianteEvento implements Serializable {
 	private String asistencia;
 
 	@Column(name="CALIFICACION")
-	private int calificacion;
-
+	private BigDecimal calificacion;
+	
+	@Transient
+	private long idEstudiante;
+	
+	@Transient
+	private Estudiante estudiante;
+	
+	
 	public EstudianteEvento() {
 	}
 
@@ -43,12 +50,23 @@ public class EstudianteEvento implements Serializable {
 		this.asistencia = asistencia;
 	}
 
-	public int getCalificacion() {
+	public BigDecimal getCalificacion() {
 		return this.calificacion;
 	}
 
-	public void setCalificacion(int calificacion) {
+	public void setCalificacion(BigDecimal calificacion) {
 		this.calificacion = calificacion;
 	}
-
+	
+	public long getIdEstudiante() {
+		idEstudiante = id.getIdEstudiante(); 
+		return idEstudiante;
+	}
+	
+	public long getIdEvento() {
+		return  this.id.getIdEvento();
+	}
+	
+	
+	
 }

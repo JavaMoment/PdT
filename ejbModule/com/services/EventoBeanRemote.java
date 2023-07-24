@@ -16,5 +16,5 @@ public interface EventoBeanRemote extends CRUDRemote<Evento, Long>{
 	public Evento createEvento(Evento evento);
 	public List<Evento> todos();
 	public Tutor tutorDelEvento (long id_tutor);
-	public long buscarId (String titulo);
+	public int buscarId (String titulo);
 }

@@ -114,6 +114,7 @@ public class CRUDBean<T, ID extends Serializable> implements CRUDRemote<T, ID> {
         TypedQuery<T> query = em.createQuery(cq);
         return query.getResultList();
 	}
+	
 
 	@SuppressWarnings("unchecked")
 	private Class<T> getEntityClass() {
@@ -134,16 +135,7 @@ public class CRUDBean<T, ID extends Serializable> implements CRUDRemote<T, ID> {
 		return Stream.concat(Arrays.stream(colNames), Arrays.stream(pkColName)).toArray(String[]::new);
 	}
 
-	public List<T> selectAllByActive(int activo) {
-		// TODO Auto-generated method stub
-		Class<T> entityClass = getEntityClass();
-		CriteriaBuilder cb = em.getCriteriaBuilder();
-		CriteriaQuery<T> cq = cb.createQuery(entityClass);
-		Root<T> root = cq.from(entityClass);
-		cq.select(root).where(cb.equal(root.get("activo"), activo));
-		TypedQuery<T> query = em.createQuery(cq);
-		return query.getResultList();
-	}
+
 
 	
 
