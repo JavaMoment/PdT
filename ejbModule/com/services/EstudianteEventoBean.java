@@ -6,6 +6,7 @@ import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
 import com.entities.Constancia;
+import com.entities.Estudiante;
 import com.entities.EstudianteEvento;
 import com.entities.Usuario;
 
@@ -21,7 +22,5 @@ public class EstudianteEventoBean extends CRUDBean<EstudianteEvento, Long> imple
     public EstudianteEventoBean() {
         // TODO Auto-generated constructor stub
     }
-    
  
-
 }

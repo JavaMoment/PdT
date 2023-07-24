@@ -8,6 +8,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaUpdate;
 import javax.persistence.criteria.Root;
 
+import com.entities.EstudianteEvento;
 import com.entities.Usuario;
 
 
@@ -63,6 +64,7 @@ public class UsuarioBean extends CRUDBean<Usuario, Long> implements UsuarioBeanR
 			return null;
 		}
 	}
+	
 	
 	@Override
 	public int logicalDeleteByUsername(String username) {
