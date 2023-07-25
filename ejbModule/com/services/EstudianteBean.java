@@ -1,5 +1,7 @@
 package com.services;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
@@ -33,4 +35,16 @@ public class EstudianteBean extends CRUDBean<Estudiante, Long> implements Estudi
 		}
 	} 
     
+    @Override
+	public List<Estudiante> getEstudiantesBy(long idEvento) {
+		try {
+			TypedQuery<Estudiante> query = (TypedQuery<Estudiante>) super.getEntityManager()
+					.createQuery("SELECT e FROM Estudiante e JOIN EstudianteEvento ee ON ee.id.idEstudiante = e.idEstudiante WHERE ee.id.idEvento = :idEvento", Estudiante.class)
+					.setParameter("idEvento", idEvento);
+			return query.getResultList();
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
+	}
 }
