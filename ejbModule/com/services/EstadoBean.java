@@ -10,7 +10,7 @@ import com.entities.Estado;
  * Session Bean implementation class EstadoBean
  */
 @Stateless
-
+	
 public class EstadoBean extends CRUDBean<Estado, Long> implements EstadoBeanRemote{
 
     /**

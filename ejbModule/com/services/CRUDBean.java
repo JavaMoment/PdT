@@ -136,7 +136,6 @@ public class CRUDBean<T, ID extends Serializable> implements CRUDRemote<T, ID> {
 	}
 
 
-
 	
 
 }
