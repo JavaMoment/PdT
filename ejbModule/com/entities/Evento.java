@@ -44,7 +44,7 @@ public class Evento implements Serializable {
 	@SequenceGenerator(name = "SEQ_ID_EVENTO", sequenceName = "SEQ_ID_EVENTO")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_ID_EVENTO")
 	@Column(name="ID_EVENTO")
-	private int idEvento;
+	private long idEvento;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "FECHA_HORA_FINAL")
@@ -58,7 +58,7 @@ public class Evento implements Serializable {
 	@JoinColumn(name = "ID_ITR", nullable = false)
 	private Itr itr;
 
-  @Column(name="LOCALIZACION")
+	@Column(name="LOCALIZACION")
 	private String localizacion;
 
 	@Column(name="TIPO_EVENTO")
@@ -104,11 +104,11 @@ public class Evento implements Serializable {
 	public Evento () {
 		
 	}
-	public int getIdEvento() {
+	public long getIdEvento() {
 		return this.idEvento;
 	}
 
-	public void setIdEvento(int idEvento) {
+	public void setIdEvento(long idEvento) {
 		this.idEvento = idEvento;
 	}
 
@@ -205,9 +205,8 @@ public class Evento implements Serializable {
 		tutorEvento.setEvento(null);
 
 		return tutorEvento;
-
-    }
-
+	}
+    
 	@Override
 	public String toString() {
 		return "Evento [idEvento=" + idEvento + ", fechaHoraFinal=" + fechaHoraFinal + ", fechaHoraInicio="

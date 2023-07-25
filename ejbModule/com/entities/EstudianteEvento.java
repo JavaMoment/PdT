@@ -2,6 +2,9 @@ package com.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import org.hibernate.annotations.Type;
+
 import java.math.BigDecimal;
 
 
@@ -18,19 +21,15 @@ public class EstudianteEvento implements Serializable {
 	@EmbeddedId
 	private EstudianteEventoPK id;
 
-	@Column(name="ASISTENCIA")
+	@Column(name="ASISTENCIA", nullable=true)
 	private String asistencia;
 
-	@Column(name="CALIFICACION")
+	@Column(name="CALIFICACION", nullable=true, precision=3, scale=2)
 	private BigDecimal calificacion;
 	
 	@Transient
-	private long idEstudiante;
-	
-	@Transient
-	private Estudiante estudiante;
-	
-	
+	private String nombreUsuario;
+
 	public EstudianteEvento() {
 	}
 
@@ -59,14 +58,25 @@ public class EstudianteEvento implements Serializable {
 	}
 	
 	public long getIdEstudiante() {
-		idEstudiante = id.getIdEstudiante(); 
-		return idEstudiante;
+		return this.id.getIdEstudiante(); 
 	}
 	
 	public long getIdEvento() {
 		return  this.id.getIdEvento();
 	}
+
+	public String getNombreUsuario() {
+		return nombreUsuario;
+	}
+
+	public void setNombreUsuario(String nombreUsuario) {
+		this.nombreUsuario = nombreUsuario;
+	}
 	
-	
-	
+	@Override
+	public String toString() {
+		return "EstudianteEvento [" + (asistencia != null ? "asistencia=" + asistencia + ", " : "") + "calificacion="
+				+ calificacion + "]";
+	}
+
 }

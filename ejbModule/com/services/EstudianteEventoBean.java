@@ -1,6 +1,7 @@
 package com.services;
 
-import javax.ejb.LocalBean;
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
@@ -22,5 +23,17 @@ public class EstudianteEventoBean extends CRUDBean<EstudianteEvento, Long> imple
     public EstudianteEventoBean() {
         // TODO Auto-generated constructor stub
     }
- 
+
+    @Override
+    public List<EstudianteEvento> getEstudianteEventoFrom(long idEstudiante) {
+    	try {
+			TypedQuery<EstudianteEvento> query = (TypedQuery<EstudianteEvento>) super.getEntityManager()
+					.createQuery("SELECT ee FROM EstudianteEvento ee WHERE ee.id.idEstudiante = :idEstudiante", EstudianteEvento.class)
+					.setParameter("idEstudiante", idEstudiante);
+			return query.getResultList();
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
+    }
 }

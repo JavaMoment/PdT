@@ -10,6 +10,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
+import com.entities.Estudiante;
 import com.entities.Evento;
 import com.entities.Tutor;
 
@@ -47,13 +48,13 @@ public class EventoBean extends CRUDBean<Evento, Long> implements EventoBeanRemo
 
 			// Creamos una variable de apoyo para capturar el id maximo que seria el ultimo
 			// en guardarse osea el de arriba
-			int maxId = 0;
+			long maxId = 0;
 
 			// recorremos todos los registros que haya en la base de datos
 			for (Evento aux : todos()) {
 
 				// Obtenemos el id de cada items
-				int idEvento = aux.getIdEvento();
+				long idEvento = aux.getIdEvento();
 
 				// Si es mayor a el maxId lo almacenamos ahí
 				if (idEvento > maxId) {
@@ -88,7 +89,7 @@ public class EventoBean extends CRUDBean<Evento, Long> implements EventoBeanRemo
 	}
 
 	@Override
-	public int buscarId(String titulo) {
+	public Long buscarId(String titulo) {
 		try {
 			TypedQuery<Evento> query = (TypedQuery<Evento>) super.getEntityManager()
 					.createQuery("SELECT e FROM Evento e WHERE e.titulo = :titulo", Evento.class)
@@ -96,7 +97,20 @@ public class EventoBean extends CRUDBean<Evento, Long> implements EventoBeanRemo
 			return query.getResultList().get(0).getIdEvento();
 		} catch (Exception e) {
 			// TODO: handle exception
-			return 0;
+			return null;
+		}
+	}
+	
+	@Override
+	public List<Evento> getEventosBy(long idEstudiante) {
+		try {
+			TypedQuery<Evento> query = (TypedQuery<Evento>) super.getEntityManager()
+					.createQuery("SELECT e FROM Evento e JOIN EstudianteEvento ee ON ee.id.idEvento = e.idEvento WHERE ee.id.idEstudiante = :idEstudiante", Evento.class)
+					.setParameter("idEstudiante", idEstudiante);
+			return query.getResultList();
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
 		}
 	}
 

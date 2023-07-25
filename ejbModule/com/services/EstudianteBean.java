@@ -37,7 +37,6 @@ public class EstudianteBean extends CRUDBean<Estudiante, Long> implements Estudi
 		}
 	} 
     
-//
     @Override
 	public List<Estudiante> getEstudiantesBy(long idEvento) {
 		try {
@@ -50,7 +49,4 @@ public class EstudianteBean extends CRUDBean<Estudiante, Long> implements Estudi
 			return null;
 		}
 	}
-    
-    
-    	    
 }
