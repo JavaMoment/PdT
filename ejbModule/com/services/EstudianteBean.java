@@ -7,6 +7,8 @@ import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
 import com.entities.Estudiante;
+import com.entities.EstudianteEvento;
+
 
 
 /**

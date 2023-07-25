@@ -18,7 +18,7 @@ public class Estudiante implements Serializable {
 	@SequenceGenerator(name="ESTUDIANTES_IDESTUDIANTE_GENERATOR", sequenceName="estud_id_seq", allocationSize=1, initialValue=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ESTUDIANTES_IDESTUDIANTE_GENERATOR")
 	@Column(name="ID_ESTUDIANTE", unique=true, nullable=false, precision=38)
-	private Long idEstudiante;
+	private long idEstudiante;
 
 	@Column(name="GENERACION", nullable=false, length=4)
 	private String generacion;
@@ -27,6 +27,7 @@ public class Estudiante implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="NOMBRE_USUARIO", nullable=false)
 	private Usuario usuario;
+	
 
 	public Estudiante() {
 	}
@@ -43,7 +44,7 @@ public class Estudiante implements Serializable {
 		return this.idEstudiante;
 	}
 
-	public void setIdEstudiante(long idEstudiante) {
+	public void setIdEstudiante(int idEstudiante) {
 		this.idEstudiante = idEstudiante;
 	}
 
@@ -62,6 +63,11 @@ public class Estudiante implements Serializable {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+
+	public String getNombreUsuario() {
+		return this.usuario.getNombreUsuario();
+	}
+	
 	
 
 

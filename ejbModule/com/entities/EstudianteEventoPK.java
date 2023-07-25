@@ -20,13 +20,13 @@ public class EstudianteEventoPK implements Serializable {
 
 	public EstudianteEventoPK() {
 	}
-	
+
 	public long getIdEstudiante() {
 		return this.idEstudiante;
 	}
 	
-	public void setIdEstudiante(long idEstudiante) {
-		this.idEstudiante = idEstudiante;
+	public void setIdEstudiante(long idEstudiante2) {
+		this.idEstudiante = idEstudiante2;
 	}
 	
 	public long getIdEvento() {
@@ -58,4 +58,6 @@ public class EstudianteEventoPK implements Serializable {
 		
 		return hash;
 	}
+	
+	
 }

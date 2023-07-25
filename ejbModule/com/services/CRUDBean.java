@@ -135,6 +135,4 @@ public class CRUDBean<T, ID extends Serializable> implements CRUDRemote<T, ID> {
 		return query.getResultList();
 	}
 
-	
-
 }
