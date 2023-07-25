@@ -44,7 +44,7 @@ public class Evento implements Serializable {
 	@SequenceGenerator(name = "SEQ_ID_EVENTO", sequenceName = "SEQ_ID_EVENTO")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_ID_EVENTO")
 	@Column(name="ID_EVENTO")
-	private int idEvento;
+	private long idEvento;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "FECHA_HORA_FINAL")
@@ -104,11 +104,11 @@ public class Evento implements Serializable {
 	public Evento () {
 		
 	}
-	public int getIdEvento() {
+	public long getIdEvento() {
 		return this.idEvento;
 	}
 
-	public void setIdEvento(int idEvento) {
+	public void setIdEvento(long idEvento) {
 		this.idEvento = idEvento;
 	}
 

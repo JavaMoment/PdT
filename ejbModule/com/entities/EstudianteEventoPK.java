@@ -13,10 +13,10 @@ public class EstudianteEventoPK implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Column(name="ID_ESTUDIANTE", insertable=true, updatable=true)
-	private int idEstudiante;
+	private long idEstudiante;
 
 	@Column(name="ID_EVENTO", insertable=true, updatable=true)
-	private int idEvento;
+	private long idEvento;
 
 	public EstudianteEventoPK() {
 	}
@@ -25,15 +25,15 @@ public class EstudianteEventoPK implements Serializable {
 		return this.idEstudiante;
 	}
 	
-	public void setIdEstudiante(int idEstudiante) {
-		this.idEstudiante = idEstudiante;
+	public void setIdEstudiante(long idEstudiante2) {
+		this.idEstudiante = idEstudiante2;
 	}
 	
 	public long getIdEvento() {
 		return this.idEvento;
 	}
 	
-	public void setIdEvento(int idEvento) {
+	public void setIdEvento(long idEvento) {
 		this.idEvento = idEvento;
 	}
 

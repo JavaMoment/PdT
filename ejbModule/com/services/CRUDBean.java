@@ -113,6 +113,7 @@ public class CRUDBean<T, ID extends Serializable> implements CRUDRemote<T, ID> {
         cq.select(root).where(cb.equal(root.get("activo"), activo));
         TypedQuery<T> query = em.createQuery(cq);
         return query.getResultList();
+        
 	}
 	
 
