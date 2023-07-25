@@ -58,7 +58,7 @@ public class Evento implements Serializable {
 	@JoinColumn(name = "ID_ITR", nullable = false)
 	private Itr itr;
 
-  @Column(name="LOCALIZACION")
+	@Column(name="LOCALIZACION")
 	private String localizacion;
 
 	@Column(name="TIPO_EVENTO")
@@ -205,7 +205,8 @@ public class Evento implements Serializable {
 		tutorEvento.setEvento(null);
 
 		return tutorEvento;
-    }
+	}
+    
 	@Override
 	public String toString() {
 		return "Evento [idEvento=" + idEvento + ", fechaHoraFinal=" + fechaHoraFinal + ", fechaHoraInicio="
