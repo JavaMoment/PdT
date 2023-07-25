@@ -27,6 +27,7 @@ public class Estudiante implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="NOMBRE_USUARIO", nullable=false)
 	private Usuario usuario;
+	
 
 	public Estudiante() {
 	}

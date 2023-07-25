@@ -25,11 +25,7 @@ public class EstudianteEvento implements Serializable {
 	private BigDecimal calificacion;
 	
 	@Transient
-	private long idEstudiante;
-	
-	@Transient
-	private Estudiante estudiante;
-	
+	private String nombreUsuario;
 	
 	public EstudianteEvento() {
 	}
@@ -59,12 +55,19 @@ public class EstudianteEvento implements Serializable {
 	}
 	
 	public long getIdEstudiante() {
-		idEstudiante = id.getIdEstudiante(); 
-		return idEstudiante;
+		return this.id.getIdEstudiante(); 
 	}
 	
 	public long getIdEvento() {
 		return  this.id.getIdEvento();
+	}
+
+	public String getNombreUsuario() {
+		return nombreUsuario;
+	}
+
+	public void setNombreUsuario(String nombreUsuario) {
+		this.nombreUsuario = nombreUsuario;
 	}
 	
 	

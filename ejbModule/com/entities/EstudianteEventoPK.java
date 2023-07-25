@@ -21,10 +21,6 @@ public class EstudianteEventoPK implements Serializable {
 	public EstudianteEventoPK() {
 	}
 
-	public EstudianteEventoPK(long idEstudiante2, long idEvento2) {
-		// TODO Auto-generated constructor stub
-	}
-
 	public long getIdEstudiante() {
 		return this.idEstudiante;
 	}

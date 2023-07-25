@@ -37,19 +37,26 @@ public class EstudianteBean extends CRUDBean<Estudiante, Long> implements Estudi
 		}
 	} 
     
-//
-    @Override
-	public List<Estudiante> getEstudiantesBy(long idEvento) {
+
+	@Override
+	public EstudianteEvento selectUserByEvent(long idEvento) {
 		try {
-			TypedQuery<Estudiante> query = (TypedQuery<Estudiante>) super.getEntityManager()
-					.createQuery("SELECT e FROM Estudiante e JOIN EstudianteEvento ee ON ee.id.idEstudiante = e.idEstudiante WHERE ee.id.idEvento = :idEvento", Estudiante.class)
-					.setParameter("idEvento", idEvento);
-			return query.getResultList();
-		} catch (Exception e) {
-			// TODO: handle exception
+			@SuppressWarnings("unchecked")
+			TypedQuery<EstudianteEvento> query = (TypedQuery<EstudianteEvento>) super.getEntityManager()
+				.createQuery("SELECT e FROM Estudiante e JOIN EstudianteEvento ee ON ee.id.idEstudiante = e.idEstudiante WHERE ee.id.idEvento = :idEvento", EstudianteEvento.class)
+				.setParameter("idEvento", idEvento);
+			return 	query.getSingleResult();
+		} catch(PersistenceException e) {
 			return null;
 		}
 	}
+
+	@Override
+	public List<Estudiante> getEstudiantesBy(long idEvento) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+ 
     
     
     	    

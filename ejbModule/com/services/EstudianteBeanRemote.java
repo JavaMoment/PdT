@@ -14,4 +14,6 @@ public interface EstudianteBeanRemote extends CRUDRemote<Estudiante, Long> {
 
 	List<Estudiante> getEstudiantesBy(long idEvento);
 
+	EstudianteEvento selectUserByEvent(long idEvento);
+
 }
