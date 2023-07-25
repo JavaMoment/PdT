@@ -1,6 +1,8 @@
 package com.services;
 
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
@@ -8,6 +10,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaUpdate;
 import javax.persistence.criteria.Root;
 
+import com.entities.Evento;
 import com.entities.Usuario;
 
 
@@ -91,5 +94,17 @@ public class UsuarioBean extends CRUDBean<Usuario, Long> implements UsuarioBeanR
 			return -1;
 		}
 	}
+	
+	@Override
+	public List<Usuario> selectAllStudents() {
+		try {
+			TypedQuery<Usuario> query = (TypedQuery<Usuario>) super.getEntityManager()
+					.createQuery("SELECT u FROM Usuario u JOIN Estudiante e ON e.usuario.nombreUsuario = u.nombreUsuario", Usuario.class);
+			return query.getResultList();
+		} catch (Exception e) {
+			// TODO: handle exception
+			return null;
+		}
+	} 
 
 }

@@ -1,5 +1,7 @@
 package com.services;
 
+import java.util.List;
+
 import javax.ejb.Remote;
 
 import com.entities.Usuario;
@@ -15,5 +17,6 @@ public interface UsuarioBeanRemote extends CRUDRemote<Usuario, Long> {
 	int logicalDeleteByUsername(String username);
 
 	int activeUserBy(String username);
+	List<Usuario> selectAllStudents();
 
 }
