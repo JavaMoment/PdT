@@ -49,4 +49,10 @@ public class EstudianteBean extends CRUDBean<Estudiante, Long> implements Estudi
 			return null;
 		}
 	}
+
+	@Override
+	public EstudianteEvento selectUserByEvent(long idEvento) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

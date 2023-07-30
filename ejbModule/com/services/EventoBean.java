@@ -89,7 +89,7 @@ public class EventoBean extends CRUDBean<Evento, Long> implements EventoBeanRemo
 	}
 
 	@Override
-	public Long buscarId(String titulo) {
+	public long buscarId(String titulo) {
 		try {
 			TypedQuery<Evento> query = (TypedQuery<Evento>) super.getEntityManager()
 					.createQuery("SELECT e FROM Evento e WHERE e.titulo = :titulo", Evento.class)
@@ -97,7 +97,7 @@ public class EventoBean extends CRUDBean<Evento, Long> implements EventoBeanRemo
 			return query.getResultList().get(0).getIdEvento();
 		} catch (Exception e) {
 			// TODO: handle exception
-			return null;
+			return -1L;
 		}
 	}
 	
