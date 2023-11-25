@@ -91,6 +91,9 @@ public class Usuario implements Serializable {
 
 	@Transient
 	private String tipoUsuario;
+	
+	@Transient
+	private boolean active;
 
 	public Usuario() {
 	}
@@ -122,8 +125,8 @@ public class Usuario implements Serializable {
 		this.nombreUsuario = nombreUsuario;
 	}
 
-	public byte getActivo() {
-		return this.activo;
+	public String getActivo() {
+		return this.activo == 1 ? "Activo" : "Inactivo";
 	}
 
 	public void setActivo(byte activo) {
@@ -264,6 +267,10 @@ public class Usuario implements Serializable {
 		return this.tipoUsuario;
 	}
 	
+	public void setTipoUsuario(String tipoUsuario) {
+		this.tipoUsuario = tipoUsuario;
+	}
+
 	public String getGeneracion() {
 		Optional<Estudiante> studentIfExists = estudiantes.stream().filter(estudiante -> estudiante.getUsuario().getNombreUsuario().equals(nombreUsuario)).findFirst();
 		if(studentIfExists.isEmpty()) {
@@ -375,6 +382,14 @@ public class Usuario implements Serializable {
 		return tutor;
 	}
 	
+	public boolean isActive() {
+		return activo == 1;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
 	@Override
 	public String toString() {
 		return nombreUsuario != null ? nombreUsuario : "";

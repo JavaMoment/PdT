@@ -43,6 +43,9 @@ public class Itr implements Serializable {
 	//bi-directional many-to-one association to Usuario
 	@OneToMany(mappedBy="itr", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	private Set<Usuario> usuarios;
+	
+	@Transient
+	private boolean active;
 
 	public Itr() {
 	}
@@ -113,12 +116,20 @@ public class Itr implements Serializable {
 		return usuario;
 	}
 
-	public byte getActivo() {
-		return activo;
+	public String getActivo() {
+		return activo == 1 ? "Activo" : "Inactivo";
 	}
 
 	public void setActivo(byte activo) {
 		this.activo = activo;
+	}
+
+	public boolean isActive() {
+		return activo == 1;
+	}
+
+	public void setActive(boolean isActive) {
+		this.active = isActive;
 	}
 
 	@Override

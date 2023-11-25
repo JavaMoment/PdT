@@ -17,4 +17,6 @@ public interface ItrBeanRemote extends CRUDRemote<Itr, Long>  {
 	int activeItrBy(String name);
 
 	List<Itr> selectAllActives();
+
+	Itr selectBy(String name);
 }

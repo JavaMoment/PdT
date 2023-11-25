@@ -34,4 +34,19 @@ public class DepartamentoBean extends CRUDBean<Departamento, Long> implements De
 		}
 	}
 
+	@Override
+	public Departamento selectByName(String name) {
+		try {
+			@SuppressWarnings("unchecked")
+			TypedQuery<Departamento> query = (TypedQuery<Departamento>) super.getEntityManager()
+					.createQuery("SELECT d FROM Departamento d WHERE d.nombre =: name ORDER BY d.idDepartamento", Departamento.class)
+					.setParameter("name", name);
+			return query.getSingleResult();
+		} catch (PersistenceException e) {
+			return null;
+		}
+	}
+	
+	
+
 }

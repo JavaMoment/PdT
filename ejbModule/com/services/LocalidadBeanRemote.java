@@ -17,4 +17,6 @@ public interface LocalidadBeanRemote extends CRUDRemote<Localidad, Long>  {
 	List<Localidad> selectAllBy(long l);
 
 	List<Localidad> selectAllByObject(Departamento depa);
+	
+	Localidad selectBy(String name);
 }
