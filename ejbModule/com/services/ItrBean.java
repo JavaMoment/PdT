@@ -87,4 +87,18 @@ public class ItrBean extends CRUDBean<Itr, Long> implements ItrBeanRemote {
 			return null;
 		}
 	}
+
+	@Override
+	public Itr selectBy(String name) {
+		// TODO Auto-generated method stub
+		try {
+			@SuppressWarnings("unchecked")
+			TypedQuery<Itr> query = (TypedQuery<Itr>) super.getEntityManager()
+					.createQuery("SELECT i FROM Itr i WHERE i.nombre =: name ORDER BY i.idItr", Itr.class)
+					.setParameter("name", name);
+			return query.getSingleResult();
+		} catch (PersistenceException e) {
+			return null;
+		}
+	}
 }

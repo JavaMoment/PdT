@@ -267,6 +267,10 @@ public class Usuario implements Serializable {
 		return this.tipoUsuario;
 	}
 	
+	public void setTipoUsuario(String tipoUsuario) {
+		this.tipoUsuario = tipoUsuario;
+	}
+
 	public String getGeneracion() {
 		Optional<Estudiante> studentIfExists = estudiantes.stream().filter(estudiante -> estudiante.getUsuario().getNombreUsuario().equals(nombreUsuario)).findFirst();
 		if(studentIfExists.isEmpty()) {
