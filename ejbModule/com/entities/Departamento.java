@@ -20,7 +20,7 @@ public class Departamento implements Serializable {
 	@Column(name="ID_DEPARTAMENTO")
 	private Long idDepartamento;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Itr.class, cascade = CascadeType.MERGE)
 	@JoinColumn(name="ID_ITR", nullable=true)
 	private Itr itr;
 
