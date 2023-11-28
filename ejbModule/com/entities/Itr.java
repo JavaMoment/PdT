@@ -3,7 +3,7 @@ package com.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 
-
+import java.util.HashSet;
 
 //import entities.Departamento;
 //import entities.Usuario;
@@ -37,7 +37,7 @@ public class Itr implements Serializable {
 	private byte activo;
 	
 	//bi-directional many-to-one association to Departamento
-	@OneToMany(mappedBy="itr", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="itr", cascade = CascadeType.MERGE, fetch=FetchType.EAGER)
 	private Set<Departamento> departamentos;
 
 	//bi-directional many-to-one association to Usuario
@@ -53,6 +53,12 @@ public class Itr implements Serializable {
 	public Itr(String name) {
 		this.nombre = name;
 		this.activo = (byte) 1;
+	}
+
+	public Itr(String name, List<Departamento> departamentos) {
+		this.nombre = name;
+		this.activo = (byte) 1;
+		this.departamentos = new HashSet<>(departamentos);
 	}
 
 	public long getIdItr() {
