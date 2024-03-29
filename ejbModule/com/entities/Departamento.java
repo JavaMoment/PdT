@@ -2,7 +2,7 @@ package com.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -20,7 +20,7 @@ public class Departamento implements Serializable {
 	@Column(name="ID_DEPARTAMENTO")
 	private Long idDepartamento;
 
-	@ManyToOne(fetch = FetchType.LAZY, targetEntity = Itr.class, cascade = CascadeType.MERGE)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name="ID_ITR", nullable=true)
 	private Itr itr;
 
@@ -28,8 +28,8 @@ public class Departamento implements Serializable {
 	private String nombre;
 
 	//bi-directional many-to-one association to Localidad
-	@OneToMany(mappedBy="departamento", cascade = CascadeType.ALL, orphanRemoval = true, fetch=FetchType.LAZY)
-	private List<Localidad> localidades;
+	@OneToMany(mappedBy="departamento", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	private Set<Localidad> localidades;
 
 	public Departamento() {
 	}
@@ -58,11 +58,11 @@ public class Departamento implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public List<Localidad> getLocalidades() {
+	public Set<Localidad> getLocalidades() {
 		return this.localidades;
 	}
 
-	public void setLocalidades(List<Localidad> localidades) {
+	public void setLocalidades(Set<Localidad> localidades) {
 		this.localidades = localidades;
 	}
 
@@ -83,6 +83,16 @@ public class Departamento implements Serializable {
 	@Override
 	public String toString() {
 		return nombre != null ? nombre : "";
+	}
+	
+	/*
+	 * Comparator a traves del nombre de los departamentos (ya que son únicos)
+	 * para complacer las operaciones del estilo .contains().
+	 */
+	@Override
+	public boolean equals(Object other) {
+		Departamento otherDepa = (Departamento) other;
+	    return this.getNombre().equals(otherDepa.getNombre());
 	}
 
 }
