@@ -1,6 +1,7 @@
 package com.services;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 
 import javax.ejb.Remote;
@@ -26,5 +27,7 @@ public interface CRUDRemote<T, ID extends Serializable> {
 	List<T> selectAllByActive(int activo);
 
 	String[] getColsNames();
+
+	List<T> selectAllBy(Collection<String> names);
 
 }

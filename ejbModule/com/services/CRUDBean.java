@@ -2,7 +2,9 @@ package com.services;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -26,7 +28,7 @@ import org.hibernate.metamodel.spi.MetamodelImplementor;
 public class CRUDBean<T, ID extends Serializable> implements CRUDRemote<T, ID> {
 
 	@PersistenceContext
-	private EntityManager em = Persistence.createEntityManagerFactory("PDTServerSide").createEntityManager();
+	private EntityManager em = Persistence.createEntityManagerFactory("ServerSide").createEntityManager();
 
 	/**
 	 * Default constructor.
@@ -43,8 +45,9 @@ public class CRUDBean<T, ID extends Serializable> implements CRUDRemote<T, ID> {
 	public int create(T entity) {
 		// TODO Auto-generated method stub
 		try {
-			em.persist(entity);
+			em.persist(em.contains(entity) ? entity : em.merge(entity));
 			em.flush();
+			em.clear();
 			return 0;
 		} catch (PersistenceException e) {
 			System.out.println(e.getMessage());
@@ -136,4 +139,21 @@ public class CRUDBean<T, ID extends Serializable> implements CRUDRemote<T, ID> {
 		return query.getResultList();
 	}
 
+	/*
+	 * Dada una lista de nombres asociadas a una entidad generica con atributo nombre,
+	 * retorna todos los objetos que hayan en base de datos con cumplan la condicion de que su nombre
+	 * este dentro de la coleccion provista.
+	 * En SQL equivale a WHERE entidad.nombre IN (?);
+	 */
+	@Override
+	public List<T> selectAllBy(Collection<String> names) {
+		Class<T> entityClass = getEntityClass();
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<T> cq = cb.createQuery(entityClass);
+		Root<T> root = cq.from(entityClass);
+		cq.select(root).where(root.get("nombre").in(names));
+		TypedQuery<T> query = em.createQuery(cq);
+		return query.getResultList();
+	}
+	
 }
