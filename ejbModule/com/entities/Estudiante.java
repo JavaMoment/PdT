@@ -1,6 +1,7 @@
 package com.entities;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -28,7 +29,9 @@ public class Estudiante implements Serializable {
 	@JoinColumn(name="NOMBRE_USUARIO", nullable=false)
 	private Usuario usuario;
 	
-
+	@OneToMany(mappedBy="estudiante", fetch=FetchType.EAGER)
+	private List<Reclamo> reclamos;
+	
 	public Estudiante() {
 	}
 	
@@ -67,8 +70,13 @@ public class Estudiante implements Serializable {
 	public String getNombreUsuario() {
 		return this.usuario.getNombreUsuario();
 	}
-	
-	
 
+	public List<Reclamo> getReclamos() {
+		return reclamos;
+	}
+
+	public void setReclamos(List<Reclamo> reclamos) {
+		this.reclamos = reclamos;
+	}
 
 }
