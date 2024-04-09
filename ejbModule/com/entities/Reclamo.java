@@ -15,39 +15,71 @@ public class Reclamo implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="RECLAMOS_IDRECLAMO_GENERATOR", sequenceName="recl_id_seq")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="RECLAMOS_IDRECLAMO_GENERATOR")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID_RECLAMO")
 	private long idReclamo;
-
-	@Column(name="DETALLE")
-	private String detalle;
-
-	@Temporal(TemporalType.DATE)
-	@Column(name="FECHA_HORA")
-	private Date fechaHora;
-
-	//bi-directional many-to-one association to Analista
-	@ManyToOne
-	@JoinColumn(name="ID_ANALISTA")
+	
+//	bi-directional many-to-one association to Analista
+	@ManyToOne(optional=true, fetch = FetchType.EAGER)
+	@JoinColumn(name="ID_ANALISTA", nullable=true)
 	private Analista analista;
 
 	//bi-directional many-to-one association to Estudiante
-	@ManyToOne
+	@ManyToOne(optional = false, fetch = FetchType.EAGER)
 	@JoinColumn(name="ID_ESTUDIANTE")
 	private Estudiante estudiante;
 
 	//bi-directional many-to-one association to Evento
-	@ManyToOne
+	@ManyToOne(optional = false, fetch = FetchType.EAGER)
 	@JoinColumn(name="ID_EVENTO")
 	private Evento evento;
 
-	
-	//bi-directional many-to-many association to StatusCertificado
-	//@ManyToMany(mappedBy="reclamos")
-	//private List<StatusCertificados> statusCertificados;
+	//bi-directional many-to-one association to Evento
+	@ManyToOne(optional = false, fetch = FetchType.EAGER)
+	@JoinColumn(name="ID_STATUS", nullable=false)
+	private StatusReclamo statusReclamo;
 
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="AUDIT_DATE", updatable=false)
+	private Date auditDate;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="MODIF_DATE", nullable=true)
+	private Date modifDate;
+	
+	@Column(name="MODIF_USER", nullable=true)
+	private String modifUser;
+	
+	@Column(name="TITULO", nullable=false)
+	private String titulo;
+	
+	@Column(name="DESCRIPCION", nullable=false)
+	private String descripcion;
+	
+	@Column(name="DETALLE", nullable=true)
+	private String detalle;
+	
 	public Reclamo() {
+	}
+	
+	public Reclamo(Estudiante estudiante, Evento evento, StatusReclamo statusReclamo, String titulo,
+			String descripcion) {
+		super();
+		this.estudiante = estudiante;
+		this.evento = evento;
+		this.statusReclamo = statusReclamo;
+		this.titulo = titulo;
+		this.descripcion = descripcion;
+	}
+	
+	@PrePersist
+	protected void onCreate() {
+		this.auditDate= new Date();
+	}
+
+	@PreUpdate
+	protected void onUpdate() {
+		this.modifDate = new Date();
 	}
 
 	public long getIdReclamo() {
@@ -64,14 +96,6 @@ public class Reclamo implements Serializable {
 
 	public void setDetalle(String detalle) {
 		this.detalle = detalle;
-	}
-
-	public Date getFechaHora() {
-		return this.fechaHora;
-	}
-
-	public void setFechaHora(Date fechaHora) {
-		this.fechaHora = fechaHora;
 	}
 
 	public Analista getAnalista() {
@@ -96,6 +120,54 @@ public class Reclamo implements Serializable {
 
 	public void setEvento(Evento evento) {
 		this.evento = evento;
+	}
+
+	public StatusReclamo getStatusReclamo() {
+		return statusReclamo;
+	}
+
+	public void setStatusReclamo(StatusReclamo statusReclamo) {
+		this.statusReclamo = statusReclamo;
+	}
+
+	public Date getAuditDate() {
+		return auditDate;
+	}
+
+	public void setAuditDate(Date auditDate) {
+		this.auditDate = auditDate;
+	}
+
+	public Date getModifDate() {
+		return modifDate;
+	}
+
+	public void setModifDate(Date modifDate) {
+		this.modifDate = modifDate;
+	}
+
+	public String getModifUser() {
+		return modifUser;
+	}
+
+	public void setModifUser(String modifUser) {
+		this.modifUser = modifUser;
+	}
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
 }
