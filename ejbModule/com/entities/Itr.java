@@ -37,7 +37,7 @@ public class Itr implements Serializable {
 	private byte activo;
 	
 	//bi-directional many-to-one association to Departamento
-	@OneToMany(mappedBy="itr", cascade = CascadeType.MERGE, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="itr", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	private Set<Departamento> departamentos;
 
 	//bi-directional many-to-one association to Usuario
@@ -58,6 +58,8 @@ public class Itr implements Serializable {
 	public Itr(String name, List<Departamento> departamentos) {
 		this.nombre = name;
 		this.activo = (byte) 1;
+		// Asegurarse que los departamentos estaran asociados unicamente con el itr instanciado
+		departamentos.forEach(d -> d.setItr(this));
 		this.departamentos = new HashSet<>(departamentos);
 	}
 
@@ -83,7 +85,33 @@ public class Itr implements Serializable {
 	}
 
 	public void setDepartamentos(Set<Departamento> departamentos) {
-		this.departamentos = departamentos;
+		if(departamentos != null) {
+			// Listas temporales para poder utilizar el metodo '.contains()'
+			// Por alguna razon no funciona con el contains de la clase Set 
+			// (sera por el hasheo? el nodo se referencia por nombre de variable en el treeMap?)
+			List<Departamento> tmp = departamentos.stream().toList();
+			List<Departamento> selfTmp = this.departamentos.stream().toList();
+			// Para cada elemento de la actual lista de departamentos asociados al ITR instanciado
+			// Eliminar la asociacion por el lado del Departamento si este no se encuentra en la lista
+			// de los nuevos departamentos asociados.
+			this.departamentos.forEach(d -> {
+				if(!tmp.contains(d)) {
+					d.setItr(null);
+				}
+			});
+			// A cada nuevo Departamento que va a estar asociado al ITR instanciado, settearle este ultimo
+			// para establecer la relacion. A su vez adicionarlo a la lista de departamentos asociados
+			// cuando esta lista se mande a BDD se rompera la asociacion (o no) entre ITR y departamento
+			// y al selectear nuevamente se devolvera la lista correcta.
+			// Si se manda con unicamente la lista de nuevos | estaticos, no se rompe la relacion en cascada 
+			// por lo que tendrias que actualizar los departamentos que eliminas de la relacion antes de actualizar el ITR.
+			departamentos.forEach(d -> {
+				d.setItr(this);
+				if(!selfTmp.contains(d)) this.departamentos.add(d);
+			});			
+		} else {
+			this.departamentos.forEach(d -> d.setItr(null));
+		}
 	}
 
 	public Departamento addDepartamento(Departamento departamento) {
@@ -99,7 +127,7 @@ public class Itr implements Serializable {
 
 		return departamento;
 	}
-
+	
 	public Set<Usuario> getUsuarios() {
 		return this.usuarios;
 	}
