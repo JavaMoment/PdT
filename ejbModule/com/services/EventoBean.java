@@ -21,6 +21,7 @@ import com.entities.Tutor;
 public class EventoBean extends CRUDBean<Evento, Long> implements EventoBeanRemote {
 
 	public EventoBean() {
+		System.out.print("");
 		// TODO Auto-generated constructor stub
 	}
 
@@ -41,33 +42,11 @@ public class EventoBean extends CRUDBean<Evento, Long> implements EventoBeanRemo
 		try {
 			// Primero persistimos los datos que vienen desde el cliente
 			super.getEntityManager().persist(evento);
-
 			// Al persistirlos tenemos el id que genera la secuencia y hacemos el commit
 			// para guardar los cambios
 			super.getEntityManager().flush();
-
-			// Creamos una variable de apoyo para capturar el id maximo que seria el ultimo
-			// en guardarse osea el de arriba
-			long maxId = 0;
-
-			// recorremos todos los registros que haya en la base de datos
-			for (Evento aux : todos()) {
-
-				// Obtenemos el id de cada items
-				long idEvento = aux.getIdEvento();
-
-				// Si es mayor a el maxId lo almacenamos ahí
-				if (idEvento > maxId) {
-					maxId = idEvento;
-				}
-			}
-
-			// Creamos una entidad de apoyo que utilizamos para retornar el id ya que si
-			// retornamos la otra entidad da negativo
-			Evento oEventoProvisorio = new Evento();
-			oEventoProvisorio.setIdEvento(maxId);
-
-			return oEventoProvisorio;
+ 
+			return evento;
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("cai en el syso de createveneto");
@@ -126,5 +105,6 @@ public class EventoBean extends CRUDBean<Evento, Long> implements EventoBeanRemo
 			return null;
 		}
 	}
+	//crear metodo para limpiar el evento
 
 }
