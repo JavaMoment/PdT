@@ -11,22 +11,6 @@ import com.enums.TipoEvento;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import com.enums.TipoEvento;
@@ -84,16 +68,19 @@ public class Evento implements Serializable {
 	private Estado estado;
 
 	@Column(name = "ACTIVO")
-	private int activo;
+	private byte activo;
 	
 	// bi-directional many-to-one association to TutorEvento
 	@OneToMany(mappedBy = "evento", fetch = FetchType.EAGER)
 	private List<TutorEvento> tutorEventos;
 
-
+	
+	@Transient
+	private boolean active;
+	
 	// Constructor con parámetros para inicializar todas las propiedades de Evento
 	public Evento(String titulo, TipoEvento tipoEvento, Date fechaHoraInicio, Date fechaHoraFinal, Modalidad modalidad,
-			Itr itr, String localizacion, Estado estado, int activo) {
+			Itr itr, String localizacion, Estado estado, byte activo) {
 		this.titulo = titulo;
 		this.tipoEvento = tipoEvento;
 		this.fechaHoraInicio = fechaHoraInicio;
@@ -106,7 +93,7 @@ public class Evento implements Serializable {
 	}
 
 	public Evento () {
-		this.activo = 1;
+		
 		
 	}
 	public long getIdEvento() {
@@ -180,13 +167,21 @@ public class Evento implements Serializable {
 	public void setEstado(Estado estado) {
 		this.estado = estado;
 	}
-
-	public int getActivo() {
-		return activo;
+	
+	public String getActivo() {
+		return activo == 1 ? "Activo" : "Inactivo";
 	}
 
-	public void setActivo(int activo) {
+	public void setActivo(byte activo) {
 		this.activo = activo;
+	}
+
+	public boolean isActive() {
+		return activo == 1;
+	}
+
+	public void setActive(boolean isActive) {
+		this.active = isActive;
 	}
 	
 	
