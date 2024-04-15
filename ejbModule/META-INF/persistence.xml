@@ -25,6 +25,7 @@
         <class>com.entities.EstudianteEventoPK</class>
         <class>com.entities.TutorEvento</class>
         <class>com.entities.TutorEventoPK</class>
+        <class>com.entities.StatusReclamo</class>
 
 
 		<validation-mode>AUTO</validation-mode>
