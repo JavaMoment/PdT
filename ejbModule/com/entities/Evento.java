@@ -11,6 +11,24 @@ import com.enums.TipoEvento;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+
 import com.enums.TipoEvento;
 
 /**
@@ -29,25 +47,28 @@ public class Evento implements Serializable {
 	@Column(name="ID_EVENTO")
 	private long idEvento;
 
+	@NotNull
 	@Temporal(TemporalType.DATE)
 	@Column(name = "FECHA_HORA_FINAL")
 	private Date fechaHoraFinal;
 
+	@NotNull
 	@Temporal(TemporalType.DATE)
 	@Column(name = "FECHA_HORA_INICIO")
 	private Date fechaHoraInicio;
-
+	
 	@ManyToOne()
-	@JoinColumn(name = "ID_ITR", nullable = false)
+	@JoinColumn(name = "ID_ITR")
 	private Itr itr;
 
 	@Column(name="LOCALIZACION")
 	private String localizacion;
 
-	@Column(name="TIPO_EVENTO")
+	@Column(name="TIPO_EVENTO", nullable = false)
 	@Enumerated(EnumType.STRING)
 	private TipoEvento tipoEvento;
 	
+	@NotNull
 	@Column(name="TITULO")
 	private String titulo;
 	
@@ -87,6 +108,7 @@ public class Evento implements Serializable {
 	}
 
 	public Evento () {
+		this.activo = 1;
 		
 	}
 	public long getIdEvento() {
