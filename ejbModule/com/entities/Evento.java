@@ -90,7 +90,9 @@ public class Evento implements Serializable {
 	@OneToMany(mappedBy = "evento", fetch = FetchType.EAGER)
 	private List<TutorEvento> tutorEventos;
 
-
+	@OneToMany(mappedBy="evento", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	private List<Reclamo> reclamos;
+	
 	// Constructor con parámetros para inicializar todas las propiedades de Evento
 	public Evento(String titulo, TipoEvento tipoEvento, Date fechaHoraInicio, Date fechaHoraFinal, Modalidad modalidad,
 			Itr itr, String localizacion, Estado estado, int activo) {
@@ -212,6 +214,14 @@ public class Evento implements Serializable {
 		return tutorEvento;
 	}
     
+	public List<Reclamo> getReclamos() {
+		return reclamos;
+	}
+
+	public void setReclamos(List<Reclamo> reclamos) {
+		this.reclamos = reclamos;
+	}
+
 	@Override
 	public String toString() {
 		return "Evento [idEvento=" + idEvento + ", fechaHoraFinal=" + fechaHoraFinal + ", fechaHoraInicio="
