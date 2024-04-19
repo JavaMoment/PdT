@@ -7,4 +7,6 @@ import com.entities.StatusReclamo;
 @Remote
 public interface StatusReclamoBeanRemote extends CRUDRemote<StatusReclamo, Long> {
 
+	StatusReclamo selectBy(String nombre);
+	
 }
