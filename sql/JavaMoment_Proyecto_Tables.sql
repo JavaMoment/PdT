@@ -170,6 +170,7 @@ CREATE TABLE EVENTOS
     CONSTRAINT fk_tipo_evento       FOREIGN KEY (id_tipo_evento) REFERENCES TIPOS_EVENTO(id_tipo_evento),
     CONSTRAINT fk_itr_evento        FOREIGN KEY (id_itr)         REFERENCES ITR(id_itr),
     CONSTRAINT fk_modalidad_evento  FOREIGN KEY (id_modalidad)   REFERENCES MODALIDADES(id_modalidad),
+    CONSTRAINT fk_status_evento		FOREIGN KEY (id_status_evento)		REFERENCES STATUS_EVENTO(id_status),
     CONSTRAINT chk_evento_activo    CHECK       ( activo IN (1, 0) )
 );
 
