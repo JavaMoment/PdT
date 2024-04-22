@@ -34,6 +34,10 @@ public class Reclamo implements Serializable {
 	@JoinColumn(name="ID_EVENTO")
 	private Evento evento;
 
+	//bi-directional many-to-one association to Evento
+	@ManyToOne(optional = false, fetch = FetchType.EAGER)
+	@JoinColumn(name="ID_STATUS", nullable=false)
+	private StatusReclamo statusReclamo;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="AUDIT_DATE", updatable=false)
@@ -58,11 +62,12 @@ public class Reclamo implements Serializable {
 	public Reclamo() {
 	}
 	
-	public Reclamo(Estudiante estudiante, Evento evento, String titulo,
+	public Reclamo(Estudiante estudiante, Evento evento, StatusReclamo statusReclamo, String titulo,
 			String descripcion) {
 		super();
 		this.estudiante = estudiante;
 		this.evento = evento;
+		this.statusReclamo = statusReclamo;
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 	}
@@ -71,7 +76,6 @@ public class Reclamo implements Serializable {
 	protected void onCreate() {
 		this.auditDate= new Date();
 	}
-
 	@PreUpdate
 	protected void onUpdate() {
 		this.modifDate = new Date();
@@ -124,7 +128,8 @@ public class Reclamo implements Serializable {
 	public void setStatusReclamo(StatusReclamo statusReclamo) {
 		this.statusReclamo = statusReclamo;
 	}
-
+	
+	
 	public Date getAuditDate() {
 		return auditDate;
 	}
@@ -164,5 +169,5 @@ public class Reclamo implements Serializable {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-
+	
 }
