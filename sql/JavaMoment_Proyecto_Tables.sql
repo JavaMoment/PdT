@@ -94,13 +94,13 @@ CREATE TABLE TUTORES
 (
     id_tutor        INTEGER         NOT NULL,
     nombre_usuario  VARCHAR2(100)   NOT NULL,
-    id_tipo_tutor   VARCHAR2(75)    NOT NULL,
+    id_tipo_tutor   INTEGER         NOT NULL,
     id_area         INTEGER         NOT NULL,
     
     CONSTRAINT pk_tutor_id          PRIMARY KEY (id_tutor),
     CONSTRAINT fk_tutor_nomb_user   FOREIGN KEY (nombre_usuario) REFERENCES USUARIOS(nombre_usuario),
     CONSTRAINT fk_tutor_id_area     FOREIGN KEY (id_area)        REFERENCES AREAS(id_area),
-    CONSTRAINT fk_tipo_tutor        FOREIGN KEY (id_tipo_tutor)  REFERENCES TUTORES(id_tipo_tutor)
+    CONSTRAINT fk_tipo_tutor        FOREIGN KEY (id_tipo_tutor)  REFERENCES TIPOS_TUTOR(id_tipo_tutor)
 );
 
 CREATE TABLE ANALISTAS
@@ -238,8 +238,8 @@ CREATE TABLE RECLAMOS
 
 CREATE TABLE STATUS_CERTIFICADOS
 (
-    id_status_certificado     INTEGER      NOT NULL,
-    nombre                    VARCHAR2(50) NOT NULL,
+    id_status     INTEGER      NOT NULL,
+    nombre        VARCHAR2(50) NOT NULL,
     
     CONSTRAINT pk_status_id           PRIMARY KEY (id_status),
     CONSTRAINT uk_stat_cert_nomb      UNIQUE (nombre)
@@ -259,7 +259,7 @@ CREATE TABLE JUSTIFICACIONES
     CONSTRAINT fk_justif_id_estud    FOREIGN KEY (id_estudiante) REFERENCES ESTUDIANTES(id_estudiante),
     CONSTRAINT fk_justif_id_evento   FOREIGN KEY (id_evento)     REFERENCES EVENTOS(id_evento),
     CONSTRAINT fk_justif_id_anali    FOREIGN KEY (id_analista)   REFERENCES ANALISTAS(id_analista),
-    CONSTRAINT fk_status_just        FOREIGN KEY (id_status)     REFERENCES STATUS_CERTIFICADOS(id_status_certificado)
+    CONSTRAINT fk_status_just        FOREIGN KEY (id_status)     REFERENCES STATUS_CERTIFICADOS(id_status)
 );
 
 CREATE TABLE CONSTANCIAS
@@ -276,7 +276,7 @@ CREATE TABLE CONSTANCIAS
     CONSTRAINT fk_const_id_estud    FOREIGN KEY (id_estudiante) REFERENCES ESTUDIANTES(id_estudiante),
     CONSTRAINT fk_const_id_evento   FOREIGN KEY (id_evento)     REFERENCES EVENTOS(id_evento),
     CONSTRAINT fk_const_id_anali    FOREIGN KEY (id_analista)   REFERENCES ANALISTAS(id_analista),
-    CONSTRAINT fk_status_just       FOREIGN KEY (id_status)     REFERENCES STATUS_CERTIFICADOS(id_status_certificado)
+    CONSTRAINT fk_status_const      FOREIGN KEY (id_status)     REFERENCES STATUS_CERTIFICADOS(id_status)
 );
 
 COMMIT;
