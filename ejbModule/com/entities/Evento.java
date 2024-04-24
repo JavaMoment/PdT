@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import javax.persistence.*;
 
 import com.entities.Modalidad;
-import com.enums.TipoEvento;
 
 
 import java.util.Date;
@@ -13,7 +12,6 @@ import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
-import com.enums.TipoEvento;
 
 /**
  * The persistent class for the EVENTOS database table.
