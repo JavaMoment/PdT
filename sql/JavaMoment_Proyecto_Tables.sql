@@ -188,7 +188,7 @@ CREATE TABLE ANALISTA_EVENTO
     CONSTRAINT pk_anali_evento         PRIMARY KEY (id_analista, id_evento)
 );
 
-CREATE TABLE ASISTENCIA
+CREATE TABLE ASISTENCIAS
 (
 	id_asistencia	INTEGER		GENERATED ALWAYS AS IDENTITY 	NOT NULL,
 	nombre			VARCHAR(100)								NOT NULL,
@@ -208,7 +208,7 @@ CREATE TABLE ESTUDIANTE_EVENTO
     
     CONSTRAINT fk_estud_even_estud	   FOREIGN KEY (id_estudiante) REFERENCES ESTUDIANTES(id_estudiante),
     CONSTRAINT fk_estud_even_evento    FOREIGN KEY (id_evento)     REFERENCES EVENTOS(id_evento),
-    CONSTRAINT fk_asistencia_evento	   FOREIGN KEY (id_asistencia) REFERENCES ASISTENCIA(id_asistencia),
+    CONSTRAINT fk_asistencia_evento	   FOREIGN KEY (id_asistencia) REFERENCES ASISTENCIAS(id_asistencia),
     CONSTRAINT pk_estud_evento         PRIMARY KEY (id_estudiante, id_evento)
 );
 
