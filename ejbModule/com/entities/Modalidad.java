@@ -30,7 +30,7 @@
 		
 
 		//bi-directional many-to-one association to Evento
-		@OneToMany(mappedBy="modalidad")
+		@OneToMany(mappedBy="modalidad", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 		private List<Evento> eventos;
 
 		public Modalidad() {

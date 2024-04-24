@@ -12,6 +12,7 @@ import javax.persistence.TypedQuery;
 
 import com.entities.Estudiante;
 import com.entities.Evento;
+import com.entities.Itr;
 import com.entities.Tutor;
 
 /**
@@ -106,5 +107,31 @@ public class EventoBean extends CRUDBean<Evento, Long> implements EventoBeanRemo
 		}
 	}
 	//crear metodo para limpiar el evento
+	
+		public int logicalDeleteBy(Long i) {
+			try {
+				Evento eventoToUpdate = selectById(i);
+				eventoToUpdate.setActivo((byte) 0);
+				
+				int resultCode = update(eventoToUpdate);
+				
+				return resultCode == 0  ? 0 : -1;
+			} catch(PersistenceException e) {
+				return -1;
+			}
+		}
+		
+		public int activeEventBy(Long i) {
+			try {
+				Evento eventoToUpdate = selectById(i);
+				eventoToUpdate.setActivo((byte) 1);
+				
+				int resultCode = update(eventoToUpdate);
+				
+				return resultCode == 0  ? 0 : -1;
+			} catch(PersistenceException e) {
+				return -1;
+			}
+		}
 
 }
