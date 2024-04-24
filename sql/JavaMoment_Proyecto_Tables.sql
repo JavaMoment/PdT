@@ -4,13 +4,12 @@
 CREATE TABLE USUARIOS
 (
     nombre_usuario     VARCHAR2(100) NOT NULL,
-    nombre1            VARCHAR2(50)  NOT NULL,
-    nombre2            VARCHAR2(50)          ,
+    nombre1            VARCHAR2(100)  NOT NULL,
+    nombre2            VARCHAR2(100)          ,
     apellido1          VARCHAR2(100) NOT NULL,
     apellido2          VARCHAR2(100) NOT NULL,
     fec_nac            DATE          NOT NULL,
     genero             CHAR          NOT NULL,
-    id_departamento    INTEGER       NOT NULL,
     id_localidad       INTEGER       NOT NULL,
     id_itr             INTEGER       NOT NULL,
     mail_institucional VARCHAR2(250) NOT NULL,
@@ -55,13 +54,9 @@ CREATE TABLE LOCALIDADES
     id_departamento INTEGER      NOT NULL,
     
     CONSTRAINT pk_id_locali      PRIMARY KEY (id_localidad),
-    CONSTRAINT uk_locali_nomb    UNIQUE      (nombre),
     CONSTRAINT fk_locali_id_depa FOREIGN KEY (id_departamento) REFERENCES DEPARTAMENTOS(id_departamento)
 );
 
-ALTER TABLE USUARIOS
-ADD CONSTRAINT fk_usr_id_depa
-FOREIGN KEY (id_departamento) REFERENCES DEPARTAMENTOS(id_departamento);
 
 ALTER TABLE USUARIOS
 ADD CONSTRAINT fk_usr_id_locali
@@ -156,8 +151,8 @@ CREATE TABLE MODALIDADES
 CREATE TABLE EVENTOS
 (
     id_evento           INTEGER         NOT NULL,
-    fecha_hora_inicio   DATE            NOT NULL,
-    fecha_hora_final    DATE            NOT NULL,
+    fecha_hora_inicio   TIMESTAMP       NOT NULL,
+    fecha_hora_final    TIMESTAMP       NOT NULL,
     titulo              VARCHAR2(100)   NOT NULL,
     id_tipo_evento      INTEGER                 ,
     id_itr              INTEGER                 ,
@@ -170,7 +165,6 @@ CREATE TABLE EVENTOS
     CONSTRAINT fk_tipo_evento       FOREIGN KEY (id_tipo_evento) REFERENCES TIPOS_EVENTO(id_tipo_evento),
     CONSTRAINT fk_itr_evento        FOREIGN KEY (id_itr)         REFERENCES ITR(id_itr),
     CONSTRAINT fk_modalidad_evento  FOREIGN KEY (id_modalidad)   REFERENCES MODALIDADES(id_modalidad),
-    CONSTRAINT fk_status_evento		FOREIGN KEY (id_status_evento)		REFERENCES STATUS_EVENTO(id_status),
     CONSTRAINT chk_evento_activo    CHECK       ( activo IN (1, 0) )
 );
 
@@ -194,15 +188,27 @@ CREATE TABLE ANALISTA_EVENTO
     CONSTRAINT pk_anali_evento         PRIMARY KEY (id_analista, id_evento)
 );
 
+CREATE TABLE ASISTENCIA
+(
+	id_asistencia	INTEGER		GENERATED ALWAYS AS IDENTITY 	NOT NULL,
+	nombre			VARCHAR(100)								NOT NULL,
+	valor			NUMBER(3,2)								    NOT NULL,
+	
+	CONSTRAINT	pk_asistencia_id PRIMARY KEY (id_asistencia),
+	CONSTRAINT  uk_asist_nombre	 UNIQUE      (nombre)
+);
+
+
 CREATE TABLE ESTUDIANTE_EVENTO
 (
     id_estudiante  INTEGER       NOT NULL,
     id_evento      INTEGER       NOT NULL,
+    id_asistencia  INTEGER		 NOT NULL,
     calificacion   NUMBER(3, 2)  NOT NULL,
-    asistencia     VARCHAR2(100) NOT NULL,
     
-    CONSTRAINT fk_estud_even_analista  FOREIGN KEY (id_estudiante) REFERENCES ESTUDIANTES(id_estudiante),
+    CONSTRAINT fk_estud_even_estud	   FOREIGN KEY (id_estudiante) REFERENCES ESTUDIANTES(id_estudiante),
     CONSTRAINT fk_estud_even_evento    FOREIGN KEY (id_evento)     REFERENCES EVENTOS(id_evento),
+    CONSTRAINT fk_asistencia_evento	   FOREIGN KEY (id_asistencia) REFERENCES ASISTENCIA(id_asistencia),
     CONSTRAINT pk_estud_evento         PRIMARY KEY (id_estudiante, id_evento)
 );
 
@@ -253,7 +259,7 @@ CREATE TABLE JUSTIFICACIONES
     id_analista      INTEGER                ,
     id_status        INTEGER        NOT NULL,
     detalle          VARCHAR2(250)  NOT NULL,
-    fecha_hora       DATE           NOT NULL,
+    fecha_hora       TIMESTAMP      NOT NULL,
     
     CONSTRAINT pk_justif_id          PRIMARY KEY (id_justificacion),
     CONSTRAINT fk_justif_id_estud    FOREIGN KEY (id_estudiante) REFERENCES ESTUDIANTES(id_estudiante),
@@ -280,3 +286,4 @@ CREATE TABLE CONSTANCIAS
 );
 
 COMMIT;
+
