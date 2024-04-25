@@ -29,6 +29,7 @@
         <class>com.entities.StatusEvento</class>
         <class>com.entities.TiposTutor</class>
         <class>com.entities.TiposEvento</class>
+        <class>com.entities.Asistencia</class>
 
 
 		<validation-mode>AUTO</validation-mode>
