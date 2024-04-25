@@ -1,6 +1,8 @@
 package com.entities;
 
 import java.io.Serializable;
+import java.util.List;
+
 import javax.persistence.*;
 
 
@@ -21,6 +23,9 @@ public class TiposTutor implements Serializable {
 
 	@Column(nullable=false, length=100)
 	private String nombre;
+	
+	@OneToMany(mappedBy="rol", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	private List<Tutor> tutores;
 
 	public TiposTutor() {
 	}
@@ -39,6 +44,19 @@ public class TiposTutor implements Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public List<Tutor> getTutores() {
+		return tutores;
+	}
+
+	public void setTutores(List<Tutor> tutores) {
+		this.tutores = tutores;
+	}
+
+	@Override
+	public String toString() {
+		return (nombre != null ? nombre : "");
 	}
 
 }
