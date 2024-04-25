@@ -46,10 +46,6 @@ public class Usuario implements Serializable {
 	private char genero;
 
 	@ManyToOne
-	@JoinColumn(name="ID_DEPARTAMENTO", nullable=false)
-	private Departamento departamento;
-
-	@ManyToOne
 	@JoinColumn(name="ID_ITR", nullable=false)
 	private Itr itr;
 	
@@ -111,7 +107,6 @@ public class Usuario implements Serializable {
 		this.documento = documento;
 		this.fechaNacimiento = FechaNacimiento;
 		this.genero = genero;
-		this.departamento = idDepartamento;
 		this.itr = idItr;
 		this.localidad = idLocalidad;
 		this.mailInstitucional = mailInsti;
@@ -179,14 +174,6 @@ public class Usuario implements Serializable {
 
 	public void setGenero(char genero) {
 		this.genero = genero;
-	}
-
-	public Departamento getDepartamento() {
-		return this.departamento;
-	}
-
-	public void setDepartamento(Departamento idDepartamento) {
-		this.departamento = idDepartamento;
 	}
 
 	public Itr getItr() {
@@ -280,12 +267,12 @@ public class Usuario implements Serializable {
 		return gen != null ? gen : "";
 	}
 	
-	public Roles getRol() {
+	public String getRol() {
 		Optional<Tutor> teacherIfExists = tutores.stream().filter(tutor -> tutor.getUsuario().getNombreUsuario().equals(nombreUsuario)).findFirst();
 		if(teacherIfExists.isEmpty()) {
 			return null;
 		}
-		Roles rol = teacherIfExists.get().getTipo();
+		String rol = teacherIfExists.get().getTipo().getNombre();
 		return rol;
 	}
 	

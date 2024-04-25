@@ -26,18 +26,18 @@ public class Evento implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name = "SEQ_ID_EVENTO", sequenceName = "SEQ_ID_EVENTO")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_ID_EVENTO")
+	@SequenceGenerator(name = "event_id_seq", sequenceName = "event_id_seq")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "event_id_seq")
 	@Column(name="ID_EVENTO")
 	private long idEvento;
 
 	@NotNull
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "FECHA_HORA_FINAL")
 	private Date fechaHoraFinal;
 
 	@NotNull
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "FECHA_HORA_INICIO")
 	private Date fechaHoraInicio;
 	

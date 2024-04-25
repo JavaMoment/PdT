@@ -20,7 +20,7 @@ public class StatusCertificados implements Serializable {
 	@Column(name="ID_STATUS", unique=true, nullable=false, precision=38)
 	private Long idStatus;
 	
-	@Column(name="NOMBRE_ACCION", nullable=false)
+	@Column(name="nombre", nullable=false)
 	@Enumerated(EnumType.STRING)
 	private Status nombreAccion;
 	
