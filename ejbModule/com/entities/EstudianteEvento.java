@@ -23,7 +23,7 @@ public class EstudianteEvento implements Serializable {
 
 	@ManyToOne(optional = false, fetch = FetchType.EAGER)
 	@JoinColumn(name="ID_ASISTENCIA", nullable=false)
-	private int asistencia;
+	private Asistencia asistencia;
 
 	@Column(name="CALIFICACION", nullable=true, precision=3, scale=2)
 	private BigDecimal calificacion;
@@ -42,11 +42,11 @@ public class EstudianteEvento implements Serializable {
 		this.id = id;
 	}
 
-	public int getAsistencia() {
+	public Asistencia getAsistencia() {
 		return this.asistencia;
 	}
 
-	public void setAsistencia(int asistencia) {
+	public void setAsistencia(Asistencia asistencia) {
 		this.asistencia = asistencia;
 	}
 
