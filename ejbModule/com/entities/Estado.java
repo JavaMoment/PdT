@@ -10,15 +10,14 @@ import java.util.List;
  * 
  */
 @Entity
-@Table(name="ESTADOS")
+@Table(name="STATUS_EVENTO")
 @NamedQuery(name="Estado.findAll", query="SELECT e FROM Estado e")
 public class Estado implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="EVENTOS_IDESTADO_GENERATOR", sequenceName="SEQ_ESTADOS", allocationSize=1)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="EVENTOS_IDESTADO_GENERATOR")	
-	@Column(name="ID_ESTADO")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="ID_STATUS")
 	private long idEstado;
 
 	@Column(name="NOMBRE")
@@ -28,7 +27,7 @@ public class Estado implements Serializable {
 	private int activo;
 
 	//bi-directional many-to-one association to Evento
-	@OneToMany(mappedBy="estado")
+	@OneToMany(mappedBy="statusEvento", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	private List<Evento> eventos;
 
 	public Estado() {

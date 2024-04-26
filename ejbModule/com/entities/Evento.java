@@ -5,30 +5,13 @@ import java.time.LocalDate;
 import javax.persistence.*;
 
 import com.entities.Modalidad;
-import com.enums.TipoEvento;
 
 
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
-import com.enums.TipoEvento;
 
 /**
  * The persistent class for the EVENTOS database table.
@@ -41,67 +24,76 @@ public class Evento implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name = "SEQ_ID_EVENTO", sequenceName = "SEQ_ID_EVENTO")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_ID_EVENTO")
+	@SequenceGenerator(name = "event_id_seq", sequenceName = "event_id_seq")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "event_id_seq")
 	@Column(name="ID_EVENTO")
 	private long idEvento;
 
-	@Temporal(TemporalType.DATE)
+	@NotNull
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "FECHA_HORA_FINAL")
 	private Date fechaHoraFinal;
 
-	@Temporal(TemporalType.DATE)
+	@NotNull
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "FECHA_HORA_INICIO")
 	private Date fechaHoraInicio;
-
+	
 	@ManyToOne()
-	@JoinColumn(name = "ID_ITR", nullable = false)
+	@JoinColumn(name = "ID_ITR")
 	private Itr itr;
 
-	@Column(name="LOCALIZACION")
+	@Column(name="DESC_LOCALIZACION")
 	private String localizacion;
 
-	@Column(name="TIPO_EVENTO")
-	@Enumerated(EnumType.STRING)
-	private TipoEvento tipoEvento;
+	@ManyToOne(optional = false, fetch = FetchType.EAGER)
+	@JoinColumn(name="ID_TIPO_EVENTO", nullable=false)
+	private TiposEvento tiposEvento;
 	
+	@NotNull
 	@Column(name="TITULO")
 	private String titulo;
 	
 
 	//bi-directional many-to-one association to Modalidad
-	@ManyToOne
-	@JoinColumn(name = "ID_MODALIDAD")
+	@ManyToOne(optional = false, fetch = FetchType.EAGER)
+	@JoinColumn(name = "ID_MODALIDAD", nullable=false)
 	private Modalidad modalidad;
 
 	// bi-directional many-to-one association to Estado
-	@ManyToOne
-	@JoinColumn(name = "ID_ESTADO")
-	private Estado estado;
+	@ManyToOne(optional = false, fetch = FetchType.EAGER)
+	@JoinColumn(name = "ID_STATUS_EVENTO", nullable=false)
+	private Estado statusEvento;
 
 	@Column(name = "ACTIVO")
-	private int activo;
+	private byte activo;
 	
 	// bi-directional many-to-one association to TutorEvento
 	@OneToMany(mappedBy = "evento", fetch = FetchType.EAGER)
 	private List<TutorEvento> tutorEventos;
+	
+	@Transient
+	private boolean active;
 
-
+	@OneToMany(mappedBy="evento", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	private List<Reclamo> reclamos;
+	
 	// Constructor con parámetros para inicializar todas las propiedades de Evento
-	public Evento(String titulo, TipoEvento tipoEvento, Date fechaHoraInicio, Date fechaHoraFinal, Modalidad modalidad,
-			Itr itr, String localizacion, Estado estado, int activo) {
+	public Evento(String titulo, TiposEvento tiposEvento, Date fechaHoraInicio, Date fechaHoraFinal, Modalidad modalidad,
+			Itr itr, String localizacion, Estado statusEvento, byte activo) {
 		this.titulo = titulo;
-		this.tipoEvento = tipoEvento;
+		this.tiposEvento = tiposEvento;
 		this.fechaHoraInicio = fechaHoraInicio;
 		this.fechaHoraFinal = fechaHoraFinal;
 		this.modalidad = modalidad;
 		this.itr = itr;
 		this.localizacion = localizacion;
-		this.estado = estado;
+		this.statusEvento = statusEvento;
 		this.activo = activo;
 	}
 
 	public Evento () {
+		
 		
 	}
 	public long getIdEvento() {
@@ -144,12 +136,12 @@ public class Evento implements Serializable {
 		this.localizacion = localizacion;
 	}
 
-	public TipoEvento getTipoEvento() {
-		return this.tipoEvento;
+	public TiposEvento getTiposEvento() {
+		return this.tiposEvento;
 	}
 
-	public void setTipoEvento(TipoEvento tipoEvento) {
-		this.tipoEvento = tipoEvento;
+	public void setTiposEvento(TiposEvento tiposEvento) {
+		this.tiposEvento = tiposEvento;
 	}
 
 	public String getTitulo() {
@@ -168,20 +160,28 @@ public class Evento implements Serializable {
 		this.modalidad = modalidade;
 	}
 
-	public Estado getEstado() {
-		return this.estado;
+	public Estado getstatusEvento() {
+		return this.statusEvento;
 	}
 
-	public void setEstado(Estado estado) {
-		this.estado = estado;
+	public void setstatusEvento(Estado statusEvento) {
+		this.statusEvento = statusEvento;
+	}
+	
+	public String getActivo() {
+		return activo == 1 ? "Activo" : "Inactivo";
 	}
 
-	public int getActivo() {
-		return activo;
-	}
-
-	public void setActivo(int activo) {
+	public void setActivo(byte activo) {
 		this.activo = activo;
+	}
+
+	public boolean isActive() {
+		return activo == 1;
+	}
+
+	public void setActive(boolean isActive) {
+		this.active = isActive;
 	}
 	
 	
@@ -207,11 +207,19 @@ public class Evento implements Serializable {
 		return tutorEvento;
 	}
     
+	public List<Reclamo> getReclamos() {
+		return reclamos;
+	}
+
+	public void setReclamos(List<Reclamo> reclamos) {
+		this.reclamos = reclamos;
+	}
+
 	@Override
 	public String toString() {
 		return "Evento [idEvento=" + idEvento + ", fechaHoraFinal=" + fechaHoraFinal + ", fechaHoraInicio="
-				+ fechaHoraInicio + ", idItr=" + itr.getNombre() + ", localizacion=" + localizacion + ", tipoEvento=" + tipoEvento
-				+ ", titulo=" + titulo + ", modalidad=" + modalidad + ", estado=" + estado + ", activo=" + activo + "]";
+				+ fechaHoraInicio + ", idItr=" + itr.getNombre() + ", localizacion=" + localizacion + ", tipoEvento=" + tiposEvento
+				+ ", titulo=" + titulo + ", modalidad=" + modalidad + ", estado=" + statusEvento + ", activo=" + activo + "]";
 	}
 
 }
