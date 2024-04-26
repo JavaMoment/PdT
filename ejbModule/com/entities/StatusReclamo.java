@@ -53,4 +53,14 @@ public class StatusReclamo implements Serializable {
 		this.reclamos = reclamos;
 	}
 
+	@Override
+	public String toString() {
+		return this.nombre;
+	}
+	
+	@Override
+	public boolean equals(Object other) {
+		StatusReclamo otherSR = (StatusReclamo) other;
+	    return this.getNombre().equals(otherSR.getNombre());
+	}
 }
