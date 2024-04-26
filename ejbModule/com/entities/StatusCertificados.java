@@ -3,7 +3,6 @@
 import java.io.Serializable;
 import javax.persistence.*;
 
-import com.enums.Status;
 
 /**
  * Entity implementation class for Entity: StatusCertificados
@@ -20,11 +19,9 @@ public class StatusCertificados implements Serializable {
 	@Column(name="ID_STATUS", unique=true, nullable=false, precision=38)
 	private Long idStatus;
 	
-	@Column(name="nombre", nullable=false)
-	@Enumerated(EnumType.STRING)
-	private Status nombreAccion;
-	
-	
+	@Column(name="NOMBRE", nullable=false)
+	private String nombreAccion;
+
 	public StatusCertificados() {
 		super();
 	}
@@ -40,12 +37,12 @@ public class StatusCertificados implements Serializable {
 	}
 
 
-	public Status getStatus() {
+	public String getStatus() {
 		return nombreAccion;
 	}
 
 
-	public void setStatus(Status status) {
+	public void setStatus(String status) {
 		this.nombreAccion = status;
 	}
    

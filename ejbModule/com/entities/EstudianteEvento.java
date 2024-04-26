@@ -21,8 +21,8 @@ public class EstudianteEvento implements Serializable {
 	@EmbeddedId
 	private EstudianteEventoPK id;
 
-	@ManyToOne
-	@JoinColumn(name="id_asistencia", nullable=false)
+	@ManyToOne(optional = false, fetch = FetchType.EAGER)
+	@JoinColumn(name="ID_ASISTENCIA", nullable=false)
 	private Asistencia asistencia;
 
 	@Column(name="CALIFICACION", nullable=true, precision=3, scale=2)
@@ -43,7 +43,7 @@ public class EstudianteEvento implements Serializable {
 	}
 
 	public Asistencia getAsistencia() {
-		return asistencia;
+		return this.asistencia;
 	}
 
 	public void setAsistencia(Asistencia asistencia) {
@@ -76,7 +76,7 @@ public class EstudianteEvento implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "EstudianteEvento [" + (asistencia != null ? "asistencia=" + asistencia + ", " : "") + "calificacion="
+		return "EstudianteEvento [Asistencia" + asistencia + "calificacion="
 				+ calificacion + "]";
 	}
 

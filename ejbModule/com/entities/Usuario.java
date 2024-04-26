@@ -3,8 +3,6 @@ package com.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 
-import com.enums.Roles;
-
 import java.util.Date;
 import java.util.Optional;
 import java.util.Set;
@@ -96,9 +94,8 @@ public class Usuario implements Serializable {
 
 	public Usuario(String nombreUsuario, String apellido1, String apellido2, 
 			String contrasenia, String documento, Date FechaNacimiento, 
-			char genero, Departamento idDepartamento, Itr idItr, 
-			Localidad idLocalidad, String mailInsti, String mailPers,
-			String nombre1) {
+			char genero, Itr idItr, Localidad idLocalidad, String mailInsti,
+			String mailPers, String nombre1) {
 		super();
 		this.nombreUsuario = nombreUsuario;
 		this.apellido1 = apellido1;

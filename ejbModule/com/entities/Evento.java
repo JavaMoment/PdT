@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import javax.persistence.*;
 
 import com.entities.Modalidad;
-import com.enums.TipoEvento;
 
 
 import java.util.Date;
@@ -13,7 +12,6 @@ import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
-import com.enums.TipoEvento;
 
 /**
  * The persistent class for the EVENTOS database table.
@@ -25,7 +23,6 @@ import com.enums.TipoEvento;
 public class Evento implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
 	@SequenceGenerator(name = "event_id_seq", sequenceName = "event_id_seq")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "event_id_seq")
 	@Column(name="ID_EVENTO")
