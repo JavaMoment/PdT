@@ -173,7 +173,6 @@ public class Usuario implements Serializable {
 		this.genero = genero;
 	}
 
-
 	public Itr getItr() {
 		return this.itr;
 	}
@@ -265,6 +264,14 @@ public class Usuario implements Serializable {
 		return gen != null ? gen : "";
 	}
 	
+	public String getRol() {
+		Optional<Tutor> teacherIfExists = tutores.stream().filter(tutor -> tutor.getUsuario().getNombreUsuario().equals(nombreUsuario)).findFirst();
+		if(teacherIfExists.isEmpty()) {
+			return null;
+		}
+		String rol = teacherIfExists.get().getTipo().getNombre();
+		return rol;
+	}
 	
 	public Area getArea() {
 		Optional<Tutor> teacherIfExists = tutores.stream().filter(tutor -> tutor.getUsuario().getNombreUsuario().equals(nombreUsuario)).findFirst();

@@ -24,8 +24,9 @@ public class Tutor implements Serializable {
 	@JoinColumn(name="ID_AREA", nullable=false)
 	private Area area;
 
-	@Column(name="ID_TIPO_TUTOR", nullable=false, length=75)
-	private int rol;
+	@ManyToOne
+	@JoinColumn(name="id_tipo_tutor", nullable=false, length=75)
+	private TiposTutor rol;
 
 	//bi-directional many-to-one association to Usuario
 	@ManyToOne
@@ -39,7 +40,7 @@ public class Tutor implements Serializable {
 		this.usuario = user;
 	}
 	
-	public Tutor(Usuario user, Area area, int rol) {
+	public Tutor(Usuario user, Area area, TiposTutor rol) {
 		this.usuario = user;
 		this.area = area;
 		this.rol = rol;
@@ -61,11 +62,11 @@ public class Tutor implements Serializable {
 		this.area = idArea;
 	}
 
-	public int getTipo() {
+	public TiposTutor getTipo() {
 		return this.rol;
 	}
 
-	public void setTipo(int tipo) {
+	public void setTipo(TiposTutor tipo) {
 		this.rol = tipo;
 	}
 
