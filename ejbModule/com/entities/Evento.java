@@ -23,6 +23,7 @@ import javax.validation.constraints.NotNull;
 public class Evento implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@Id
 	@SequenceGenerator(name = "event_id_seq", sequenceName = "event_id_seq")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "event_id_seq")
 	@Column(name="ID_EVENTO")

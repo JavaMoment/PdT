@@ -25,7 +25,7 @@ public class Tutor implements Serializable {
 	private Area area;
 
 	@ManyToOne
-	@JoinColumn(name="id_tipo_tutor", nullable=false, length=75)
+	@JoinColumn(name="id_tipo_tutor", nullable=false)
 	private TiposTutor rol;
 
 	//bi-directional many-to-one association to Usuario
