@@ -231,6 +231,8 @@ CREATE TABLE RECLAMOS
     titulo           VARCHAR2(150)   NOT NULL,
     descripcion      VARCHAR2(240)   NOT NULL,
     detalle          VARCHAR2(250),
+    semestre         NUMBER(1,0),
+    creditos         NUMBER(1,0),
     audit_date       TIMESTAMP       NOT NULL,
     modif_user       VARCHAR2(100),
     modif_date       TIMESTAMP,
@@ -239,7 +241,9 @@ CREATE TABLE RECLAMOS
     CONSTRAINT fk_recl_id_estud     FOREIGN KEY (id_estudiante) REFERENCES ESTUDIANTES(id_estudiante),
     CONSTRAINT fk_recl_id_evento    FOREIGN KEY (id_evento)     REFERENCES EVENTOS(id_evento),
     CONSTRAINT fk_recl_id_anali     FOREIGN KEY (id_analista)   REFERENCES ANALISTAS(id_analista),
-    CONSTRAINT fk_recl_id_status    FOREIGN KEY (id_status)     REFERENCES STATUS_RECLAMO(id_status)
+    CONSTRAINT fk_recl_id_status    FOREIGN KEY (id_status)     REFERENCES STATUS_RECLAMO(id_status),
+    CONSTRAINT chk_recl_semestre    CHECK       (semestre BETWEEN 1 AND 8),
+    CONSTRAINT chk_recl_creditos    CHECK       (creditos > 0)
 );
 
 CREATE TABLE STATUS_CERTIFICADOS
