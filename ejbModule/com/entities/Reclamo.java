@@ -2,6 +2,10 @@ package com.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+
+import org.hibernate.validator.constraints.Range;
+
 import java.util.Date;
 
 
@@ -38,6 +42,14 @@ public class Reclamo implements Serializable {
 	@ManyToOne(optional = false, fetch = FetchType.EAGER)
 	@JoinColumn(name="ID_STATUS", nullable=false)
 	private StatusReclamo statusReclamo;
+	
+	@Column(name="SEMESTRE", nullable=true)
+//	@Range(min=1, max=8)
+	private Integer semestre;
+	
+	@Column(name="CREDITOS", nullable=true)
+//	@Min(value=1)
+	private Integer creditos;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="AUDIT_DATE", updatable=false)
@@ -168,6 +180,22 @@ public class Reclamo implements Serializable {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+	public Integer getSemestre() {
+		return this.semestre;
+	}
+
+	public void setSemestre(int semestre) {
+		this.semestre = semestre;
+	}
+
+	public Integer getCreditos() {
+		return creditos;
+	}
+
+	public void setCreditos(int creditos) {
+		this.creditos = creditos;
 	}
 	
 }
