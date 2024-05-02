@@ -1,5 +1,7 @@
 package com.services;
 
+import java.util.List;
+
 import javax.ejb.Remote;
 import com.entities.Reclamo;
 
@@ -8,6 +10,8 @@ import com.entities.Reclamo;
  */
 @Remote
 public interface ReclamoBeanRemote extends CRUDRemote<Reclamo, Long> {
+
+	List<Reclamo> selectAllBy(String nombreUsuario);
 
 
 }
