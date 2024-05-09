@@ -217,9 +217,13 @@ public class Evento implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Evento [idEvento=" + idEvento + ", fechaHoraFinal=" + fechaHoraFinal + ", fechaHoraInicio="
-				+ fechaHoraInicio + ", idItr=" + itr.getNombre() + ", localizacion=" + localizacion + ", tipoEvento=" + tiposEvento
-				+ ", titulo=" + titulo + ", modalidad=" + modalidad + ", estado=" + statusEvento + ", activo=" + activo + "]";
+		return this.titulo;
+	}
+	
+	@Override
+	public boolean equals(Object other) {
+		Evento otherE = (Evento) other;
+		return this.getIdEvento() == (otherE.getIdEvento());
 	}
 
 }
