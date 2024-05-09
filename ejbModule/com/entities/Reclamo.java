@@ -43,12 +43,10 @@ public class Reclamo implements Serializable {
 	@JoinColumn(name="ID_STATUS", nullable=false)
 	private StatusReclamo statusReclamo;
 	
-	@Column(name="SEMESTRE", nullable=true)
-//	@Range(min=1, max=8)
+	@Column(name="SEMESTRE", nullable=true, updatable=true)
 	private Integer semestre;
 	
-	@Column(name="CREDITOS", nullable=true)
-//	@Min(value=1)
+	@Column(name="CREDITOS", nullable=true, updatable=true)
 	private Integer creditos;
 
 	@Temporal(TemporalType.TIMESTAMP)
@@ -82,6 +80,18 @@ public class Reclamo implements Serializable {
 		this.statusReclamo = statusReclamo;
 		this.titulo = titulo;
 		this.descripcion = descripcion;
+	}
+	
+	public Reclamo(Estudiante estudiante, Evento evento, StatusReclamo statusReclamo, String titulo,
+			String descripcion, Integer semestre, Integer creditos) {
+		super();
+		this.estudiante = estudiante;
+		this.evento = evento;
+		this.statusReclamo = statusReclamo;
+		this.titulo = titulo;
+		this.descripcion = descripcion;
+		this.semestre = semestre;
+		this.creditos = creditos;
 	}
 	
 	@PrePersist
@@ -186,7 +196,7 @@ public class Reclamo implements Serializable {
 		return this.semestre;
 	}
 
-	public void setSemestre(int semestre) {
+	public void setSemestre(Integer semestre) {
 		this.semestre = semestre;
 	}
 
@@ -194,7 +204,7 @@ public class Reclamo implements Serializable {
 		return creditos;
 	}
 
-	public void setCreditos(int creditos) {
+	public void setCreditos(Integer creditos) {
 		this.creditos = creditos;
 	}
 	

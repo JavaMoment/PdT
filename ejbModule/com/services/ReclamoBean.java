@@ -1,6 +1,9 @@
 package com.services;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
+import javax.persistence.TypedQuery;
 
 import com.entities.Reclamo;
 
@@ -15,6 +18,18 @@ public class ReclamoBean extends CRUDBean<Reclamo, Long> implements ReclamoBeanR
      */
     public ReclamoBean() {
         // TODO Auto-generated constructor stub
+    }
+    
+    @Override
+    public List<Reclamo> selectAllBy(String nombreUsuario) {
+    	try {
+    		TypedQuery<Reclamo> query = (TypedQuery<Reclamo>) super.getEntityManager()
+    				.createQuery("SELECT r FROM Reclamo r WHERE r.estudiante.usuario.nombreUsuario = :nombreUsuario", Reclamo.class)
+    				.setParameter("nombreUsuario", nombreUsuario);
+    		return query.getResultList();
+    	} catch (Exception e) {
+    		return null;
+    	}
     }
 
 }

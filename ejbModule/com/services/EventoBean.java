@@ -133,5 +133,16 @@ public class EventoBean extends CRUDBean<Evento, Long> implements EventoBeanRemo
 				return -1;
 			}
 		}
-
+		
+	@Override
+	public Evento selectBy(String title) {
+		try {
+			TypedQuery<Evento> query = (TypedQuery<Evento>) super.getEntityManager()
+					.createQuery("SELECT e FROM Evento e WHERE e.titulo =: title", Evento.class)
+					.setParameter("title", title);
+			return query.getSingleResult();
+		} catch(Exception e) {
+			return null;
+		}
+	}
 }
