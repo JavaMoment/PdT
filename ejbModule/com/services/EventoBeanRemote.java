@@ -21,4 +21,5 @@ public interface EventoBeanRemote extends CRUDRemote<Evento, Long>{
 	List<Evento> selectEventosByTutor(long idTutor);
 	int activeEventBy(Long i);
 	int logicalDeleteBy(Long i);
+	Evento selectBy(String name);
 }
