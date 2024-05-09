@@ -2,6 +2,10 @@ package com.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+
+import org.hibernate.validator.constraints.Range;
+
 import java.util.Date;
 
 
