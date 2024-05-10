@@ -117,8 +117,8 @@ public class Usuario implements Serializable {
 		this.nombreUsuario = nombreUsuario;
 	}
 
-	public String getActivo() {
-		return this.activo == 1 ? "Activo" : "Inactivo";
+	public Byte getActivo() {
+		return this.activo;
 	}
 
 	public void setActivo(byte activo) {
@@ -238,6 +238,9 @@ public class Usuario implements Serializable {
 	}
 	
 	public String getTipoUsuario() {
+		if(analistas == null & estudiantes == null & tutores == null) {
+			return "";
+		}
 		if(this.tipoUsuario != null) {
 			return this.tipoUsuario;
 		}
@@ -253,33 +256,6 @@ public class Usuario implements Serializable {
 	
 	public void setTipoUsuario(String tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
-	}
-
-	public String getGeneracion() {
-		Optional<Estudiante> studentIfExists = estudiantes.stream().filter(estudiante -> estudiante.getUsuario().getNombreUsuario().equals(nombreUsuario)).findFirst();
-		if(studentIfExists.isEmpty()) {
-			return "";
-		}
-		String gen = studentIfExists.get().getGeneracion();
-		return gen != null ? gen : "";
-	}
-	
-	public String getRol() {
-		Optional<Tutor> teacherIfExists = tutores.stream().filter(tutor -> tutor.getUsuario().getNombreUsuario().equals(nombreUsuario)).findFirst();
-		if(teacherIfExists.isEmpty()) {
-			return null;
-		}
-		String rol = teacherIfExists.get().getTipo().getNombre();
-		return rol;
-	}
-	
-	public Area getArea() {
-		Optional<Tutor> teacherIfExists = tutores.stream().filter(tutor -> tutor.getUsuario().getNombreUsuario().equals(nombreUsuario)).findFirst();
-		if(teacherIfExists.isEmpty()) {
-			return null;
-		}
-		Area area = teacherIfExists.get().getArea();
-		return area;
 	}
 	
 	public Set<Analista> getAnalistas() {

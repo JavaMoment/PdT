@@ -17,7 +17,7 @@ public class Area implements Serializable {
 	@SequenceGenerator(name="AREAS_IDAREA_GENERATOR", sequenceName="AREAS_ID_SEQ")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="AREAS_IDAREA_GENERATOR")
 	@Column(name="ID_AREA")
-	private long idArea;
+	private Long idArea;
 
 	@Column(name="DESCRIPCION", nullable=false)
 	private String descripcion;
@@ -28,11 +28,11 @@ public class Area implements Serializable {
 	public Area() {
 	}
 
-	public long getIdArea() {
+	public Long getIdArea() {
 		return this.idArea;
 	}
 
-	public void setIdArea(long idArea) {
+	public void setIdArea(Long idArea) {
 		this.idArea = idArea;
 	}
 
@@ -57,4 +57,11 @@ public class Area implements Serializable {
 		return this.nombre != null ? this.nombre : "";
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+	    Area other = (Area) obj; 
+		if (!nombre.equals(other.getNombre()))
+	        return false;
+	    return true;
+	}
 }

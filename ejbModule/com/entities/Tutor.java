@@ -46,11 +46,11 @@ public class Tutor implements Serializable {
 		this.rol = rol;
 	}
 
-	public long getIdTutor() {
+	public Long getIdTutor() {
 		return this.idTutor;
 	}
 
-	public void setIdTutor(long idTutor) {
+	public void setIdTutor(Long idTutor) {
 		this.idTutor = idTutor;
 	}
 
@@ -62,11 +62,11 @@ public class Tutor implements Serializable {
 		this.area = idArea;
 	}
 
-	public TiposTutor getTipo() {
+	public TiposTutor getRol() {
 		return this.rol;
 	}
 
-	public void setTipo(TiposTutor tipo) {
+	public void setRol(TiposTutor tipo) {
 		this.rol = tipo;
 	}
 
