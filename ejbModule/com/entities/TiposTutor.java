@@ -19,7 +19,7 @@ public class TiposTutor implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID_TIPO_TUTOR", unique=true, nullable=false, precision=38)
-	private long idTipoTutor;
+	private Long idTipoTutor;
 
 	@Column(nullable=false, length=100)
 	private String nombre;
@@ -30,11 +30,11 @@ public class TiposTutor implements Serializable {
 	public TiposTutor() {
 	}
 
-	public long getIdTipoTutor() {
+	public Long getIdTipoTutor() {
 		return this.idTipoTutor;
 	}
 
-	public void setIdTipoTutor(long idTipoTutor) {
+	public void setIdTipoTutor(Long idTipoTutor) {
 		this.idTipoTutor = idTipoTutor;
 	}
 
@@ -57,6 +57,14 @@ public class TiposTutor implements Serializable {
 	@Override
 	public String toString() {
 		return (nombre != null ? nombre : "");
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+	    TiposTutor other = (TiposTutor) obj; 
+		if (!nombre.equals(other.getNombre()))
+	        return false;
+	    return true;
 	}
 
 }

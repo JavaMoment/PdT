@@ -2,12 +2,7 @@ package com.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
-
 import java.util.HashSet;
-
-//import entities.Departamento;
-//import entities.Usuario;
-
 import java.util.List;
 import java.util.Set;
 
@@ -150,8 +145,8 @@ public class Itr implements Serializable {
 		return usuario;
 	}
 
-	public String getActivo() {
-		return activo == 1 ? "Activo" : "Inactivo";
+	public Byte getActivo() {
+		return activo;
 	}
 
 	public void setActivo(byte activo) {
@@ -169,5 +164,13 @@ public class Itr implements Serializable {
 	@Override
 	public String toString() {
 		return this.nombre != null ? this.nombre : "";
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+	    Itr other = (Itr) obj; 
+		if (!nombre.equals(other.getNombre()))
+	        return false;
+	    return true;
 	}
 }

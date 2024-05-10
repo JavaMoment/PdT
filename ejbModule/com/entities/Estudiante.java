@@ -67,10 +67,6 @@ public class Estudiante implements Serializable {
 		this.usuario = usuario;
 	}
 
-	public String getNombreUsuario() {
-		return this.usuario.getNombreUsuario();
-	}
-
 	public List<Reclamo> getReclamos() {
 		return reclamos;
 	}
