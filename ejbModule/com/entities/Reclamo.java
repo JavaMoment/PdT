@@ -21,7 +21,7 @@ public class Reclamo implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID_RECLAMO")
-	private long idReclamo;
+	private Long idReclamo;
 	
 //	bi-directional many-to-one association to Analista
 	@ManyToOne(optional=true, fetch = FetchType.EAGER)
@@ -103,11 +103,11 @@ public class Reclamo implements Serializable {
 		this.modifDate = new Date();
 	}
 
-	public long getIdReclamo() {
+	public Long getIdReclamo() {
 		return this.idReclamo;
 	}
 
-	public void setIdReclamo(long idReclamo) {
+	public void setIdReclamo(Long idReclamo) {
 		this.idReclamo = idReclamo;
 	}
 
