@@ -3,7 +3,6 @@ package com.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 
-import com.enums.Roles;
 
 
 /**
@@ -25,9 +24,9 @@ public class Tutor implements Serializable {
 	@JoinColumn(name="ID_AREA", nullable=false)
 	private Area area;
 
-	@Column(name="tipo", nullable=false, length=75)
-	@Enumerated(EnumType.STRING)
-	private Roles rol;
+	@ManyToOne
+	@JoinColumn(name="id_tipo_tutor", nullable=false)
+	private TiposTutor rol;
 
 	//bi-directional many-to-one association to Usuario
 	@ManyToOne
@@ -41,17 +40,17 @@ public class Tutor implements Serializable {
 		this.usuario = user;
 	}
 	
-	public Tutor(Usuario user, Area area, Roles rol) {
+	public Tutor(Usuario user, Area area, TiposTutor rol) {
 		this.usuario = user;
 		this.area = area;
 		this.rol = rol;
 	}
 
-	public long getIdTutor() {
+	public Long getIdTutor() {
 		return this.idTutor;
 	}
 
-	public void setIdTutor(long idTutor) {
+	public void setIdTutor(Long idTutor) {
 		this.idTutor = idTutor;
 	}
 
@@ -63,11 +62,11 @@ public class Tutor implements Serializable {
 		this.area = idArea;
 	}
 
-	public Roles getTipo() {
+	public TiposTutor getRol() {
 		return this.rol;
 	}
 
-	public void setTipo(Roles tipo) {
+	public void setRol(TiposTutor tipo) {
 		this.rol = tipo;
 	}
 

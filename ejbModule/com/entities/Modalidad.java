@@ -16,8 +16,7 @@
 		private static final long serialVersionUID = 1L;
 
 		@Id
-		@SequenceGenerator(name="MODALIDADES_IDMODALIDAD_GENERATOR", sequenceName="SEQ_MODALIDADES", allocationSize=1)
-		@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="MODALIDADES_IDMODALIDAD_GENERATOR")	
+		@GeneratedValue(strategy=GenerationType.IDENTITY)	
 		@Column(name="ID_MODALIDAD")
 		private long idModalidad;
 
@@ -30,7 +29,7 @@
 		
 
 		//bi-directional many-to-one association to Evento
-		@OneToMany(mappedBy="modalidad")
+		@OneToMany(mappedBy="modalidad", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 		private List<Evento> eventos;
 
 		public Modalidad() {

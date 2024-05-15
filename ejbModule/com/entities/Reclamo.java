@@ -2,6 +2,10 @@ package com.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+
+import org.hibernate.validator.constraints.Range;
+
 import java.util.Date;
 
 
@@ -17,7 +21,7 @@ public class Reclamo implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID_RECLAMO")
-	private long idReclamo;
+	private Long idReclamo;
 	
 //	bi-directional many-to-one association to Analista
 	@ManyToOne(optional=true, fetch = FetchType.EAGER)
@@ -38,6 +42,12 @@ public class Reclamo implements Serializable {
 	@ManyToOne(optional = false, fetch = FetchType.EAGER)
 	@JoinColumn(name="ID_STATUS", nullable=false)
 	private StatusReclamo statusReclamo;
+	
+	@Column(name="SEMESTRE", nullable=true, updatable=true)
+	private Integer semestre;
+	
+	@Column(name="CREDITOS", nullable=true, updatable=true)
+	private Integer creditos;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="AUDIT_DATE", updatable=false)
@@ -72,21 +82,32 @@ public class Reclamo implements Serializable {
 		this.descripcion = descripcion;
 	}
 	
+	public Reclamo(Estudiante estudiante, Evento evento, StatusReclamo statusReclamo, String titulo,
+			String descripcion, Integer semestre, Integer creditos) {
+		super();
+		this.estudiante = estudiante;
+		this.evento = evento;
+		this.statusReclamo = statusReclamo;
+		this.titulo = titulo;
+		this.descripcion = descripcion;
+		this.semestre = semestre;
+		this.creditos = creditos;
+	}
+	
 	@PrePersist
 	protected void onCreate() {
 		this.auditDate= new Date();
 	}
-
 	@PreUpdate
 	protected void onUpdate() {
 		this.modifDate = new Date();
 	}
 
-	public long getIdReclamo() {
+	public Long getIdReclamo() {
 		return this.idReclamo;
 	}
 
-	public void setIdReclamo(long idReclamo) {
+	public void setIdReclamo(Long idReclamo) {
 		this.idReclamo = idReclamo;
 	}
 
@@ -129,7 +150,8 @@ public class Reclamo implements Serializable {
 	public void setStatusReclamo(StatusReclamo statusReclamo) {
 		this.statusReclamo = statusReclamo;
 	}
-
+	
+	
 	public Date getAuditDate() {
 		return auditDate;
 	}
@@ -170,4 +192,20 @@ public class Reclamo implements Serializable {
 		this.descripcion = descripcion;
 	}
 
+	public Integer getSemestre() {
+		return this.semestre;
+	}
+
+	public void setSemestre(Integer semestre) {
+		this.semestre = semestre;
+	}
+
+	public Integer getCreditos() {
+		return creditos;
+	}
+
+	public void setCreditos(Integer creditos) {
+		this.creditos = creditos;
+	}
+	
 }

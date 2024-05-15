@@ -3,8 +3,6 @@ package com.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 
-import com.enums.Roles;
-
 import java.util.Date;
 import java.util.Optional;
 import java.util.Set;
@@ -44,10 +42,6 @@ public class Usuario implements Serializable {
 
 	@Column(name="GENERO", nullable=false, length=1)
 	private char genero;
-
-	@ManyToOne
-	@JoinColumn(name="ID_DEPARTAMENTO", nullable=false)
-	private Departamento departamento;
 
 	@ManyToOne
 	@JoinColumn(name="ID_ITR", nullable=false)
@@ -100,9 +94,8 @@ public class Usuario implements Serializable {
 
 	public Usuario(String nombreUsuario, String apellido1, String apellido2, 
 			String contrasenia, String documento, Date FechaNacimiento, 
-			char genero, Departamento idDepartamento, Itr idItr, 
-			Localidad idLocalidad, String mailInsti, String mailPers,
-			String nombre1) {
+			char genero, Itr idItr, Localidad idLocalidad, String mailInsti,
+			String mailPers, String nombre1) {
 		super();
 		this.nombreUsuario = nombreUsuario;
 		this.apellido1 = apellido1;
@@ -111,7 +104,6 @@ public class Usuario implements Serializable {
 		this.documento = documento;
 		this.fechaNacimiento = FechaNacimiento;
 		this.genero = genero;
-		this.departamento = idDepartamento;
 		this.itr = idItr;
 		this.localidad = idLocalidad;
 		this.mailInstitucional = mailInsti;
@@ -125,8 +117,8 @@ public class Usuario implements Serializable {
 		this.nombreUsuario = nombreUsuario;
 	}
 
-	public String getActivo() {
-		return this.activo == 1 ? "Activo" : "Inactivo";
+	public Byte getActivo() {
+		return this.activo;
 	}
 
 	public void setActivo(byte activo) {
@@ -179,14 +171,6 @@ public class Usuario implements Serializable {
 
 	public void setGenero(char genero) {
 		this.genero = genero;
-	}
-
-	public Departamento getDepartamento() {
-		return this.departamento;
-	}
-
-	public void setDepartamento(Departamento idDepartamento) {
-		this.departamento = idDepartamento;
 	}
 
 	public Itr getItr() {
@@ -254,6 +238,9 @@ public class Usuario implements Serializable {
 	}
 	
 	public String getTipoUsuario() {
+		if(analistas == null & estudiantes == null & tutores == null) {
+			return "";
+		}
 		if(this.tipoUsuario != null) {
 			return this.tipoUsuario;
 		}
@@ -269,33 +256,6 @@ public class Usuario implements Serializable {
 	
 	public void setTipoUsuario(String tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
-	}
-
-	public String getGeneracion() {
-		Optional<Estudiante> studentIfExists = estudiantes.stream().filter(estudiante -> estudiante.getUsuario().getNombreUsuario().equals(nombreUsuario)).findFirst();
-		if(studentIfExists.isEmpty()) {
-			return "";
-		}
-		String gen = studentIfExists.get().getGeneracion();
-		return gen != null ? gen : "";
-	}
-	
-	public Roles getRol() {
-		Optional<Tutor> teacherIfExists = tutores.stream().filter(tutor -> tutor.getUsuario().getNombreUsuario().equals(nombreUsuario)).findFirst();
-		if(teacherIfExists.isEmpty()) {
-			return null;
-		}
-		Roles rol = teacherIfExists.get().getTipo();
-		return rol;
-	}
-	
-	public Area getArea() {
-		Optional<Tutor> teacherIfExists = tutores.stream().filter(tutor -> tutor.getUsuario().getNombreUsuario().equals(nombreUsuario)).findFirst();
-		if(teacherIfExists.isEmpty()) {
-			return null;
-		}
-		Area area = teacherIfExists.get().getArea();
-		return area;
 	}
 	
 	public Set<Analista> getAnalistas() {

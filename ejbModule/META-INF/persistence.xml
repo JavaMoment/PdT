@@ -26,6 +26,10 @@
         <class>com.entities.TutorEvento</class>
         <class>com.entities.TutorEventoPK</class>
         <class>com.entities.StatusReclamo</class>
+        <class>com.entities.StatusEvento</class>
+        <class>com.entities.TiposTutor</class>
+        <class>com.entities.TiposEvento</class>
+        <class>com.entities.Asistencia</class>
 
 
 		<validation-mode>AUTO</validation-mode>
