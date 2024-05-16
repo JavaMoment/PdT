@@ -30,7 +30,7 @@ public class Localidad implements Serializable {
 	public Localidad() {
 	}
 
-	public long getIdLocalidad() {
+	public Long getIdLocalidad() {
 		return this.idLocalidad;
 	}
 

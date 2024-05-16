@@ -18,13 +18,13 @@ public class Estado implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID_STATUS")
-	private long idEstado;
+	private Long idEstado;
 
 	@Column(name="NOMBRE")
 	private String nombre;
 	
 	@Column(name="ACTIVO")
-	private int activo;
+	private Integer activo;
 
 	//bi-directional many-to-one association to Evento
 	@OneToMany(mappedBy="statusEvento", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
@@ -33,11 +33,11 @@ public class Estado implements Serializable {
 	public Estado() {
 	}
 
-	public long getIdEstado() {
+	public Long getIdEstado() {
 		return this.idEstado;
 	}
 
-	public void setIdEstado(long idEstado) {
+	public void setIdEstado(Long idEstado) {
 		this.idEstado = idEstado;
 	}
 
@@ -61,7 +61,7 @@ public class Estado implements Serializable {
 		return activo;
 	}
 
-	public void setActivo(int activo) {
+	public void setActivo(Integer activo) {
 		this.activo = activo;
 	}
 

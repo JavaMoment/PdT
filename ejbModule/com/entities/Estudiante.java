@@ -19,7 +19,7 @@ public class Estudiante implements Serializable {
 	@SequenceGenerator(name="ESTUDIANTES_IDESTUDIANTE_GENERATOR", sequenceName="estud_id_seq", allocationSize=1, initialValue=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ESTUDIANTES_IDESTUDIANTE_GENERATOR")
 	@Column(name="ID_ESTUDIANTE", unique=true, nullable=false, precision=38)
-	private long idEstudiante;
+	private Long idEstudiante;
 
 	@Column(name="GENERACION", nullable=false, length=4)
 	private String generacion;
@@ -43,11 +43,11 @@ public class Estudiante implements Serializable {
 		this.generacion = generacion;
 	}
 
-	public long getIdEstudiante() {
+	public Long getIdEstudiante() {
 		return this.idEstudiante;
 	}
 
-	public void setIdEstudiante(int idEstudiante) {
+	public void setIdEstudiante(Long idEstudiante) {
 		this.idEstudiante = idEstudiante;
 	}
 

@@ -21,7 +21,7 @@ public class StatusReclamo implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID_STATUS")
-	private long idStatus;
+	private Long idStatus;
 	
 	@Column(name="NOMBRE", unique=true)
 	private String nombre;
@@ -29,11 +29,11 @@ public class StatusReclamo implements Serializable {
 	@OneToMany(mappedBy="statusReclamo", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	private List<Reclamo> reclamos;
 
-	public long getIdStatus() {
+	public Long getIdStatus() {
 		return idStatus;
 	}
 
-	public void setIdStatus(long idStatus) {
+	public void setIdStatus(Long idStatus) {
 		this.idStatus = idStatus;
 	}
 

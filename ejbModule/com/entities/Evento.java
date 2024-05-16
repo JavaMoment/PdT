@@ -27,7 +27,7 @@ public class Evento implements Serializable {
 	@SequenceGenerator(name = "event_id_seq", sequenceName = "event_id_seq")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "event_id_seq")
 	@Column(name="ID_EVENTO")
-	private long idEvento;
+	private Long idEvento;
 
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
@@ -66,15 +66,12 @@ public class Evento implements Serializable {
 	private Estado statusEvento;
 
 	@Column(name = "ACTIVO")
-	private byte activo;
+	private Byte activo;
 	
 	// bi-directional many-to-one association to TutorEvento
 	@OneToMany(mappedBy = "evento", fetch = FetchType.EAGER)
 	private List<TutorEvento> tutorEventos;
 	
-	@Transient
-	private boolean active;
-
 	@OneToMany(mappedBy="evento", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	private List<Reclamo> reclamos;
 	
@@ -96,11 +93,11 @@ public class Evento implements Serializable {
 		
 		
 	}
-	public long getIdEvento() {
+	public Long getIdEvento() {
 		return this.idEvento;
 	}
 
-	public void setIdEvento(long idEvento) {
+	public void setIdEvento(Long idEvento) {
 		this.idEvento = idEvento;
 	}
 
@@ -168,23 +165,14 @@ public class Evento implements Serializable {
 		this.statusEvento = statusEvento;
 	}
 	
-	public String getActivo() {
-		return activo == 1 ? "Activo" : "Inactivo";
+	public Byte getActivo() {
+		return activo;
 	}
 
-	public void setActivo(byte activo) {
+	public void setActivo(Byte activo) {
 		this.activo = activo;
 	}
 
-	public boolean isActive() {
-		return activo == 1;
-	}
-
-	public void setActive(boolean isActive) {
-		this.active = isActive;
-	}
-	
-	
 	public List<TutorEvento> getTutorEventos() {
 		return this.tutorEventos;
 	}
@@ -214,7 +202,7 @@ public class Evento implements Serializable {
 	public void setReclamos(List<Reclamo> reclamos) {
 		this.reclamos = reclamos;
 	}
-
+	
 	@Override
 	public String toString() {
 		return this.titulo;

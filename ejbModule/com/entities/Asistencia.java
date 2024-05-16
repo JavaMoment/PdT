@@ -19,7 +19,7 @@ public class Asistencia implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID_ASISTENCIA")
-	private long idAsistencia;
+	private Long idAsistencia;
 
 	private String nombre;
 
@@ -39,11 +39,11 @@ public class Asistencia implements Serializable {
 		this.estudiantesEventos = estudiantesEventos;
 	}
 
-	public long getIdAsistencia() {
+	public Long getIdAsistencia() {
 		return this.idAsistencia;
 	}
 
-	public void setIdAsistencia(long idAsistencia) {
+	public void setIdAsistencia(Long idAsistencia) {
 		this.idAsistencia = idAsistencia;
 	}
 
