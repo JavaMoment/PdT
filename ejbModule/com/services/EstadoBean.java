@@ -1,17 +1,16 @@
 package com.services;
 
-import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 
-import com.entities.Area;
-import com.entities.Estado;
+
+import com.entities.StatusEvento;
 
 /**
  * Session Bean implementation class EstadoBean
  */
 @Stateless
 	
-public class EstadoBean extends CRUDBean<Estado, Long> implements EstadoBeanRemote{
+public class EstadoBean extends CRUDBean<StatusEvento, Long> implements EstadoBeanRemote{
 
     /**
      * Default constructor. 

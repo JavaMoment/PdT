@@ -3,14 +3,14 @@ package com.entities;
 import java.io.Serializable;
 import java.time.LocalDate;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 import com.entities.Modalidad;
 
 
 import java.util.Date;
 import java.util.List;
-
-import javax.validation.constraints.NotNull;
+ 
 
 
 /**
@@ -19,21 +19,21 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "EVENTOS")
-@NamedQuery(name = "Evento.findAll", query = "SELECT e FROM Evento e")
 public class Evento implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@NotNull
 	@Id
 	@SequenceGenerator(name = "event_id_seq", sequenceName = "event_id_seq")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "event_id_seq")
 	@Column(name="ID_EVENTO")
 	private long idEvento;
-
+ 
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "FECHA_HORA_FINAL")
 	private Date fechaHoraFinal;
-
+ 
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "FECHA_HORA_INICIO")
@@ -46,10 +46,11 @@ public class Evento implements Serializable {
 	@Column(name="DESC_LOCALIZACION")
 	private String localizacion;
 
+	@NotNull
 	@ManyToOne(optional = false, fetch = FetchType.EAGER)
 	@JoinColumn(name="ID_TIPO_EVENTO", nullable=false)
 	private TiposEvento tiposEvento;
-	
+	 
 	@NotNull
 	@Column(name="TITULO")
 	private String titulo;
@@ -61,9 +62,10 @@ public class Evento implements Serializable {
 	private Modalidad modalidad;
 
 	// bi-directional many-to-one association to Estado
+	@NotNull
 	@ManyToOne(optional = false, fetch = FetchType.EAGER)
 	@JoinColumn(name = "ID_STATUS_EVENTO", nullable=false)
-	private Estado statusEvento;
+	private StatusEvento statusEvento;
 
 	@Column(name = "ACTIVO")
 	private byte activo;
@@ -80,7 +82,7 @@ public class Evento implements Serializable {
 	
 	// Constructor con parámetros para inicializar todas las propiedades de Evento
 	public Evento(String titulo, TiposEvento tiposEvento, Date fechaHoraInicio, Date fechaHoraFinal, Modalidad modalidad,
-			Itr itr, String localizacion, Estado statusEvento, byte activo) {
+			Itr itr, String localizacion, StatusEvento statusEvento, byte activo) {
 		this.titulo = titulo;
 		this.tiposEvento = tiposEvento;
 		this.fechaHoraInicio = fechaHoraInicio;
@@ -160,11 +162,11 @@ public class Evento implements Serializable {
 		this.modalidad = modalidade;
 	}
 
-	public Estado getstatusEvento() {
+	public StatusEvento getstatusEvento() {
 		return this.statusEvento;
 	}
 
-	public void setstatusEvento(Estado statusEvento) {
+	public void setstatusEvento(StatusEvento statusEvento) {
 		this.statusEvento = statusEvento;
 	}
 	
