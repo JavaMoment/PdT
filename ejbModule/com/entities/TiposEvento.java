@@ -19,7 +19,7 @@ public class TiposEvento implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID_TIPO_EVENTO", unique=true, nullable=false, precision=38)
-	private long idTipoEvento;
+	private Long idTipoEvento;
 
 	@Column(name = "NOMBRE", nullable=false, length=100)
 	private String nombre;
@@ -30,11 +30,11 @@ public class TiposEvento implements Serializable {
 	public TiposEvento() {
 	}
 
-	public long getIdTipoEvento() {
+	public Long getIdTipoEvento() {
 		return this.idTipoEvento;
 	}
 
-	public void setIdTipoEvento(long idTipoEvento) {
+	public void setIdTipoEvento(Long idTipoEvento) {
 		this.idTipoEvento = idTipoEvento;
 	}
 

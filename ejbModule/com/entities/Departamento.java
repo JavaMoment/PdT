@@ -34,7 +34,7 @@ public class Departamento implements Serializable {
 	public Departamento() {
 	}
 
-	public long getIdDepartamento() {
+	public Long getIdDepartamento() {
 		return this.idDepartamento;
 	}
 

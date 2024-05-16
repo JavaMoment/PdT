@@ -19,7 +19,7 @@ public class StatusEvento implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="ID_STATUS", unique=true, nullable=false, precision=38)
-	private long idStatus;
+	private Long idStatus;
 
 	@Column(nullable=false, precision=1)
 	private BigDecimal activo;
@@ -33,11 +33,11 @@ public class StatusEvento implements Serializable {
 	public StatusEvento() {
 	}
 
-	public long getIdStatus() {
+	public Long getIdStatus() {
 		return this.idStatus;
 	}
 
-	public void setIdStatus(long idStatus) {
+	public void setIdStatus(Long idStatus) {
 		this.idStatus = idStatus;
 	}
 
