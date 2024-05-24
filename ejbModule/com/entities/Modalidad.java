@@ -18,13 +18,13 @@
 		@Id
 		@GeneratedValue(strategy=GenerationType.IDENTITY)	
 		@Column(name="ID_MODALIDAD")
-		private long idModalidad;
+		private Long idModalidad;
 
 		@Column(name="NOMBRE")
 		private String nombre;
 		
 		@Column(name="ACTIVO")
-		private int activo;
+		private Integer activo;
 
 		
 
@@ -35,11 +35,11 @@
 		public Modalidad() {
 		}
 
-		public long getIdModalidad() {
+		public Long getIdModalidad() {
 			return this.idModalidad;
 		}
 
-		public void setIdModalidad(long idModalidad) {
+		public void setIdModalidad(Long idModalidad) {
 			this.idModalidad = idModalidad;
 		}
 
@@ -59,11 +59,11 @@
 			this.eventos = eventos;
 		}
 		
-		public int getActivo() {
+		public Integer getActivo() {
 			return activo;
 		}
 
-		public void setActivo(int activo) {
+		public void setActivo(Integer activo) {
 			this.activo = activo;
 		}
 

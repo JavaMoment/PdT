@@ -19,7 +19,7 @@ public class Itr implements Serializable {
 	@SequenceGenerator(name="ITR_IDITR_GENERATOR", sequenceName="itr_id_seq")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ITR_IDITR_GENERATOR")
 	@Column(name="ID_ITR")
-	private long idItr;
+	private Long idItr;
 
 
 	@Column(name="NOMBRE", nullable=false)
@@ -29,7 +29,7 @@ public class Itr implements Serializable {
 	private List<Evento> eventos;
 	
 	@Column(nullable=false, precision=1)
-	private byte activo;
+	private Byte activo;
 	
 	//bi-directional many-to-one association to Departamento
 	@OneToMany(mappedBy="itr", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
@@ -39,9 +39,6 @@ public class Itr implements Serializable {
 	@OneToMany(mappedBy="itr", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	private Set<Usuario> usuarios;
 	
-	@Transient
-	private boolean active;
-
 	public Itr() {
 	}
 	
@@ -58,11 +55,11 @@ public class Itr implements Serializable {
 		this.departamentos = new HashSet<>(departamentos);
 	}
 
-	public long getIdItr() {
+	public Long getIdItr() {
 		return this.idItr;
 	}
 
-	public void setIdItr(long idItr) {
+	public void setIdItr(Long idItr) {
 		this.idItr = idItr;
 	}
 
@@ -149,16 +146,8 @@ public class Itr implements Serializable {
 		return activo;
 	}
 
-	public void setActivo(byte activo) {
+	public void setActivo(Byte activo) {
 		this.activo = activo;
-	}
-
-	public boolean isActive() {
-		return activo == 1;
-	}
-
-	public void setActive(boolean isActive) {
-		this.active = isActive;
 	}
 
 	@Override
