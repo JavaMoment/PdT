@@ -142,12 +142,16 @@ public class Itr implements Serializable {
 		return usuario;
 	}
 
-	public Byte getActivo() {
-		return activo;
+	public Boolean getActivo() {
+		return activo == 1;
 	}
 
 	public void setActivo(Byte activo) {
 		this.activo = activo;
+	}
+	
+	public void setActivo(Boolean activo) {
+		this.activo = activo ? (byte) 1 : (byte) 0;
 	}
 
 	@Override
