@@ -146,9 +146,9 @@ public class Itr implements Serializable {
 		return activo == 1;
 	}
 
-	public void setActivo(Byte activo) {
+	/*public void setActivo(Byte activo) {
 		this.activo = activo;
-	}
+	}*/
 	
 	public void setActivo(Boolean activo) {
 		this.activo = activo ? (byte) 1 : (byte) 0;

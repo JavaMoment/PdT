@@ -51,7 +51,8 @@ public class ItrBean extends CRUDBean<Itr, Long> implements ItrBeanRemote {
 	public int logicalDeleteBy(String name) {
 		try {
 			Itr itrToUpdate = selectItrBy(name);
-			itrToUpdate.setActivo((byte) 0);
+			//itrToUpdate.setActivo((byte) 0);
+			itrToUpdate.setActivo(false);
 			
 			int resultCode = update(itrToUpdate);
 			
@@ -65,7 +66,8 @@ public class ItrBean extends CRUDBean<Itr, Long> implements ItrBeanRemote {
 	public int activeItrBy(String name) {
 		try {
 			Itr itrToUpdate = selectItrBy(name);
-			itrToUpdate.setActivo((byte) 1);
+			//itrToUpdate.setActivo((byte) 1);
+			itrToUpdate.setActivo(true);
 			
 			int resultCode = update(itrToUpdate);
 			
