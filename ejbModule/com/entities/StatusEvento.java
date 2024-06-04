@@ -22,7 +22,7 @@ public class StatusEvento implements Serializable {
 	private Long idStatus;
 
 	@Column(nullable=false, precision=1)
-	private BigDecimal activo;
+	private Byte activo;
 
 	@Column(nullable=false, length=100)
 	private String nombre;
@@ -31,6 +31,12 @@ public class StatusEvento implements Serializable {
 	private List<Evento> eventos; 
 
 	public StatusEvento() {
+	
+	}
+	
+	public StatusEvento(String name) {
+		this.nombre = name;
+		this.activo = (byte) 1;
 	}
 
 	public Long getIdStatus() {
@@ -41,20 +47,32 @@ public class StatusEvento implements Serializable {
 		this.idStatus = idStatus;
 	}
 
-	public BigDecimal getActivo() {
-		return this.activo;
+	public Boolean getActivo() {
+		return activo == 1;
 	}
 
-	public void setActivo(BigDecimal activo) {
-		this.activo = activo;
+	public void setActivo(Boolean activo) {
+		this.activo = activo ? (byte) 1 : (byte) 0;
 	}
-
 	public String getNombre() {
 		return this.nombre;
 	}
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	
+	@Override
+	public String toString() {
+		return this.nombre != null ? this.nombre : "";
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+	    StatusEvento other = (StatusEvento) obj; 
+		if (!nombre.equals(other.getNombre()))
+	        return false;
+	    return true;
 	}
 
 }

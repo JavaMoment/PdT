@@ -36,7 +36,7 @@
 		<properties>
 
 			<property name="hibernate.dialect"
-				value="org.hibernate.dialect.Oracle10gDialect" />
+				value="org.hibernate.dialect.Oracle12cDialect" />
 
 			<property name="hibernate.hbm2ddl.auto" value="validate" />
 
