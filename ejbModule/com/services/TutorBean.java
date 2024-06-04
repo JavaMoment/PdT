@@ -63,6 +63,30 @@ public class TutorBean extends CRUDBean<Tutor, Long> implements TutorBeanRemote 
 	        return false;
 	    }
 	}
+//	 @Override
+//	    public boolean asignarEventoTutor(Evento evento, Tutor tutor) {
+//	        try {
+//	            // Verifica si el evento ya está gestionado por el EntityManager
+//	            Evento managedEvento = entityManager.find(Evento.class, evento.getIdEvento());
+//	            if (managedEvento == null) {
+//	                throw new IllegalArgumentException("El evento no está gestionado por el EntityManager.");
+//	            }
+//
+//	            TutorEventoPK tutorEventoPK = new TutorEventoPK(tutor.getIdTutor(), evento.getIdEvento());
+//	            TutorEvento tutorEvento = new TutorEvento(tutorEventoPK);
+//	            entityManager.persist(tutorEvento);
+//	            entityManager.flush();
+//	            return true;
+//	        } catch (PersistenceException e) {
+//	            System.out.println(e);
+//	            System.out.println("cai en syso de asignarevento");
+//	            return false;
+//	        } catch (IllegalArgumentException e) {
+//	            System.out.println(e.getMessage());
+//	            return false;
+//	        }
+//	    }
+
 	 @Override
 	   	public Tutor selectUserBy(String username) {
 	   		try {
