@@ -5,10 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.ejb.Remote;
-import javax.persistence.Entity;
-import com.entities.Estado;
-
-import com.entities.Estado;
+;
 
 @Remote
 public interface CRUDRemote<T, ID extends Serializable> {
