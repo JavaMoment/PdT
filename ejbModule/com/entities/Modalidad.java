@@ -20,11 +20,11 @@
 		@Column(name="ID_MODALIDAD")
 		private Long idModalidad;
 
-		@Column(name="NOMBRE")
+		@Column(name="NOMBRE", nullable=false)
 		private String nombre;
 		
-		@Column(name="ACTIVO")
-		private Integer activo;
+		@Column(nullable=false, precision=1)
+		private Byte activo;
 
 		
 
@@ -35,6 +35,10 @@
 		public Modalidad() {
 		}
 
+		public Modalidad(String name) {
+			this.nombre = name;
+			this.activo = (byte) 1;
+		}
 		public Long getIdModalidad() {
 			return this.idModalidad;
 		}
@@ -59,16 +63,25 @@
 			this.eventos = eventos;
 		}
 		
-		public Integer getActivo() {
-			return activo;
+		public Boolean getActivo() {
+			return activo == 1;
+		}
+		public void setActivo(Boolean activo) {
+			this.activo = activo ? (byte) 1 : (byte) 0;
 		}
 
-		public void setActivo(Integer activo) {
-			this.activo = activo;
-		}
 
+		@Override
 		public String toString() {
-			return nombre;
+			return this.nombre != null ? this.nombre : "";
+		}
+		
+		@Override
+		public boolean equals(Object obj) {
+		    Itr other = (Itr) obj; 
+			if (!nombre.equals(other.getNombre()))
+		        return false;
+		    return true;
 		}
 
 	}
