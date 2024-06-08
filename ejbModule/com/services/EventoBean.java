@@ -38,7 +38,6 @@ public class EventoBean extends CRUDBean<Evento, Long> implements EventoBeanRemo
 			return Collections.emptyList();
 		}
 	}
-	
 	public Evento createEvento(Evento evento) {
 		try {
 			evento.setActivo(true);
@@ -58,6 +57,12 @@ public class EventoBean extends CRUDBean<Evento, Long> implements EventoBeanRemo
 		}
 	}
 	
+	private Evento getLastInsertedEvento() {
+	    List<Evento> eventos = super.getEntityManager().createQuery("SELECT e FROM Evento e ORDER BY e.idEvento DESC", Evento.class)
+	                                .setMaxResults(1)
+	                                .getResultList();
+	    return eventos.isEmpty() ? null : eventos.get(0);
+	}
 
 	@Override
 	public Tutor tutorDelEvento(long id_tutor) {
@@ -138,7 +143,6 @@ public class EventoBean extends CRUDBean<Evento, Long> implements EventoBeanRemo
 				return -1;
 			}
 		}
-
 		
 	@Override
 	public Evento selectBy(String title) {
@@ -151,7 +155,4 @@ public class EventoBean extends CRUDBean<Evento, Long> implements EventoBeanRemo
 			return null;
 		}
 	}
-	
-
-
 }
