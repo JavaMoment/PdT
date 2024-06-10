@@ -38,7 +38,8 @@ public class EventoBean extends CRUDBean<Evento, Long> implements EventoBeanRemo
 			return Collections.emptyList();
 		}
 	}
-	public Evento createEvento(Evento evento) {
+
+  public Evento createEvento(Evento evento) {
 		try {
 			evento.setActivo(true);
 			//super.getEntityManager().contains(evento)
@@ -142,7 +143,7 @@ public class EventoBean extends CRUDBean<Evento, Long> implements EventoBeanRemo
 			} catch(PersistenceException e) {
 				return -1;
 			}
-		}
+		}	 
 		
 	@Override
 	public Evento selectBy(String title) {
