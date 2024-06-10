@@ -79,6 +79,19 @@ public class TutorBean extends CRUDBean<Tutor, Long> implements TutorBeanRemote 
 	   	} 
 
 
+	 @Override
+	 public Long buscarIdPorUsuario(String nombreUsuario) {
+	     TypedQuery<Long> query = entityManager.createQuery(
+	         "SELECT t.idTutor FROM Tutor t JOIN t.usuario u WHERE u.nombreUsuario = :nombreUsuario", Long.class);
+	     query.setParameter("nombreUsuario", nombreUsuario);
+	     try {
+	         return query.getSingleResult();
+	     } catch (Exception e) {
+	         // Handle no result or any other exception as needed
+	         return null;
+	     }
+	 }
+
 }
     
 

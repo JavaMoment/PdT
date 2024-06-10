@@ -38,9 +38,8 @@ public class EventoBean extends CRUDBean<Evento, Long> implements EventoBeanRemo
 			return Collections.emptyList();
 		}
 	}
-	
-	//este funciona pero me trae ids diferentes
-	public Evento createEvento(Evento evento) {
+
+  public Evento createEvento(Evento evento) {
 		try {
 			evento.setActivo(true);
 			//super.getEntityManager().contains(evento)
@@ -105,18 +104,19 @@ public class EventoBean extends CRUDBean<Evento, Long> implements EventoBeanRemo
 		}
 	}
 
-	@Override
 	public List<Evento> selectEventosByTutor(long idTutor) {
-		try {
-			TypedQuery<Evento> query = (TypedQuery<Evento>) super.getEntityManager()
-					.createQuery("SELECT e FROM Evento e JOIN TutorEvento te ON te.id.idEvento = e.idEvento WHERE te.id.idTutor = :idTutor", Evento.class)
-					.setParameter("idTutor", idTutor);
-			return query.getResultList();
-		} catch (Exception e) {
-			// TODO: handle exception
-			return null;
-		}
+	    try {
+	        TypedQuery<Evento> query = (TypedQuery<Evento>) super.getEntityManager()
+	                .createQuery("SELECT e FROM Evento e JOIN TutorEvento te ON te.id.idEvento = e.idEvento WHERE te.id.idTutor = :idTutor", Evento.class)
+	                .setParameter("idTutor", idTutor);
+	        return query.getResultList();
+	    } catch (Exception e) {
+	        // TODO: handle exception
+	        return null;
+	    }
 	}
+
+
 	//crear metodo para limpiar el evento
 	
 		public int logicalDeleteBy(Long i) {
