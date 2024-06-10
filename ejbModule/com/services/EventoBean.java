@@ -38,22 +38,6 @@ public class EventoBean extends CRUDBean<Evento, Long> implements EventoBeanRemo
 			return Collections.emptyList();
 		}
 	}
-//	@Override
-//	public Evento createEvento(Evento evento) {
-//		try {
-//			// Primero persistimos los datos que vienen desde el cliente
-//			super.getEntityManager().persist((super.getEntityManager().contains(evento) ? evento : super.getEntityManager().merge(evento)));
-//			// Al persistirlos tenemos el id que genera la secuencia y hacemos el commit
-//			// para guardar los cambios
-//			super.getEntityManager().flush();
-//			//super.getEntityManager().clear();
-//			return evento;
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			System.out.println("cai en el syso de createveneto");
-//			return null;
-//		}
-//	}
 	
 	//este funciona pero me trae ids diferentes
 	public Evento createEvento(Evento evento) {
