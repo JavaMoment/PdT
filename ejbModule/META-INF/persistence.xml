@@ -29,6 +29,7 @@
         <class>com.entities.TiposTutor</class>
         <class>com.entities.TiposEvento</class>
         <class>com.entities.Asistencia</class>
+        <class>com.entities.ReclamosCountByEstudiante</class>
 
 
 		<validation-mode>AUTO</validation-mode>
