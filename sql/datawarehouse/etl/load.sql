@@ -1,10 +1,9 @@
 create or replace PROCEDURE P_DWH_DT_ITR
 IS
 BEGIN
-
-  -- Dejar DT_ITR vacío
+  -- Los ITR no son muchos por definicion por lo que no es una operacion costosa el volverlos a cargar
   DELETE FROM DT_ITR;
-
+  
   -- Cargar datos desde ODS_ITR
   INSERT INTO DT_ITR(
     -- Por DDL, la sk es identidad autogenerada.
@@ -26,7 +25,6 @@ END;
 CREATE OR REPLACE PROCEDURE P_DWH_DT_TIEMPO
 IS
 BEGIN
-
     INSERT INTO DT_TIEMPO(
         PK_TIEMPO,
         ANIO,
@@ -48,8 +46,6 @@ END P_DWH_DT_TIEMPO;
 CREATE OR REPLACE PROCEDURE P_DWH_HT_EVENTO
 IS
 BEGIN
-    DELETE FROM HT_EVENTO;
-    
     INSERT INTO HT_EVENTO(
         SK_TIEMPO,
         SK_ITR,

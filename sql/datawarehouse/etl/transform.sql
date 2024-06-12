@@ -90,6 +90,13 @@ BEGIN
     REPLACE(TRANSLATE(TRIM(UPPER(REGEXP_REPLACE(itr_nombre, '[^a-zA-Z0-9]$', ''))), '¡…Õ”⁄·ÈÌÛ˙', 'AEIOU'), ' ', '-'), -- Aplicamos mismas transformaciones para luego poder joinear
     TO_NUMBER(TO_CHAR(fecha_hora_final, 'yyyymmdd'))
   FROM H_EVENTOS;
+  
+  -- Remover duplicados
+  DELETE FROM ODS_EVENTOS
+  WHERE rowid not in
+  (SELECT MIN(rowid)
+  FROM ODS_EVENTOS
+  GROUP BY PK_ITR, PK_TIEMPO);
 
   COMMIT;
   DBMS_OUTPUT.PUT_LINE('Transform process completed successfully.');

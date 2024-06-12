@@ -7,7 +7,7 @@ IS
 begin
   v_sql := '
     create table h_eventos as
-    select 
+    select
         e.fecha_hora_final,
         e.fecha_hora_inicio,
         e.id_evento,
@@ -15,6 +15,8 @@ begin
     from c##proyecto.eventos e
     join c##proyecto.itr i on e.id_itr = i.id_itr
     where e.fecha_hora_final is not null -- La fecha_hora de finalizacion puede ser null por definicion. Agregaria mugre estos eventos no finalizados.
+    and e.fecha_hora_inicio between trunc(current_date, ''mm'') and last_day(current_date)
+    or e.fecha_hora_final between trunc(current_date, ''mm'') and last_day(current_date) -- carga de datos mensuales
     '
     ;
 
@@ -64,6 +66,9 @@ begin
         fecha_hora_inicio,
         fecha_hora_final
     from c##proyecto.eventos
+    where fecha_hora_final is not null -- La fecha_hora de finalizacion puede ser null por definicion. Agregaria mugre estos eventos no finalizados.
+    and fecha_hora_inicio between trunc(current_date, ''mm'') and last_day(current_date)
+    or  fecha_hora_final between trunc(current_date, ''mm'') and last_day(current_dat) -- carga de datos mensuales
     '
     ;
 
