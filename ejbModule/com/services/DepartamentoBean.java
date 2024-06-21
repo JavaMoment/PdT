@@ -47,6 +47,15 @@ public class DepartamentoBean extends CRUDBean<Departamento, Long> implements De
 		}
 	}
 	
-	
+	@Override
+	public List<Departamento> getDepartamentosWithoutItr() {
+		try {
+			TypedQuery<Departamento> query = (TypedQuery<Departamento>) super.getEntityManager()
+					.createQuery("SELECT d FROM Departamento d WHERE d.itr = null ORDER BY d.idDepartamento", Departamento.class);
+			return query.getResultList();
+		} catch (PersistenceException e) {
+			return null;
+		}
+	}
 
 }
