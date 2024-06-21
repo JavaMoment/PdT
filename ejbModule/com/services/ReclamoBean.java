@@ -3,6 +3,7 @@ package com.services;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
 import com.entities.Reclamo;
@@ -32,4 +33,15 @@ public class ReclamoBean extends CRUDBean<Reclamo, Long> implements ReclamoBeanR
     	}
     }
 
+    @Override
+    public Reclamo insert(Reclamo newReclamo) {
+    	try {
+			getEntityManager().persist(newReclamo);
+			getEntityManager().flush();
+			return newReclamo;
+		} catch (PersistenceException e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+    }
 }
