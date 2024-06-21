@@ -74,5 +74,18 @@ public class Estudiante implements Serializable {
 	public void setReclamos(List<Reclamo> reclamos) {
 		this.reclamos = reclamos;
 	}
+	
+	@Override
+	public String toString() {
+		return this.usuario.getNombreUsuario();
+	}
+	
+	@Override
+	public boolean equals(Object other) {
+		if (other == null) return false;
+		if(!(other instanceof Estudiante)) return false;
+		Estudiante otherE = (Estudiante) other;
+		return this.getIdEstudiante() == (otherE.getIdEstudiante());
+	}
 
 }
