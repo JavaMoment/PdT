@@ -12,6 +12,6 @@ import com.entities.Reclamo;
 public interface ReclamoBeanRemote extends CRUDRemote<Reclamo, Long> {
 
 	List<Reclamo> selectAllBy(String nombreUsuario);
-
+	Reclamo insert(Reclamo newReclamo);
 
 }
