@@ -5,8 +5,6 @@ import javax.persistence.*;
 
 import org.hibernate.annotations.Immutable;
 
-import java.util.Date;
-
 
 /**
  * The persistent class for the RECLAMOS_COUNT_BY_ESTUDIANTE database table.
@@ -26,7 +24,7 @@ public class ReclamosCountByEstudiante implements Serializable {
 	private Integer cantReclamos;
 
 	@Column(name="FECHA_CREACION")
-	private Date fechaCreacion;
+	private String fechaCreacion;
 
 	@Id
 	@Column(name="ID_ESTUDIANTE")
@@ -43,7 +41,7 @@ public class ReclamosCountByEstudiante implements Serializable {
 		return this.cantReclamos;
 	}
 
-	public Date getFechaCreacion() {
+	public String getFechaCreacion() {
 		return this.fechaCreacion;
 	}
 

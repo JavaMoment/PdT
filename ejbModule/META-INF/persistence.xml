@@ -30,6 +30,9 @@
         <class>com.entities.TiposEvento</class>
         <class>com.entities.Asistencia</class>
         <class>com.entities.ReclamosCountByEstudiante</class>
+        <class>com.entities.DtItr</class>
+        <class>com.entities.DtTiempo</class>
+        <class>com.entities.HtEvento</class>
 
 
 		<validation-mode>AUTO</validation-mode>
