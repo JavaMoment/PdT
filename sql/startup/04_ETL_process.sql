@@ -11,16 +11,16 @@ EXEC P_DDL_DT_ITR;
 EXEC P_DDL_HT_EVENTO;
 
 -- Crear los objetos procedimiento para ejecutar el proceso
-@./etl/extract.sql
-@./etl/transform.sql
-@./etl/load.sql
+@extract.sql
+@transform.sql
+@load.sql
 
--- Extración de datos
+-- Extraciï¿½n de datos
 EXEC P_H_EVENTOS;
 EXEC P_D_ITR;
 EXEC P_D_TIEMPO;
 
--- Transformación de datos
+-- Transformaciï¿½n de datos
 EXEC P_ODS_D_ITR;
 EXEC P_ODS_H_EVENTOS;
 EXEC P_ODS_D_TIEMPO;
