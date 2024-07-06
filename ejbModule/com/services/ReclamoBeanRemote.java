@@ -13,5 +13,7 @@ public interface ReclamoBeanRemote extends CRUDRemote<Reclamo, Long> {
 
 	List<Reclamo> selectAllBy(String nombreUsuario);
 	Reclamo insert(Reclamo newReclamo);
+	List<Reclamo> getReclamosByTitleLike(String keyword);
+	List<Reclamo> selectAllBy(String nombreUsuario, String searchText);
 
 }

@@ -32,6 +32,19 @@ public class ReclamoBean extends CRUDBean<Reclamo, Long> implements ReclamoBeanR
     		return null;
     	}
     }
+    
+    @Override
+    public List<Reclamo> selectAllBy(String nombreUsuario, String searchText) {
+    	try {
+    		TypedQuery<Reclamo> query = (TypedQuery<Reclamo>) super.getEntityManager()
+    				.createQuery("SELECT r FROM Reclamo r WHERE r.estudiante.usuario.nombreUsuario = :nombreUsuario AND r.titulo LIKE :title", Reclamo.class)
+    				.setParameter("nombreUsuario", nombreUsuario)
+    				.setParameter("title", "%" + searchText + "%");
+    		return query.getResultList();
+    	} catch (Exception e) {
+    		return null;
+    	}
+    }
 
     @Override
     public Reclamo insert(Reclamo newReclamo) {
@@ -43,5 +56,17 @@ public class ReclamoBean extends CRUDBean<Reclamo, Long> implements ReclamoBeanR
 			System.out.println(e.getMessage());
 			return null;
 		}
+    }
+    
+    @Override
+    public List<Reclamo> getReclamosByTitleLike(String keyword) {
+    	try {
+    		TypedQuery<Reclamo> query = (TypedQuery<Reclamo>) super.getEntityManager()
+    				.createQuery("SELECT r FROM Reclamo r WHERE r.titulo LIKE :title", Reclamo.class)
+    				.setParameter("title", "%" + keyword + "%");
+    		return query.getResultList();
+    	} catch (Exception e) {
+    		return null;
+    	}
     }
 }
