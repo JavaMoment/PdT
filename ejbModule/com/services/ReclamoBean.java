@@ -59,11 +59,12 @@ public class ReclamoBean extends CRUDBean<Reclamo, Long> implements ReclamoBeanR
     }
     
     @Override
-    public List<Reclamo> getReclamosByTitleLike(String keyword) {
+    public List<Reclamo> getReclamosBy(String keyword) {
     	try {
     		TypedQuery<Reclamo> query = (TypedQuery<Reclamo>) super.getEntityManager()
-    				.createQuery("SELECT r FROM Reclamo r WHERE r.titulo LIKE :title", Reclamo.class)
-    				.setParameter("title", "%" + keyword + "%");
+    				.createQuery("SELECT r FROM Reclamo r WHERE r.titulo LIKE :title OR r.estudiante.usuario.nombreUsuario LIKE :username", Reclamo.class)
+    				.setParameter("title", "%" + keyword + "%")
+    				.setParameter("username", "%" + keyword + "%");
     		return query.getResultList();
     	} catch (Exception e) {
     		return null;
