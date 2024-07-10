@@ -10,4 +10,5 @@ import com.entities.Departamento;
 public interface DepartamentoBeanRemote extends CRUDRemote<Departamento, Long> {
 	List<String> selectAllNames();
 	Departamento selectByName(String name);
+	List<Departamento> getDepartamentosWithoutItr();
 }

@@ -19,7 +19,7 @@ public class Estudiante implements Serializable {
 	@SequenceGenerator(name="ESTUDIANTES_IDESTUDIANTE_GENERATOR", sequenceName="estud_id_seq", allocationSize=1, initialValue=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ESTUDIANTES_IDESTUDIANTE_GENERATOR")
 	@Column(name="ID_ESTUDIANTE", unique=true, nullable=false, precision=38)
-	private long idEstudiante;
+	private Long idEstudiante;
 
 	@Column(name="GENERACION", nullable=false, length=4)
 	private String generacion;
@@ -43,11 +43,11 @@ public class Estudiante implements Serializable {
 		this.generacion = generacion;
 	}
 
-	public long getIdEstudiante() {
+	public Long getIdEstudiante() {
 		return this.idEstudiante;
 	}
 
-	public void setIdEstudiante(int idEstudiante) {
+	public void setIdEstudiante(Long idEstudiante) {
 		this.idEstudiante = idEstudiante;
 	}
 
@@ -67,16 +67,25 @@ public class Estudiante implements Serializable {
 		this.usuario = usuario;
 	}
 
-	public String getNombreUsuario() {
-		return this.usuario.getNombreUsuario();
-	}
-
 	public List<Reclamo> getReclamos() {
 		return reclamos;
 	}
 
 	public void setReclamos(List<Reclamo> reclamos) {
 		this.reclamos = reclamos;
+	}
+	
+	@Override
+	public String toString() {
+		return this.usuario.getNombreUsuario();
+	}
+	
+	@Override
+	public boolean equals(Object other) {
+		if (other == null) return false;
+		if(!(other instanceof Estudiante)) return false;
+		Estudiante otherE = (Estudiante) other;
+		return this.getIdEstudiante() == (otherE.getIdEstudiante());
 	}
 
 }

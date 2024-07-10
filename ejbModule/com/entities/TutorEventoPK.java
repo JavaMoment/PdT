@@ -12,10 +12,15 @@ public class TutorEventoPK implements Serializable {
 	// default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
-	@Column(name = "ID_TUTOR", insertable = false, updatable = false)
+//	@Column(name = "ID_TUTOR", insertable = false, updatable = false)
+//	private long idTutor;
+//
+//	@Column(name = "ID_EVENTO", insertable = false, updatable = false)
+//	private long idEvento;
+	@Column(name = "ID_TUTOR")
 	private long idTutor;
 
-	@Column(name = "ID_EVENTO", insertable = false, updatable = false)
+	@Column(name = "ID_EVENTO")
 	private long idEvento;
 
 	public TutorEventoPK() {

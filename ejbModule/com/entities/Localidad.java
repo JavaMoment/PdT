@@ -30,7 +30,7 @@ public class Localidad implements Serializable {
 	public Localidad() {
 	}
 
-	public long getIdLocalidad() {
+	public Long getIdLocalidad() {
 		return this.idLocalidad;
 	}
 
@@ -59,5 +59,12 @@ public class Localidad implements Serializable {
 		return nombre != null ? nombre : "";
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+	    Localidad other = (Localidad) obj; 
+		if (!nombre.equals(other.getNombre()))
+	        return false;
+	    return true;
+	}
 
 }

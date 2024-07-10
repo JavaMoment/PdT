@@ -2,12 +2,7 @@ package com.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
-
 import java.util.HashSet;
-
-//import entities.Departamento;
-//import entities.Usuario;
-
 import java.util.List;
 import java.util.Set;
 
@@ -24,7 +19,7 @@ public class Itr implements Serializable {
 	@SequenceGenerator(name="ITR_IDITR_GENERATOR", sequenceName="itr_id_seq")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ITR_IDITR_GENERATOR")
 	@Column(name="ID_ITR")
-	private long idItr;
+	private Long idItr;
 
 
 	@Column(name="NOMBRE", nullable=false)
@@ -34,7 +29,7 @@ public class Itr implements Serializable {
 	private List<Evento> eventos;
 	
 	@Column(nullable=false, precision=1)
-	private byte activo;
+	private Byte activo;
 	
 	//bi-directional many-to-one association to Departamento
 	@OneToMany(mappedBy="itr", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
@@ -44,9 +39,6 @@ public class Itr implements Serializable {
 	@OneToMany(mappedBy="itr", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	private Set<Usuario> usuarios;
 	
-	@Transient
-	private boolean active;
-
 	public Itr() {
 	}
 	
@@ -63,11 +55,11 @@ public class Itr implements Serializable {
 		this.departamentos = new HashSet<>(departamentos);
 	}
 
-	public long getIdItr() {
+	public Long getIdItr() {
 		return this.idItr;
 	}
 
-	public void setIdItr(long idItr) {
+	public void setIdItr(Long idItr) {
 		this.idItr = idItr;
 	}
 
@@ -150,24 +142,28 @@ public class Itr implements Serializable {
 		return usuario;
 	}
 
-	public String getActivo() {
-		return activo == 1 ? "Activo" : "Inactivo";
-	}
-
-	public void setActivo(byte activo) {
-		this.activo = activo;
-	}
-
-	public boolean isActive() {
+	public Boolean getActivo() {
 		return activo == 1;
 	}
 
-	public void setActive(boolean isActive) {
-		this.active = isActive;
+	/*public void setActivo(Byte activo) {
+		this.activo = activo;
+	}*/
+	
+	public void setActivo(Boolean activo) {
+		this.activo = activo ? (byte) 1 : (byte) 0;
 	}
 
 	@Override
 	public String toString() {
 		return this.nombre != null ? this.nombre : "";
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+	    Itr other = (Itr) obj; 
+		if (!nombre.equals(other.getNombre()))
+	        return false;
+	    return true;
 	}
 }

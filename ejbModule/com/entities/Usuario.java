@@ -1,10 +1,15 @@
 package com.entities;
 
 import java.io.Serializable;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+
 import javax.persistence.*;
 
 import java.util.Date;
-import java.util.Optional;
+import java.util.HexFormat;
 import java.util.Set;
 
 
@@ -65,6 +70,9 @@ public class Usuario implements Serializable {
 
 	@Column(length=9, nullable = true)
 	private String telefono;
+	
+	@Column(length=10, nullable=false)
+	private String salt;
 
 	//bi-directional many-to-one association to Analista
 	@OneToMany(mappedBy="usuario", cascade = CascadeType.ALL, fetch=FetchType.EAGER, orphanRemoval = true)
@@ -117,8 +125,8 @@ public class Usuario implements Serializable {
 		this.nombreUsuario = nombreUsuario;
 	}
 
-	public String getActivo() {
-		return this.activo == 1 ? "Activo" : "Inactivo";
+	public Byte getActivo() {
+		return this.activo;
 	}
 
 	public void setActivo(byte activo) {
@@ -146,7 +154,17 @@ public class Usuario implements Serializable {
 	}
 
 	public void setContrasenia(String contrasenia) {
-		this.contrasenia = contrasenia;
+		MessageDigest md = null;
+		try {
+			md = MessageDigest.getInstance("SHA-256");
+			SecureRandom rand = new SecureRandom();
+		    byte[] newSalt = new byte[5];
+		    rand.nextBytes(newSalt);
+			this.salt = HexFormat.of().withUpperCase().formatHex(newSalt);
+			this.contrasenia = HexFormat.of().withUpperCase().formatHex(md.digest((this.salt + contrasenia).getBytes(StandardCharsets.UTF_8)));
+		} catch (NoSuchAlgorithmException e1) {
+			e1.printStackTrace();
+		}
 	}
 
 	public String getDocumento() {
@@ -234,10 +252,19 @@ public class Usuario implements Serializable {
 	}
 	
 	public boolean isValidUser(String passw) {
-		return activo == 1 && contrasenia.equals(passw);
+		try {
+			System.out.println(HexFormat.of().withUpperCase().formatHex(MessageDigest.getInstance("SHA-256").digest((this.salt + passw).getBytes(StandardCharsets.UTF_8))));
+			return activo == 1 && contrasenia.equals(HexFormat.of().withUpperCase().formatHex(MessageDigest.getInstance("SHA-256").digest((this.salt + passw).getBytes(StandardCharsets.UTF_8))));
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
 	public String getTipoUsuario() {
+		if(analistas == null & estudiantes == null & tutores == null) {
+			return "";
+		}
 		if(this.tipoUsuario != null) {
 			return this.tipoUsuario;
 		}
@@ -253,33 +280,6 @@ public class Usuario implements Serializable {
 	
 	public void setTipoUsuario(String tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
-	}
-
-	public String getGeneracion() {
-		Optional<Estudiante> studentIfExists = estudiantes.stream().filter(estudiante -> estudiante.getUsuario().getNombreUsuario().equals(nombreUsuario)).findFirst();
-		if(studentIfExists.isEmpty()) {
-			return "";
-		}
-		String gen = studentIfExists.get().getGeneracion();
-		return gen != null ? gen : "";
-	}
-	
-	public String getRol() {
-		Optional<Tutor> teacherIfExists = tutores.stream().filter(tutor -> tutor.getUsuario().getNombreUsuario().equals(nombreUsuario)).findFirst();
-		if(teacherIfExists.isEmpty()) {
-			return null;
-		}
-		String rol = teacherIfExists.get().getTipo().getNombre();
-		return rol;
-	}
-	
-	public Area getArea() {
-		Optional<Tutor> teacherIfExists = tutores.stream().filter(tutor -> tutor.getUsuario().getNombreUsuario().equals(nombreUsuario)).findFirst();
-		if(teacherIfExists.isEmpty()) {
-			return null;
-		}
-		Area area = teacherIfExists.get().getArea();
-		return area;
 	}
 	
 	public Set<Analista> getAnalistas() {
@@ -377,6 +377,14 @@ public class Usuario implements Serializable {
 	@Override
 	public String toString() {
 		return nombreUsuario != null ? nombreUsuario : "";
+	}
+
+	public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
 	}
 
 }

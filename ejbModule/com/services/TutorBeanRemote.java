@@ -15,5 +15,7 @@ public interface TutorBeanRemote extends CRUDRemote<Tutor, Long> {
     boolean asignarEventoTutor (Evento evento, Tutor tutor);
 
 	Tutor selectUserBy(String username);
+
+	Long buscarIdPorUsuario(String nombreUsuario);
   
 }

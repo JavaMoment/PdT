@@ -39,20 +39,30 @@ public class EventoBean extends CRUDBean<Evento, Long> implements EventoBeanRemo
 		}
 	}
 
-	public Evento createEvento(Evento evento) {
+  public Evento createEvento(Evento evento) {
 		try {
+			evento.setActivo(true);
+			//super.getEntityManager().contains(evento)
 			// Primero persistimos los datos que vienen desde el cliente
-			super.getEntityManager().persist(evento);
+			super.getEntityManager().persist(super.getEntityManager().contains(evento) ? evento : super.getEntityManager().merge(evento));
 			// Al persistirlos tenemos el id que genera la secuencia y hacemos el commit
 			// para guardar los cambios
 			super.getEntityManager().flush();
- 
-			return evento;
+			TypedQuery<Evento> query = (TypedQuery<Evento>) super.getEntityManager()
+					.createQuery("SELECT e FROM Evento e ORDER BY e.idEvento DESC", Evento.class);
+			return query.getResultList().get(0);
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("cai en el syso de createveneto");
+			System.out.println("cai en el syso de createvento");
 			return null;
 		}
+	}
+	
+	private Evento getLastInsertedEvento() {
+	    List<Evento> eventos = super.getEntityManager().createQuery("SELECT e FROM Evento e ORDER BY e.idEvento DESC", Evento.class)
+	                                .setMaxResults(1)
+	                                .getResultList();
+	    return eventos.isEmpty() ? null : eventos.get(0);
 	}
 
 	@Override
@@ -94,24 +104,25 @@ public class EventoBean extends CRUDBean<Evento, Long> implements EventoBeanRemo
 		}
 	}
 
-	@Override
 	public List<Evento> selectEventosByTutor(long idTutor) {
-		try {
-			TypedQuery<Evento> query = (TypedQuery<Evento>) super.getEntityManager()
-					.createQuery("SELECT e FROM Evento e JOIN TutorEvento te ON te.id.idEvento = e.idEvento WHERE te.id.idTutor = :idTutor", Evento.class)
-					.setParameter("idTutor", idTutor);
-			return query.getResultList();
-		} catch (Exception e) {
-			// TODO: handle exception
-			return null;
-		}
+	    try {
+	        TypedQuery<Evento> query = (TypedQuery<Evento>) super.getEntityManager()
+	                .createQuery("SELECT e FROM Evento e JOIN TutorEvento te ON te.id.idEvento = e.idEvento WHERE te.id.idTutor = :idTutor", Evento.class)
+	                .setParameter("idTutor", idTutor);
+	        return query.getResultList();
+	    } catch (Exception e) {
+	        // TODO: handle exception
+	        return null;
+	    }
 	}
+
+
 	//crear metodo para limpiar el evento
 	
 		public int logicalDeleteBy(Long i) {
 			try {
 				Evento eventoToUpdate = selectById(i);
-				eventoToUpdate.setActivo((byte) 0);
+				eventoToUpdate.setActivo(false);
 				
 				int resultCode = update(eventoToUpdate);
 				
@@ -124,7 +135,7 @@ public class EventoBean extends CRUDBean<Evento, Long> implements EventoBeanRemo
 		public int activeEventBy(Long i) {
 			try {
 				Evento eventoToUpdate = selectById(i);
-				eventoToUpdate.setActivo((byte) 1);
+				eventoToUpdate.setActivo(true);
 				
 				int resultCode = update(eventoToUpdate);
 				
@@ -132,6 +143,17 @@ public class EventoBean extends CRUDBean<Evento, Long> implements EventoBeanRemo
 			} catch(PersistenceException e) {
 				return -1;
 			}
+		}	 
+		
+	@Override
+	public Evento selectBy(String title) {
+		try {
+			TypedQuery<Evento> query = (TypedQuery<Evento>) super.getEntityManager()
+					.createQuery("SELECT e FROM Evento e WHERE e.titulo =: title", Evento.class)
+					.setParameter("title", title);
+			return query.getSingleResult();
+		} catch(Exception e) {
+			return null;
 		}
-
+	}
 }

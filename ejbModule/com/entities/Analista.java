@@ -36,11 +36,11 @@ public class Analista implements Serializable {
 		this.usuario = user;
 	}
 
-	public long getIdAnalista() {
+	public Long getIdAnalista() {
 		return this.idAnalista;
 	}
 
-	public void setIdAnalista(long idAnalista) {
+	public void setIdAnalista(Long idAnalista) {
 		this.idAnalista = idAnalista;
 	}
 
